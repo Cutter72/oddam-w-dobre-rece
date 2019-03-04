@@ -11,15 +11,15 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-//    @Override
-//    protected void configure(HttpSecurity http) throws Exception {
-//        http.authorizeRequests()
-//                .antMatchers("/panel/**").authenticated()
-//                .anyRequest().permitAll()
-//                .and().formLogin().defaultSuccessUrl("/panel")
-//                .loginPage("/login").and().logout().logoutSuccessUrl("/login")
-//                .permitAll();
-//    }
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+        http.authorizeRequests()
+                .antMatchers("/admin/**").authenticated()
+                .anyRequest().permitAll()
+                .and().formLogin().defaultSuccessUrl("/")
+                .and().logout().logoutSuccessUrl("/")
+                .permitAll();
+    }
 
 //    @Bean
 //    public SpringDataUserDetailsService customUserDetailsService() {

@@ -15,16 +15,16 @@
 <header class="header--main-page">
     <nav class="container container--70">
         <ul class="nav--actions">
-            <li><a href="/login" class="btn btn--small btn--without-border">Zaloguj</a></li>
-            <li><a href="/register" class="btn btn--small btn--highlighted">Załóż konto</a></li>
+            <li><a href="<jsp:include page="../links/hrefLogin.jsp"/>" class="btn btn--small btn--without-border">Zaloguj</a></li>
+            <li><a href="<jsp:include page="../links/hrefRegister.jsp"/>" class="btn btn--small btn--highlighted">Załóż konto</a></li>
         </ul>
 
         <ul>
-            <li><a href="#" class="btn btn--without-border active">Start</a></li>
-            <li><a href="#" class="btn btn--without-border">O co chodzi?</a></li>
-            <li><a href="#" class="btn btn--without-border">O nas</a></li>
-            <li><a href="#" class="btn btn--without-border">Fundacje i organizacje</a></li>
-            <li><a href="#" class="btn btn--without-border">Kontakt</a></li>
+            <li><a href="" class="btn btn--without-border active">Start</a></li>
+            <li><a href="" class="btn btn--without-border">O co chodzi?</a></li>
+            <li><a href="#About" class="btn btn--without-border">O nas</a></li>
+            <li><a href="#Organizations" class="btn btn--without-border">Fundacje i organizacje</a></li>
+            <li><a href="#Contact" class="btn btn--without-border">Kontakt</a></li>
         </ul>
     </nav>
 
@@ -93,7 +93,7 @@
 
     <a href="#" class="btn btn--large">Załóż konto</a>
 </section>
-
+<a name="About">
 <section class="about-us">
     <div class="about-us--text">
         <h2>O nas</h2>
@@ -102,7 +102,9 @@
     </div>
     <div class="about-us--image"><img src="images/about-us.jpg" alt="People in circle" /></div>
 </section>
+</a>
 
+<a name="Organizations">
 <section class="help">
     <h2>Komu pomagamy?</h2>
 
@@ -234,7 +236,9 @@
         </ul>
     </div>
 </section>
+</a>
 
+<a name="Contact">
 <footer>
     <div class="contact">
         <h2>Skontaktuj się z nami</h2>
@@ -255,6 +259,7 @@
         </div>
     </div>
 </footer>
+</a>
 
 <script src="js/app.js"></script>
 </body>

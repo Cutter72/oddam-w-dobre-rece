@@ -21,7 +21,7 @@
 
         <ul>
             <li><a href="" class="btn btn--without-border active">Start</a></li>
-            <li><a href="" class="btn btn--without-border">O co chodzi?</a></li>
+            <li><a href="#What" class="btn btn--without-border">O co chodzi?</a></li>
             <li><a href="#About" class="btn btn--without-border">O nas</a></li>
             <li><a href="#Organizations" class="btn btn--without-border">Fundacje i organizacje</a></li>
             <li><a href="#Contact" class="btn btn--without-border">Kontakt</a></li>
@@ -65,6 +65,7 @@
     </div>
 </section>
 
+<a name="What"></a>
 <section class="steps">
     <h2>Wystarczą 4 proste kroki</h2>
 
@@ -91,9 +92,10 @@
         </div>
     </div>
 
-    <a href="#" class="btn btn--large">Załóż konto</a>
+    <a href="<jsp:include page="../links/hrefRegister.jsp"/>" class="btn btn--large">Załóż konto</a>
 </section>
-<a name="About">
+
+<a name="About"></a>
 <section class="about-us">
     <div class="about-us--text">
         <h2>O nas</h2>
@@ -102,9 +104,8 @@
     </div>
     <div class="about-us--image"><img src="images/about-us.jpg" alt="People in circle" /></div>
 </section>
-</a>
 
-<a name="Organizations">
+<a name="Organizations"></a>
 <section class="help">
     <h2>Komu pomagamy?</h2>
 
@@ -236,9 +237,9 @@
         </ul>
     </div>
 </section>
-</a>
 
-<a name="Contact">
+
+<a name="Contact"></a>
 <footer>
     <div class="contact">
         <h2>Skontaktuj się z nami</h2>
@@ -259,7 +260,6 @@
         </div>
     </div>
 </footer>
-</a>
 
 <script src="js/app.js"></script>
 </body>

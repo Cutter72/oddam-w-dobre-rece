@@ -10,8 +10,10 @@
 </head>
 <body>
 <h1>Adminpage</h1>
+<jsp:include page="../components/header.jsp"/>
 <a href="/logout">
     <button>Wyloguj</button>
 </a>
+<jsp:include page="../components/footer.jsp"/>
 </body>
 </html>

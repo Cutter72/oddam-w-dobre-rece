@@ -3,6 +3,6 @@ package pl.oddam.service;
 import pl.oddam.model.User;
 
 public interface UserService {
-    User findByUserName(String name);
+    User findByEmail(String name);
     void saveUser(User user);
 }

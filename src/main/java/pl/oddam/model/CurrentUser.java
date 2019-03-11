@@ -9,10 +9,10 @@ import java.util.Collection;
 public class CurrentUser extends User {
     private final pl.oddam.model.User user;
 
-    public CurrentUser(String username, String password, Collection<?
+    public CurrentUser(String email, String password, Collection<?
             extends GrantedAuthority> authorities,
                        pl.oddam.model.User user) {
-        super(username, password, authorities);
+        super(email, password, authorities);
         this.user = user;
     }
 

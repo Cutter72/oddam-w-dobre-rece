@@ -5,8 +5,9 @@
 <header>
     <nav class="container container--70">
         <ul class="nav--actions">
-            <li><a href="<jsp:include page="../links/hrefLogin.jsp"/>">Zaloguj</a></li>
-            <li class="highlighted"><a href="<jsp:include page="../links/hrefRegister.jsp"/>">Załóż konto</a></li>
+            <li><a href="<jsp:include page="../links/hrefLogin.jsp"/>" class="btn btn--small btn--without-border">Zaloguj</a></li>
+            <li><a href="<jsp:include page="../links/hrefRegister.jsp"/>" class="btn btn--small btn--highlighted">Załóż konto</a></li>
+            <li><a href="<jsp:include page="../links/hrefUserCheck.jsp"/>" class="btn btn--small btn--without-border">Moje konto</a></li>
         </ul>
 
         <ul>

@@ -17,6 +17,7 @@
         <ul class="nav--actions">
             <li><a href="<jsp:include page="../links/hrefLogin.jsp"/>" class="btn btn--small btn--without-border">Zaloguj</a></li>
             <li><a href="<jsp:include page="../links/hrefRegister.jsp"/>" class="btn btn--small btn--highlighted">Załóż konto</a></li>
+            <li><a href="<jsp:include page="../links/hrefUserCheck.jsp"/>" class="btn btn--small btn--without-border">Moje konto</a></li>
         </ul>
 
         <ul>
@@ -241,7 +242,6 @@
 
 <a name="Contact"></a>
 <jsp:include page="../components/footer.jsp"/>
-
 <script src="js/app.js"></script>
 </body>
 </html>

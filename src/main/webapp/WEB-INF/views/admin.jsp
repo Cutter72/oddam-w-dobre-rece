@@ -13,7 +13,7 @@
 
 <jsp:include page="../components/header.jsp"/>
 
-<h1>ADMIN page</h1>
+<h1>ADMIN page, witaj ${userName}</h1>
 
 <form action="/logout" method="post">
     <input class="btn btn--without-border active" type="submit" value="Wyloguj">

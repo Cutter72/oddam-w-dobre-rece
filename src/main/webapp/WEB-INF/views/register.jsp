@@ -19,8 +19,16 @@
     <h2>Załóż konto</h2>
     <form:form method="post" modelAttribute="user">
         <div class="form-group">
-            <form:input path="email" type="email" name="email" placeholder="Email" />
-            <form:errors path="email" type="email" name="email" placeholder="Email" />
+            <form:input path="firstName" name="firstName" placeholder="Imie" />
+            <form:errors path="firstName" name="firstName" placeholder="Imię" />
+        </div>
+        <div class="form-group">
+            <form:input path="lastName" name="lastName" placeholder="Nazwisko" />
+            <form:errors path="lastName" name="lastName" placeholder="Nazwisko" />
+        </div>
+        <div class="form-group">
+            <form:input path="email" type="email" name="email" placeholder="E-mail" />${duplicateEmail}
+            <form:errors path="email" type="email" name="email" placeholder="E-mail" />
         </div>
         <div class="form-group">
             <form:input path="password" type="password" name="password" placeholder="Hasło" />

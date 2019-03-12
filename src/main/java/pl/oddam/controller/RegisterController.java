@@ -1,5 +1,6 @@
 package pl.oddam.controller;
 
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -35,11 +36,22 @@ public class RegisterController {
     }
 
     @PostMapping("")
-    public String register(@Valid User user, BindingResult result) {
+    public String register(@Valid User user, BindingResult result, Model model) {
         if (result.hasErrors()) {
             return "register";
         }
-        userServiceImpl.saveUser(user);
+        String existingEmail = null;
+        System.out.println(existingEmail);
+        try {
+            existingEmail = userServiceImpl.findByEmail(user.getEmail()).getEmail();
+        } catch (NullPointerException e) {
+            userServiceImpl.saveUser(user);
+        } finally {
+            if (existingEmail != null) {
+                model.addAttribute("duplicateEmail", "Email " + existingEmail + " jest już zajęty!");
+                return "register";
+            }
+        }
         return "redirect:/";
     }
 }

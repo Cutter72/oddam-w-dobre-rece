@@ -6,15 +6,23 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/style.css" />
     <title>Admin</title>
 </head>
 <body>
-<h1>Adminpage</h1>
+
 <jsp:include page="../components/header.jsp"/>
+
+<h1>ADMIN page</h1>
+
 <form action="/logout" method="post">
     <input class="btn btn--without-border active" type="submit" value="Wyloguj">
     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 </form>
+
 <jsp:include page="../components/footer.jsp"/>
+
+<script src="js/app.js"></script>
+
 </body>
 </html>

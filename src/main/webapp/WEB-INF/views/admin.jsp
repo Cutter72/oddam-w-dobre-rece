@@ -18,9 +18,9 @@
             <li class="logged-user">
                 Witaj ADMINIE ${userName}
                 <ul class="dropdown">
-                    <li><a href="#">Profil</a></li>
-                    <li><a href="#">Ustawienia</a></li>
-                    <li><a href="#">Moje zbiórki</a></li>
+                    <li><a href="<jsp:include page="../links/hrefUserProfile.jsp"/>">Profil</a></li>
+                    <li><a href="<jsp:include page="../links/hrefUserSettings.jsp"/>">Ustawienia</a></li>
+                    <li><a href="<jsp:include page="../links/hrefUserCollections.jsp"/>">Moje zbiórki</a></li>
                     <li>
                         <form action="/logout" method="post">
                             <input class="btn--small" type="submit" value="Wyloguj">

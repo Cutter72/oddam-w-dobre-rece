@@ -63,7 +63,7 @@
                         <form:errors path="lastName" name="lastName" placeholder="Nazwisko" />
                     </div>
                     <div class="form-group form-group--buttons">
-                        <a href="<jsp:include page="../../links/hrefUserProfile.jsp"/>" class="btn btn--without-border">Anuluj</a>
+                        <a href="/user" class="btn btn--without-border">Anuluj</a>
                         <button class="btn" type="submit">Zmień</button>
                     </div>
                 </form:form>

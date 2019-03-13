@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%--<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>--%>
 
 <!DOCTYPE html>
 <html lang="pl">
@@ -49,11 +50,25 @@
     <div class="slogan container container--90">
         <div class="slogan--item" style="text-align: center">
             <h2>
-                <span class="uppercase">Ustawienia</span>
+                <span class="uppercase">Zmień swoje dane osobowe</span>
             </h2>
-            <div class="btn btn--without-border" ><a href="<jsp:include page="../../links/hrefEditPersonalData.jsp"/>">Zmień dane osobowe</a></div>
-            <br/>
-            <div class="btn btn--without-border"><a href="<jsp:include page="../../links/hrefEditPassword.jsp"/>">Zmień hasło</a></div>
+            <section class="login-page" style="text-align: center">
+                <form method="post">
+                    <div class="form-group">
+                        <span class="slogan--steps-title">Obecne hasło: </span><input name="oldPassword" type="password" placeholder="Obecne hasło" />
+                    </div>
+                    <div class="form-group">
+                        <span class="slogan--steps-title">Nowe hasło: </span><input name="newPassword" type="password" placeholder="Nowe hasło" />
+                        <br/>
+                        <span class="slogan--steps-title">${success}</span>
+                    </div>
+                    <div class="form-group form-group--buttons">
+                        <a href="/user" class="btn btn--without-border">Anuluj</a>
+                        <button class="btn" type="submit" >Zmień</button>
+                        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                    </div>
+                </form>
+            </section>
         </div>
     </div>
 </header>

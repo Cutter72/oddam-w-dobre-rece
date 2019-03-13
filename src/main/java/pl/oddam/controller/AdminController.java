@@ -12,7 +12,7 @@ import pl.oddam.model.CurrentUser;
 public class AdminController {
     @GetMapping("")
     public String admin(@AuthenticationPrincipal CurrentUser customUser, Model model) {
-        model.addAttribute("userName", customUser.getUser().getFirstName());
+        model.addAttribute("user", customUser.getUser());
         return "admin";
     }
 

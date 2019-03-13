@@ -8,26 +8,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import pl.oddam.model.CurrentUser;
 
 @Controller
-@RequestMapping("/user")
-public class UserController {
+@RequestMapping("/user/settings")
+public class SettingsController {
     @GetMapping("")
-    public String user(@AuthenticationPrincipal CurrentUser customUser, Model model) {
+    public String userSettings(@AuthenticationPrincipal CurrentUser customUser, Model model) {
         model.addAttribute("user", customUser.getUser());
-        return "user";
+        return "user/settings";
     }
     @GetMapping("/")
-    public String userSlash() {
-        return "redirect:/user";
+    public String userSettingsSlash() {
+        return "redirect:/user/settings";
     }
-
-    @GetMapping("/profile")
-    public String userProfile(@AuthenticationPrincipal CurrentUser customUser, Model model) {
+    @GetMapping("/edit-personal-data")
+    public String editPersonalData(@AuthenticationPrincipal CurrentUser customUser, Model model) {
         model.addAttribute("user", customUser.getUser());
-        return "user/profile";
+        return "user/editPersonalData";
     }
-    @GetMapping("/profile/")
-    public String userProfileSlash() {
-        return "redirect:/user/profile";
-    }
-
 }

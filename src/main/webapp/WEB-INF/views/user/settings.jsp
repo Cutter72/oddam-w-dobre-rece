@@ -47,12 +47,13 @@
     </nav>
 
     <div class="slogan container container--90">
-        <div class="slogan--item">
+        <div class="slogan--item" style="text-align: center">
             <h2>
-                <span class="uppercase">Ustawienia:</span>
+                <span class="uppercase">Ustawienia</span>
             </h2>
-            <div class="slogan--steps-title">Zmień dane osobowe</div>
-            <div class="slogan--steps-title">Zmień hasło</div>
+            <div class="btn btn--without-border" ><a href="<jsp:include page="../../links/hrefEditPersonalData.jsp"/>">Zmień dane osobowe</a></div>
+            <br/>
+            <div class="btn btn--without-border"><a href="<jsp:include page="../../links/hrefEditPersonalData.jsp"/>">Zmień hasło</a></div>
         </div>
     </div>
 </header>

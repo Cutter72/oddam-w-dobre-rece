@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <!DOCTYPE html>
 <html lang="pl">
@@ -49,12 +50,24 @@
     <div class="slogan container container--90">
         <div class="slogan--item" style="text-align: center">
             <h2>
-                <span class="uppercase">twój profil</span>
+                <span class="uppercase">Zmień swoje dane osobowe</span>
             </h2>
-            <div class="slogan--steps-title">Imię: <b>${user.firstName}</b></div>
-            <div class="slogan--steps-title">Nazwisko: <b>${user.lastName}</b></div>
-            <div class="btn btn--without-border"><a href="<jsp:include page="../../links/hrefEditPersonalData.jsp"/>">Edytuj dane osobowe</a></div>
-            <div class="slogan--steps-title">E-mail: <b>${user.email}</b></div>
+            <section class="login-page" style="text-align: center">
+                <form:form method="post" modelAttribute="user">
+                    <div class="form-group">
+                        <span class="slogan--steps-title">Imię: </span><form:input path="firstName" name="firstName" placeholder="${user.firstName}" />
+                        <form:errors path="firstName" name="firstName" placeholder="Imię" />
+                    </div>
+                    <div class="form-group">
+                        <span class="slogan--steps-title">Nazwisko: </span><form:input path="lastName" name="lastName" placeholder="${user.lastName}" />
+                        <form:errors path="lastName" name="lastName" placeholder="Nazwisko" />
+                    </div>
+                    <div class="form-group form-group--buttons">
+                        <a href="<jsp:include page="../../links/hrefUserProfile.jsp"/>" class="btn btn--without-border">Anuluj</a>
+                        <button class="btn" type="submit">Zmień</button>
+                    </div>
+                </form:form>
+            </section>
         </div>
     </div>
 </header>

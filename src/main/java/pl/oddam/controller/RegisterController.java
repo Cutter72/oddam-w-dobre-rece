@@ -30,9 +30,8 @@ public class RegisterController {
     }
 
     @GetMapping("/")
-    public String registerFormSlash(Model model) {
-        model.addAttribute("user", new User());
-        return "register";
+    public String registerFormSlash() {
+        return "redirect:/register";
     }
 
     @PostMapping("")

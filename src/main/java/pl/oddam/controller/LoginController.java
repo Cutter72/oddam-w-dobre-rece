@@ -13,6 +13,6 @@ public class LoginController {
     }
     @GetMapping("/")
     public String loginSlash() {
-        return "login";
+        return "redirect:/login";
     }
 }

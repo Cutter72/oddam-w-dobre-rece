@@ -12,12 +12,30 @@ import pl.oddam.model.CurrentUser;
 public class UserController {
     @GetMapping("")
     public String user(@AuthenticationPrincipal CurrentUser customUser, Model model) {
-        model.addAttribute("userName", customUser.getUser().getFirstName());
+        model.addAttribute("user", customUser.getUser());
         return "user";
     }
     @GetMapping("/")
-    public String userSlash(@AuthenticationPrincipal CurrentUser customUser, Model model) {
-        model.addAttribute("userName", customUser.getUser().getFirstName());
-        return "user";
+    public String userSlash() {
+        return "redirect:/user";
+    }
+
+    @GetMapping("/profile")
+    public String userProfile(@AuthenticationPrincipal CurrentUser customUser, Model model) {
+        model.addAttribute("user", customUser.getUser());
+        return "user/profile";
+    }
+    @GetMapping("/profile/")
+    public String userProfileSlash() {
+        return "redirect:/user/profile";
+    }
+    @GetMapping("/settings")
+    public String userSettings(@AuthenticationPrincipal CurrentUser customUser, Model model) {
+        model.addAttribute("user", customUser.getUser());
+        return "user/settings";
+    }
+    @GetMapping("/settings/")
+    public String userSettingsSlash() {
+        return "redirect:/user/settings";
     }
 }

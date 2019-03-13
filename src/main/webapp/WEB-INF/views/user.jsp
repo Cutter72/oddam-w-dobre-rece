@@ -16,7 +16,7 @@
     <nav class="container container--70">
         <ul class="nav--actions">
             <li class="logged-user">
-                Witaj ${userName}
+                Witaj ${user.firstName}
                 <ul class="dropdown">
                     <li><a href="<jsp:include page="../links/hrefUserProfile.jsp"/>">Profil</a></li>
                     <li><a href="<jsp:include page="../links/hrefUserSettings.jsp"/>">Ustawienia</a></li>

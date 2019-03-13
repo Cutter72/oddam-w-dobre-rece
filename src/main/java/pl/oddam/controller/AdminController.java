@@ -17,8 +17,7 @@ public class AdminController {
     }
 
     @GetMapping("/")
-    public String adminSlash(@AuthenticationPrincipal CurrentUser customUser, Model model) {
-        model.addAttribute("userName", customUser.getUser().getFirstName());
-        return "admin";
+    public String adminSlash() {
+        return "redirect:/admin";
     }
 }

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <!DOCTYPE html>
 <html lang="pl">
@@ -11,9 +12,6 @@
     <title>Admin</title>
     <link rel="stylesheet" href="css/bootstrap/bootstrap.css"/>
     <link rel="stylesheet" href="css/style.css"/>
-    <%--<link rel="stylesheet" href="css/bootstrap/bootstrap-theme.css"/>--%>
-    <%--<link rel="stylesheet" href="css/bootstrap/bootstrap-table.css"/>--%>
-    <%--<link rel="stylesheet" href="css/bootstrap/styles.css"/>--%>
 </head>
 <body>
 <header class="header--form-page" style="background-image: none">
@@ -45,13 +43,88 @@
         </ul>
     </nav>
 
-    <div class="slogan container container--90">
+    <div class="container">
         <div class="slogan--item">
-            <h1>
-                Lista administratorów
-            </h1>
-            <div class="tab-content">
-                <div class="tab-pane fade in active">
+            <h2>
+                Zarządzanie Administratorami
+            </h2>
+        </div>
+        <div class="tab-content">
+            <div class="tab-pane fade in active">
+
+                <%--<section class="container">--%>
+                    <%--<h3 class="slogan--steps-title">--%>
+                        <%--Formularz dodawania nowego administratora--%>
+                    <%--</h3>--%>
+                    <%--<form:form method="post" modelAttribute="newUser">--%>
+                        <%--<table class="table">--%>
+                            <%--<tr>--%>
+                                <%--<th>--%>
+                                    <%--<div class="form-group">--%>
+                                        <%--<form:input  path="firstName" name="firstName" placeholder="Imie"/><br/>--%>
+                                        <%--<form:errors path="firstName" name="firstName" placeholder="Imię"/>--%>
+                                    <%--</div>--%>
+                                <%--</th>--%>
+                                <%--<th>--%>
+                                    <%--<div class="form-group">--%>
+                                        <%--<form:input path="lastName" name="lastName" placeholder="Nazwisko"/><br/>--%>
+                                        <%--<form:errors path="lastName" name="lastName" placeholder="Nazwisko"/>--%>
+                                    <%--</div>--%>
+                                <%--</th>--%>
+                                <%--<th>--%>
+                                    <%--<div class="form-group">--%>
+                                        <%--<form:input path="email" type="email" name="email" placeholder="E-mail"/><br/>--%>
+                                        <%--<br/>${duplicateEmail}--%>
+                                        <%--<form:errors path="email" type="email" name="email" placeholder="E-mail"/>--%>
+                                    <%--</div>--%>
+                                <%--</th>--%>
+                                <%--<th>--%>
+                                    <%--<div class="form-group">--%>
+                                        <%--<form:input path="password" type="password" name="password"--%>
+                                                    <%--placeholder="Hasło"/><br/>--%>
+                                        <%--<form:errors path="password" type="password" name="password"--%>
+                                                     <%--placeholder="Hasło"/>--%>
+                                    <%--</div>--%>
+                                <%--</th>--%>
+                            <%--</tr>--%>
+                        <%--</table>--%>
+                        <%--<div class="form-group form-group--buttons">--%>
+                            <%--<button class="btn btn--small" type="submit">Dodaj</button>--%>
+                        <%--</div>--%>
+                    <%--</form:form>--%>
+                <%--</section>--%>
+
+                    <section class="login-page">
+                        <h2>Załóż konto</h2>
+                        <form:form method="post" modelAttribute="newUser">
+                            <div class="form-group">
+                                <form:input path="firstName" name="firstName" placeholder="Imie" />
+                                <form:errors path="firstName" name="firstName" placeholder="Imię" />
+                            </div>
+                            <div class="form-group">
+                                <form:input path="lastName" name="lastName" placeholder="Nazwisko" />
+                                <form:errors path="lastName" name="lastName" placeholder="Nazwisko" />
+                            </div>
+                            <div class="form-group">
+                                <form:input path="email" type="email" name="email" placeholder="E-mail" />${duplicateEmail}
+                                <form:errors path="email" type="email" name="email" placeholder="E-mail" />
+                            </div>
+                            <div class="form-group">
+                                <form:input path="password" type="password" name="password" placeholder="Hasło" />
+                                <form:errors path="password" type="password" name="password" placeholder="Hasło" />
+                            </div>
+
+                            <div class="form-group form-group--buttons">
+                                <a href="<jsp:include page="../links/hrefLogin.jsp"/>" class="btn btn--without-border">Zaloguj się</a>
+                                <button class="btn" type="submit">Załóż konto</button>
+                            </div>
+                        </form:form>
+                    </section>
+
+                <section class="container">
+                    <h3 class="slogan--steps-title">
+                        Lista administratorów
+                    </h3>
                     <table class="table">
                         <tr>
                             <th>Email</th>
@@ -59,20 +132,24 @@
                             <th>Nazwisko</th>
                             <th>Zarządzaj</th>
                         </tr>
-                        <tr>
-                            <td>email 1</td>
-                            <td>Imie 1</td>
-                            <td>Nazwisko 1</td>
-                            <td>Edytuj Usuń</td>
-                        </tr>
+                        <c:forEach items="${adminList}" var="admin">
+                            <tr>
+                                <td>${admin.email}</td>
+                                <td>${admin.firstName}</td>
+                                <td>${admin.lastName}</td>
+                                <td>
+                                    <a href="#" class="btn btn--small">Edytuj</a>
+                                    <a href="#" class="btn btn--small">Usuń</a>
+                                </td>
+                            </tr>
+                        </c:forEach>
                     </table>
-                </div>
+                </section>
+
             </div>
         </div>
     </div>
 </header>
 
-
-<script src="js/app.js"></script>
 </body>
 </html>

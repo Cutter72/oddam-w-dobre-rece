@@ -40,7 +40,6 @@ public class RegisterController {
             return "register";
         }
         String existingEmail = null;
-        System.out.println(existingEmail);
         try {
             existingEmail = userServiceImpl.findByEmail(user.getEmail()).getEmail();
         } catch (NullPointerException e) {
@@ -51,6 +50,6 @@ public class RegisterController {
                 return "register";
             }
         }
-        return "redirect:/";
+        return "redirect:/login";
     }
 }

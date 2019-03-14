@@ -3,8 +3,10 @@ package pl.oddam.controller;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import pl.oddam.model.CurrentUser;
@@ -46,10 +48,11 @@ public class AdminController {
     }
 
     @PostMapping("")
-    public String adminSave(@Valid User user, BindingResult result, Model model, @AuthenticationPrincipal CurrentUser customUser) {
+    public String adminSave(@ModelAttribute("newUser")@Valid User user, BindingResult result, Model model,
+                            @AuthenticationPrincipal CurrentUser customUser, ModelMap modelMap) {
         if (result.hasErrors()) {
-//            admin(customUser, model);
-            model.addAttribute("newUser", new User());
+            admin(customUser, model);
+            modelMap.put(BindingResult.class.getName() + ".newUser", result);
             return "admin";
         }
         String existingEmail = null;

@@ -52,74 +52,47 @@
         <div class="tab-content">
             <div class="tab-pane fade in active">
 
-                <%--<section class="container">--%>
-                    <%--<h3 class="slogan--steps-title">--%>
-                        <%--Formularz dodawania nowego administratora--%>
-                    <%--</h3>--%>
-                    <%--<form:form method="post" modelAttribute="newUser">--%>
-                        <%--<table class="table">--%>
-                            <%--<tr>--%>
-                                <%--<th>--%>
-                                    <%--<div class="form-group">--%>
-                                        <%--<form:input  path="firstName" name="firstName" placeholder="Imie"/><br/>--%>
-                                        <%--<form:errors path="firstName" name="firstName" placeholder="Imię"/>--%>
-                                    <%--</div>--%>
-                                <%--</th>--%>
-                                <%--<th>--%>
-                                    <%--<div class="form-group">--%>
-                                        <%--<form:input path="lastName" name="lastName" placeholder="Nazwisko"/><br/>--%>
-                                        <%--<form:errors path="lastName" name="lastName" placeholder="Nazwisko"/>--%>
-                                    <%--</div>--%>
-                                <%--</th>--%>
-                                <%--<th>--%>
-                                    <%--<div class="form-group">--%>
-                                        <%--<form:input path="email" type="email" name="email" placeholder="E-mail"/><br/>--%>
-                                        <%--<br/>${duplicateEmail}--%>
-                                        <%--<form:errors path="email" type="email" name="email" placeholder="E-mail"/>--%>
-                                    <%--</div>--%>
-                                <%--</th>--%>
-                                <%--<th>--%>
-                                    <%--<div class="form-group">--%>
-                                        <%--<form:input path="password" type="password" name="password"--%>
-                                                    <%--placeholder="Hasło"/><br/>--%>
-                                        <%--<form:errors path="password" type="password" name="password"--%>
-                                                     <%--placeholder="Hasło"/>--%>
-                                    <%--</div>--%>
-                                <%--</th>--%>
-                            <%--</tr>--%>
-                        <%--</table>--%>
-                        <%--<div class="form-group form-group--buttons">--%>
-                            <%--<button class="btn btn--small" type="submit">Dodaj</button>--%>
-                        <%--</div>--%>
-                    <%--</form:form>--%>
-                <%--</section>--%>
-
-                    <section class="login-page">
-                        <h2>Załóż konto</h2>
-                        <form:form method="post" modelAttribute="newUser">
-                            <div class="form-group">
-                                <form:input path="firstName" name="firstName" placeholder="Imie" />
-                                <form:errors path="firstName" name="firstName" placeholder="Imię" />
-                            </div>
-                            <div class="form-group">
-                                <form:input path="lastName" name="lastName" placeholder="Nazwisko" />
-                                <form:errors path="lastName" name="lastName" placeholder="Nazwisko" />
-                            </div>
-                            <div class="form-group">
-                                <form:input path="email" type="email" name="email" placeholder="E-mail" />${duplicateEmail}
-                                <form:errors path="email" type="email" name="email" placeholder="E-mail" />
-                            </div>
-                            <div class="form-group">
-                                <form:input path="password" type="password" name="password" placeholder="Hasło" />
-                                <form:errors path="password" type="password" name="password" placeholder="Hasło" />
-                            </div>
-
-                            <div class="form-group form-group--buttons">
-                                <a href="<jsp:include page="../links/hrefLogin.jsp"/>" class="btn btn--without-border">Zaloguj się</a>
-                                <button class="btn" type="submit">Załóż konto</button>
-                            </div>
-                        </form:form>
-                    </section>
+                <section class="container">
+                    <h3 class="slogan--steps-title">
+                        Formularz dodawania nowego administratora
+                    </h3>
+                    <form:form method="post" modelAttribute="newUser">
+                        <table class="table">
+                            <tr>
+                                <th>
+                                    <div class="form-group">
+                                        <form:input  path="firstName" name="firstName" placeholder="Imie"/><br/>
+                                        <form:errors path="firstName" name="firstName" placeholder="Imię"/>
+                                    </div>
+                                </th>
+                                <th>
+                                    <div class="form-group">
+                                        <form:input path="lastName" name="lastName" placeholder="Nazwisko"/><br/>
+                                        <form:errors path="lastName" name="lastName" placeholder="Nazwisko"/>
+                                    </div>
+                                </th>
+                                <th>
+                                    <div class="form-group">
+                                        <form:input path="email" type="email" name="email" placeholder="E-mail"/><br/>
+                                        ${duplicateEmail}
+                                        <form:errors path="email" type="email" name="email" placeholder="E-mail"/>
+                                    </div>
+                                </th>
+                                <th>
+                                    <div class="form-group">
+                                        <form:input path="password" type="password" name="password"
+                                                    placeholder="Hasło"/><br/>
+                                        <form:errors path="password" type="password" name="password"
+                                                     placeholder="Hasło"/>
+                                    </div>
+                                </th>
+                            </tr>
+                        </table>
+                        <div class="form-group form-group--buttons">
+                            <button class="btn btn--small" type="submit">Dodaj</button>
+                        </div>
+                    </form:form>
+                </section>
 
                 <section class="container">
                     <h3 class="slogan--steps-title">
@@ -138,8 +111,8 @@
                                 <td>${admin.firstName}</td>
                                 <td>${admin.lastName}</td>
                                 <td>
-                                    <a href="#" class="btn btn--small">Edytuj</a>
-                                    <a href="#" class="btn btn--small">Usuń</a>
+                                    <a href="/admin/edit/${admin.id}" class="btn btn--small">Edytuj</a>
+                                    <a href="/admin/delete/${admin.id}" class="btn btn--small">Usuń</a>
                                 </td>
                             </tr>
                         </c:forEach>

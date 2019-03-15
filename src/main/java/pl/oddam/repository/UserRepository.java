@@ -7,9 +7,11 @@ import pl.oddam.model.User;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
     User findByEmail(String name);
+    Optional<User> findById(Long id);
     List<User> findAllByRoles(HashSet<Role> roles);
 }

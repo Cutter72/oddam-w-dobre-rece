@@ -1,6 +1,5 @@
 package pl.oddam.service;
 
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import pl.oddam.model.Role;
@@ -40,6 +39,14 @@ public class UserServiceImpl implements UserService {
     @Override
     public void saveAdmin(User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
+        user.setEnabled(1);
+        Role userRole = roleRepository.findByName("ROLE_ADMIN");
+        user.setRoles(new HashSet<Role>(Arrays.asList(userRole)));
+        userRepository.save(user);
+    }
+
+    @Override
+    public void editAdmin(User user) {
         user.setEnabled(1);
         Role userRole = roleRepository.findByName("ROLE_ADMIN");
         user.setRoles(new HashSet<Role>(Arrays.asList(userRole)));

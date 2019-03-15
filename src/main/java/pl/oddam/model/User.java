@@ -21,7 +21,6 @@ public class User {
     @Email
     @NotEmpty
     private String email;
-    @NotEmpty
     private String password;
     private int enabled;
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)

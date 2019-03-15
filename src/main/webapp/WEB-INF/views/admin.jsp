@@ -112,7 +112,7 @@
                                 <td>${admin.lastName}</td>
                                 <td>
                                     <a href="/admin/edit/${admin.id}" class="btn btn--small">Edytuj</a>
-                                    <a href="/admin/delete/${admin.id}" class="btn btn--small">Usuń</a>
+                                    <a href="/admin/delete/${admin.id}" class="btn btn--small deleteBtn">Usuń</a>
                                 </td>
                             </tr>
                         </c:forEach>
@@ -123,6 +123,6 @@
         </div>
     </div>
 </header>
-
+<script src="<c:url value="../../js/confirm.js"/>"></script>
 </body>
 </html>

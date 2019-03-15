@@ -111,4 +111,10 @@ public class AdminController {
         }
     }
 
+    @GetMapping("/delete/{id}")
+    public String adminDelete(@PathVariable Long id) {
+        userRepository.delete(userRepository.findById(id).get());
+        return "redirect:/admin";
+    }
+
 }

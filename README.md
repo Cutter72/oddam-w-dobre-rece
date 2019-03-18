@@ -4,6 +4,7 @@ Celem projektu jest stworzenie miejsca, w którym każdy będzie mógł oddać n
 The aim of the project is to create a place where
 everyone can give away unnecessary things to trusted institutions.
 ### Technologie/Technologies:
+* Spring Boot
 * Spring MVC
 * Spring Form
 * Hibernate

@@ -103,6 +103,7 @@
                             <th>Email</th>
                             <th>Imię</th>
                             <th>Nazwisko</th>
+                            <th>Aktywny</th>
                             <th>Zarządzaj</th>
                         </tr>
                         <c:forEach items="${userList}" var="user">
@@ -110,9 +111,19 @@
                                 <td>${user.email}</td>
                                 <td>${user.firstName}</td>
                                 <td>${user.lastName}</td>
+                                <td>${user.enabled}</td>
                                 <td>
                                     <a href="<jsp:include page="../links/hrefAdminUserEdit.jsp"/>/${user.id}" class="btn btn--small">Edytuj</a>
                                     <a href="<jsp:include page="../links/hrefAdminUserDelete.jsp"/>/${user.id}" class="btn btn--small deleteBtn">Usuń</a>
+                                    <c:choose>
+                                        <c:when test="${user.enabled=='1'}">
+                                            <a href="<jsp:include page="../links/hrefAdminUserDisable.jsp"/>/${user.id}" class="btn btn--small deleteBtn">Zablokuj</a>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <a href="<jsp:include page="../links/hrefAdminUserEnable.jsp"/>/${user.id}" class="btn btn--small deleteBtn">Odblokuj</a>
+                                        </c:otherwise>
+                                    </c:choose>
+
                                 </td>
                             </tr>
                         </c:forEach>

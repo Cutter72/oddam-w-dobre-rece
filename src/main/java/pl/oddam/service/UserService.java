@@ -7,4 +7,5 @@ public interface UserService {
     void saveUser(User user);
     void saveAdmin(User user);
     void editAdmin(User user);
+    void editUser(User user);
 }

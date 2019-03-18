@@ -34,11 +34,11 @@
         </ul>
 
         <ul>
-            <li><a href="#" class="btn btn--without-border active">Zarządzanie Administratorami</a></li>
-            <li><a href="#" class="btn btn--without-border">Zarządzanie Użytkownikami</a>
+            <li><a href="<jsp:include page="../links/hrefAdmin.jsp"/>" class="btn btn--without-border active">Zarządzanie Administratorami</a></li>
+            <li><a href="<jsp:include page="../links/hrefAdminUser.jsp"/>" class="btn btn--without-border">Zarządzanie Użytkownikami</a>
             </li>
             <li>
-                <a href="#" class="btn btn--without-border">Zarządzanie Instytucjami</a>
+                <a href="<jsp:include page="../links/hrefAdminOrganizations.jsp"/>" class="btn btn--without-border">Zarządzanie Instytucjami</a>
             </li>
         </ul>
     </nav>
@@ -111,8 +111,8 @@
                                 <td>${admin.firstName}</td>
                                 <td>${admin.lastName}</td>
                                 <td>
-                                    <a href="/admin/edit/${admin.id}" class="btn btn--small">Edytuj</a>
-                                    <a href="/admin/delete/${admin.id}" class="btn btn--small deleteBtn">Usuń</a>
+                                    <a href="<jsp:include page="../links/hrefAdminEdit.jsp"/>/${admin.id}" class="btn btn--small">Edytuj</a>
+                                    <a href="<jsp:include page="../links/hrefAdminDelete.jsp"/>/${admin.id}" class="btn btn--small deleteBtn">Usuń</a>
                                 </td>
                             </tr>
                         </c:forEach>

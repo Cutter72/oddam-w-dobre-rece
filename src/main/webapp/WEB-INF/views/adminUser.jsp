@@ -10,9 +10,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
     <title>Admin</title>
-    <link rel="stylesheet" href="<c:url value="../../../css/bootstrap/bootstrap.css"/>"/>
-    <link rel="stylesheet" href="<c:url value="../../../css/style.css"/>"/>
-
+    <link rel="stylesheet" href="/css/bootstrap/bootstrap.css"/>
+    <link rel="stylesheet" href="/css/style.css"/>
 </head>
 <body>
 <header class="header--form-page" style="background-image: none">
@@ -21,9 +20,9 @@
             <li class="logged-user">
                 Witaj ADMINIE ${user.firstName}
                 <ul class="dropdown">
-                    <li><a href="<jsp:include page="../../links/hrefUserProfile.jsp"/>">Profil</a></li>
-                    <li><a href="<jsp:include page="../../links/hrefUserSettings.jsp"/>">Ustawienia</a></li>
-                    <li><a href="<jsp:include page="../../links/hrefUserCollections.jsp"/>">Moje zbiórki</a></li>
+                    <li><a href="<jsp:include page="../links/hrefUserProfile.jsp"/>">Profil</a></li>
+                    <li><a href="<jsp:include page="../links/hrefUserSettings.jsp"/>">Ustawienia</a></li>
+                    <li><a href="<jsp:include page="../links/hrefUserCollections.jsp"/>">Moje zbiórki</a></li>
                     <li>
                         <form action="/logout" method="post">
                             <input class="btn--small" type="submit" value="Wyloguj">
@@ -35,11 +34,11 @@
         </ul>
 
         <ul>
-            <li><a href="<jsp:include page="../../links/hrefAdmin.jsp"/>" class="btn btn--without-border active">Zarządzanie Administratorami</a></li>
-            <li><a href="<jsp:include page="../../links/hrefAdminUser.jsp"/>" class="btn btn--without-border">Zarządzanie Użytkownikami</a>
+            <li><a href="<jsp:include page="../links/hrefAdmin.jsp"/>" class="btn btn--without-border">Zarządzanie Administratorami</a></li>
+            <li><a href="<jsp:include page="../links/hrefAdminUser.jsp"/>" class="btn btn--without-border active">Zarządzanie Użytkownikami</a>
             </li>
             <li>
-                <a href="<jsp:include page="../../links/hrefAdminOrganizations.jsp"/>" class="btn btn--without-border">Zarządzanie Instytucjami</a>
+                <a href="<jsp:include page="../links/hrefAdminOrganizations.jsp"/>" class="btn btn--without-border">Zarządzanie Instytucjami</a>
             </li>
         </ul>
     </nav>
@@ -47,7 +46,7 @@
     <div class="container">
         <div class="slogan--item">
             <h2>
-                Zarządzanie Administratorami
+                Zarządzanie Użytkownikami
             </h2>
         </div>
         <div class="tab-content">
@@ -55,9 +54,9 @@
 
                 <section class="container">
                     <h3 class="slogan--steps-title">
-                        Formularz edycji
+                        Formularz dodawania nowego uzytkownika
                     </h3>
-                    <form:form method="post" modelAttribute="userToEdit">
+                    <form:form method="post" modelAttribute="newUser">
                         <table class="table">
                             <tr>
                                 <th>
@@ -79,17 +78,25 @@
                                         <form:errors path="email" type="email" name="email" placeholder="E-mail"/>
                                     </div>
                                 </th>
+                                <th>
+                                    <div class="form-group">
+                                        <form:input path="password" type="password" name="password"
+                                                    placeholder="Hasło"/><br/>
+                                        <form:errors path="password" type="password" name="password"
+                                                     placeholder="Hasło"/>
+                                    </div>
+                                </th>
                             </tr>
                         </table>
                         <div class="form-group form-group--buttons">
-                            <button class="btn btn--small" type="submit">Zapisz</button>
+                            <button class="btn btn--small" type="submit">Dodaj</button>
                         </div>
                     </form:form>
                 </section>
 
                 <section class="container">
                     <h3 class="slogan--steps-title">
-                        Lista administratorów
+                        Lista użytkowników
                     </h3>
                     <table class="table">
                         <tr>
@@ -98,14 +105,14 @@
                             <th>Nazwisko</th>
                             <th>Zarządzaj</th>
                         </tr>
-                        <c:forEach items="${adminList}" var="admin">
+                        <c:forEach items="${userList}" var="user">
                             <tr>
-                                <td>${admin.email}</td>
-                                <td>${admin.firstName}</td>
-                                <td>${admin.lastName}</td>
+                                <td>${user.email}</td>
+                                <td>${user.firstName}</td>
+                                <td>${user.lastName}</td>
                                 <td>
-                                    <a href="<jsp:include page="../../links/hrefAdminEdit.jsp"/>/${admin.id}" class="btn btn--small">Edytuj</a>
-                                    <a href="<jsp:include page="../../links/hrefAdminDelete.jsp"/>/${admin.id}" class="btn btn--small deleteBtn">Usuń</a>
+                                    <a href="<jsp:include page="../links/hrefAdminUserEdit.jsp"/>/${user.id}" class="btn btn--small">Edytuj</a>
+                                    <a href="<jsp:include page="../links/hrefAdminUserDelete.jsp"/>/${user.id}" class="btn btn--small deleteBtn">Usuń</a>
                                 </td>
                             </tr>
                         </c:forEach>
@@ -116,8 +123,7 @@
         </div>
     </div>
 </header>
-
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="<c:url value="../../../js/confirm.js"/>" type="text/javascript"></script>
+<script src="<c:url value="../../js/confirm.js"/>" type="text/javascript"></script>
 </body>
 </html>

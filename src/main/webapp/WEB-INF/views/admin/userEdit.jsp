@@ -35,8 +35,8 @@
         </ul>
 
         <ul>
-            <li><a href="<jsp:include page="../../links/hrefAdmin.jsp"/>" class="btn btn--without-border active">Zarządzanie Administratorami</a></li>
-            <li><a href="<jsp:include page="../../links/hrefAdminUser.jsp"/>" class="btn btn--without-border">Zarządzanie Użytkownikami</a>
+            <li><a href="<jsp:include page="../../links/hrefAdmin.jsp"/>" class="btn btn--without-border">Zarządzanie Administratorami</a></li>
+            <li><a href="<jsp:include page="../../links/hrefAdminUser.jsp"/>" class="btn btn--without-border active">Zarządzanie Użytkownikami</a>
             </li>
             <li>
                 <a href="<jsp:include page="../../links/hrefAdminOrganizations.jsp"/>" class="btn btn--without-border">Zarządzanie Instytucjami</a>
@@ -47,7 +47,7 @@
     <div class="container">
         <div class="slogan--item">
             <h2>
-                Zarządzanie Administratorami
+                Zarządzanie Użytkownikami
             </h2>
         </div>
         <div class="tab-content">
@@ -89,7 +89,7 @@
 
                 <section class="container">
                     <h3 class="slogan--steps-title">
-                        Lista administratorów
+                        Lista uzytkowników
                     </h3>
                     <table class="table">
                         <tr>
@@ -98,14 +98,14 @@
                             <th>Nazwisko</th>
                             <th>Zarządzaj</th>
                         </tr>
-                        <c:forEach items="${adminList}" var="admin">
+                        <c:forEach items="${userList}" var="user">
                             <tr>
-                                <td>${admin.email}</td>
-                                <td>${admin.firstName}</td>
-                                <td>${admin.lastName}</td>
+                                <td>${user.email}</td>
+                                <td>${user.firstName}</td>
+                                <td>${user.lastName}</td>
                                 <td>
-                                    <a href="<jsp:include page="../../links/hrefAdminEdit.jsp"/>/${admin.id}" class="btn btn--small">Edytuj</a>
-                                    <a href="<jsp:include page="../../links/hrefAdminDelete.jsp"/>/${admin.id}" class="btn btn--small deleteBtn">Usuń</a>
+                                    <a href="<jsp:include page="../../links/hrefAdminUserEdit.jsp"/>/${user.id}" class="btn btn--small">Edytuj</a>
+                                    <a href="<jsp:include page="../../links/hrefAdminUserDelete.jsp"/>/${user.id}" class="btn btn--small deleteBtn">Usuń</a>
                                 </td>
                             </tr>
                         </c:forEach>

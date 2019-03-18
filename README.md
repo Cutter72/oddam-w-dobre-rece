@@ -7,5 +7,5 @@ everyone can give away unnecessary things to trusted institutions.
 * Spring Boot
 * Spring MVC
 * Spring Form
-* Hibernate
 * Spring Security
+* Hibernate

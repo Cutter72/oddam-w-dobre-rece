@@ -1,7 +1,11 @@
-## Oddam-w-dobre-rece
+## PL Oddam-w-dobre-rece
 Celem projektu jest stworzenie miejsca, w którym każdy będzie mógł oddać niepotrzebne rzeczy zaufanym instytucjom.
-### Technologie:
+## EN Oddam-w-dobre-rece
+The aim of the project is to create a place where
+everyone can give away unnecessary things to trusted institutions.
+### Technologie/Technologies:
+* Spring Boot
 * Spring MVC
 * Spring Form
-* Hibernate
 * Spring Security
+* Hibernate

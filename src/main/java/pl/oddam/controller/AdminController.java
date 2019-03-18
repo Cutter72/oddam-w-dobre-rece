@@ -49,6 +49,7 @@ public class AdminController {
                             @AuthenticationPrincipal CurrentUser customUser, ModelMap modelMap) {
         if (result.hasErrors()) {
             admin(customUser, model);
+            model.addAttribute("newUser", user);
             modelMap.put(BindingResult.class.getName() + ".newUser", result);
             return "admin";
         }
@@ -60,6 +61,7 @@ public class AdminController {
         }
         if (existingEmail != null) {
             admin(customUser, model);
+            model.addAttribute("newUser", user);
             model.addAttribute("duplicateEmail", "Email " + existingEmail + " jest już zajęty!");
             return "admin";
         }

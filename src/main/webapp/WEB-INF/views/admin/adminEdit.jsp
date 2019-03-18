@@ -116,6 +116,8 @@
         </div>
     </div>
 </header>
-<script src="<c:url value="../../../js/confirm.js"/>"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="<c:url value="../../../js/confirm.js"/>" type="text/javascript"></script>
 </body>
 </html>

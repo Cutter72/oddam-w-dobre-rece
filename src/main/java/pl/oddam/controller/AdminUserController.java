@@ -118,5 +118,20 @@ public class AdminUserController {
         userRepository.delete(userRepository.findById(id).get());
         return "redirect:/admin/user";
     }
+    @GetMapping("/disable/{id}")
+    public String adminUserDisable(@PathVariable Long id) {
+        User user = userRepository.findById(id).get();
+        user.setEnabled(0);
+        userRepository.save(user);
+        return "redirect:/admin/user";
+    }
+
+    @GetMapping("/enable/{id}")
+    public String adminUserEnable(@PathVariable Long id) {
+        User user = userRepository.findById(id).get();
+        user.setEnabled(1);
+        userRepository.save(user);
+        return "redirect:/admin/user";
+    }
 
 }

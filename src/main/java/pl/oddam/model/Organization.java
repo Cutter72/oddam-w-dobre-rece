@@ -19,7 +19,7 @@ public class Organization {
     @ManyToMany(cascade = CascadeType.DETACH, fetch = FetchType.EAGER)
     private Set<OrganizationTarget> organizationTarget;
     @ManyToOne(cascade = CascadeType.DETACH, fetch = FetchType.EAGER)
-//    @JoinTable(name = "organization_type", joinColumns = @JoinColumn(name = "organization_id"),
-//            inverseJoinColumns = @JoinColumn(name = "type_id"))
     private OrganizationType organizationType;
+    @ManyToMany(cascade = CascadeType.DETACH, fetch = FetchType.EAGER)
+    private Set<OrganizationNeed> organizationNeed;
 }

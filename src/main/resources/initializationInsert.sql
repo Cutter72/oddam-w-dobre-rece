@@ -19,3 +19,12 @@ INSERT INTO `oddam`.`organization_target` (`id`, `target`) VALUES
 ('3', 'bezdomni'),
 ('4', 'niepełnosprawni'),
 ('5', 'osoby starsze');
+
+INSERT INTO `oddam`.`organization_need` (`id`, `need`) VALUES
+('1', 'ubrania dla dorosłych'),
+('2', 'ubrania dla dzieci'),
+('3', 'jedzenie'),
+('4', 'sprzęt AGD'),
+('5', 'meble'),
+('6', 'zabawki'),
+('7', 'ciepłe koce');

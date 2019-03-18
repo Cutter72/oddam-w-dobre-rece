@@ -28,3 +28,24 @@ INSERT INTO `oddam`.`organization_need` (`id`, `need`) VALUES
 ('5', 'meble'),
 ('6', 'zabawki'),
 ('7', 'ciepłe koce');
+
+INSERT INTO `oddam`.`organization` (`id`, `mission`, `name`, `organization_type_id`) VALUES
+('1', 'Pomoc dzieciom z ubogich rodzin.', 'Dbam o Zdrowie', '1'),
+('2', 'Pomoc osobom znajdującym się w trudnej sytuacji życiowej.', 'Dla dzieci', '1'),
+('3', 'Pomoc dla osób nie posiadających miejsca zamieszkania.', 'Bez domu', '1');
+
+INSERT INTO `oddam`.`organization_organization_target` (`organization_id`, `organization_target_id`) VALUES
+('1', '1');
+
+INSERT INTO `oddam`.`organization_organization_need` (`organization_id`, `organization_need_id`) VALUES
+('1', '2'),
+('1', '3'),
+('1', '4'),
+('1', '5'),
+('1', '6'),
+('2', '2'),
+('2', '5'),
+('2', '6'),
+('3', '1'),
+('3', '3'),
+('3', '7');

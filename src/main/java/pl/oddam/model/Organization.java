@@ -15,12 +15,11 @@ public class Organization {
     @NotEmpty
     private String name;
     @NotEmpty
-    private String type;
-    @NotEmpty
     private String mission;
-    @NotEmpty
     @ManyToMany(cascade = CascadeType.DETACH, fetch = FetchType.EAGER)
-    @JoinTable(name = "organization_target", joinColumns = @JoinColumn(name = "organization_id"),
-            inverseJoinColumns = @JoinColumn(name = "target_id"))
-    private Set<Target> target;
+    private Set<OrganizationTarget> organizationTarget;
+    @ManyToOne(cascade = CascadeType.DETACH, fetch = FetchType.EAGER)
+//    @JoinTable(name = "organization_type", joinColumns = @JoinColumn(name = "organization_id"),
+//            inverseJoinColumns = @JoinColumn(name = "type_id"))
+    private OrganizationType organizationType;
 }

@@ -22,4 +22,6 @@ public class Organization {
     private OrganizationType organizationType;
     @ManyToMany(cascade = CascadeType.DETACH, fetch = FetchType.EAGER)
     private Set<OrganizationNeed> organizationNeed;
+    @ManyToOne(cascade = CascadeType.DETACH, fetch = FetchType.EAGER)
+    private City city;
 }

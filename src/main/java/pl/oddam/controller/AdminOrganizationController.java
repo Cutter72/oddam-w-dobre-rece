@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import pl.oddam.model.CurrentUser;
@@ -68,6 +69,13 @@ public class AdminOrganizationController {
             return "adminOrganization";
         }
         return "redirect:/admin/organization";
+    }
+
+    @GetMapping("/edit/{id}")
+    public String adminOrganizationEdit(@AuthenticationPrincipal CurrentUser customUser, Model model, @PathVariable Long id) {
+        adminOrganization(customUser, model);
+        model.addAttribute("organizationToEdit", organizationRepository.findById(id).get());
+        return "admin/organizationEdit";
     }
 
 

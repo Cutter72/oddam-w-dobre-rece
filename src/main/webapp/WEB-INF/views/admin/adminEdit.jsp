@@ -82,7 +82,8 @@
                             </tr>
                         </table>
                         <div class="form-group form-group--buttons">
-                            <button class="btn btn--small" type="submit">Zapisz</button>
+                            <a href="<jsp:include page="../../links/hrefAdmin.jsp"/>" class="btn btn--small">Anuluj</a>
+                            <button class="btn btn--small" type="submit">Zapisz zmiany</button>
                         </div>
                     </form:form>
                 </section>

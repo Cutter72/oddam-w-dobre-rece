@@ -10,8 +10,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
     <title>Admin</title>
-    <link rel="stylesheet" href="/css/bootstrap/bootstrap.css"/>
-    <link rel="stylesheet" href="/css/style.css"/>
+    <link rel="stylesheet" href="<c:url value="../../../css/bootstrap/bootstrap.css"/>"/>
+    <link rel="stylesheet" href="<c:url value="../../../css/style.css"/>"/>
 </head>
 <body>
 <header class="header--form-page" style="background-image: none">
@@ -20,9 +20,9 @@
             <li class="logged-user">
                 Witaj ADMINIE ${user.firstName}
                 <ul class="dropdown">
-                    <li><a href="<jsp:include page="../links/hrefUserProfile.jsp"/>">Profil</a></li>
-                    <li><a href="<jsp:include page="../links/hrefUserSettings.jsp"/>">Ustawienia</a></li>
-                    <li><a href="<jsp:include page="../links/hrefUserCollections.jsp"/>">Moje zbiórki</a></li>
+                    <li><a href="<jsp:include page="../../links/hrefUserProfile.jsp"/>">Profil</a></li>
+                    <li><a href="<jsp:include page="../../links/hrefUserSettings.jsp"/>">Ustawienia</a></li>
+                    <li><a href="<jsp:include page="../../links/hrefUserCollections.jsp"/>">Moje zbiórki</a></li>
                     <li>
                         <form action="/logout" method="post">
                             <input class="btn--small" type="submit" value="Wyloguj">
@@ -34,11 +34,11 @@
         </ul>
 
         <ul>
-            <li><a href="<jsp:include page="../links/hrefAdmin.jsp"/>" class="btn btn--without-border">Zarządzanie Administratorami</a></li>
-            <li><a href="<jsp:include page="../links/hrefAdminUser.jsp"/>" class="btn btn--without-border">Zarządzanie Użytkownikami</a>
+            <li><a href="<jsp:include page="../../links/hrefAdmin.jsp"/>" class="btn btn--without-border">Zarządzanie Administratorami</a></li>
+            <li><a href="<jsp:include page="../../links/hrefAdminUser.jsp"/>" class="btn btn--without-border">Zarządzanie Użytkownikami</a>
             </li>
             <li>
-                <a href="<jsp:include page="../links/hrefAdminOrganizations.jsp"/>" class="btn btn--without-border active">Zarządzanie Organizacjami</a>
+                <a href="<jsp:include page="../../links/hrefAdminOrganizations.jsp"/>" class="btn btn--without-border active">Zarządzanie Organizacjami</a>
             </li>
         </ul>
     </nav>
@@ -56,7 +56,7 @@
                     <h3 class="slogan--steps-title">
                         Formularz dodawania nowej organizacji
                     </h3>
-                    <form:form method="post" modelAttribute="newOrganization">
+                    <form:form method="post" modelAttribute="organizationToEdit">
                         <table class="table">
                             <tr>
                                 <th>Dane organizacji</th>
@@ -103,8 +103,8 @@
                             </tr>
                         </table>
                         <div class="form-group form-group--buttons">
-                            <a href="<jsp:include page="../links/hrefAdminOrganizations.jsp"/>" class="btn btn--small" style="visibility: hidden">Anuluj</a>
-                            <button class="btn btn--small" type="submit">Dodaj organizację</button>
+                            <a href="<jsp:include page="../../links/hrefAdminOrganizations.jsp"/>" class="btn btn--small">Anuluj</a>
+                            <button class="btn btn--small" type="submit">Zapisz zmiany</button>
                         </div>
                     </form:form>
                 </section>
@@ -140,8 +140,8 @@
                                     </c:forEach>
                                 </td>
                                 <td>
-                                    <a href="<jsp:include page="../links/hrefAdminOrganizationEdit.jsp"/>/${organization.id}" class="btn btn--small">Edytuj</a>
-                                    <a href="<jsp:include page="../links/hrefAdminOrganizationDelete.jsp"/>/${organization.id}" class="btn btn--small deleteBtn">Usuń</a>
+                                    <a href="<jsp:include page="../../links/hrefAdminOrganizationEdit.jsp"/>/${organization.id}" class="btn btn--small">Edytuj</a>
+                                    <a href="<jsp:include page="../../links/hrefAdminOrganizationDelete.jsp"/>/${organization.id}" class="btn btn--small deleteBtn">Usuń</a>
                                 </td>
                             </tr>
                         </c:forEach>
@@ -153,6 +153,6 @@
     </div>
 </header>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="<c:url value="../../js/confirm.js"/>" type="text/javascript"></script>
+<script src="<c:url value="../../../js/confirm.js"/>" type="text/javascript"></script>
 </body>
 </html>

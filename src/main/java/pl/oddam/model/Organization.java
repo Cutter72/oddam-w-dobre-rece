@@ -17,11 +17,11 @@ public class Organization {
     @NotEmpty
     private String mission;
     @ManyToMany(cascade = CascadeType.DETACH, fetch = FetchType.EAGER)
-    private Set<OrganizationTarget> organizationTarget;
+    private Set<OrganizationTarget> target;
     @ManyToOne(cascade = CascadeType.DETACH, fetch = FetchType.EAGER)
-    private OrganizationType organizationType;
+    private OrganizationType type;
     @ManyToMany(cascade = CascadeType.DETACH, fetch = FetchType.EAGER)
-    private Set<OrganizationNeed> organizationNeed;
+    private Set<OrganizationNeed> need;
     @ManyToOne(cascade = CascadeType.DETACH, fetch = FetchType.EAGER)
     private City city;
 }

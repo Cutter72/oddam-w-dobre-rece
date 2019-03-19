@@ -1,0 +1,1 @@
+/admin/organization/edit

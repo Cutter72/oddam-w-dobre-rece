@@ -7,19 +7,19 @@ INSERT INTO `oddam`.`role` (`role_id`, `role`) VALUES
 ('1', 'ROLE_ADMIN'),
 ('2', 'ROLE_USER');
 
-INSERT INTO `oddam`.`organization_type` (`id`, `type`) VALUES
+INSERT INTO `oddam`.`org_types` (`id`, `name`) VALUES
 ('1', 'Fundacja'),
 ('2', 'Organizacja pozarządowa'),
 ('3', 'Lokalna zbiórka');
 
-INSERT INTO `oddam`.`organization_target` (`id`, `target`) VALUES
+INSERT INTO `oddam`.`org_targets` (`id`, `name`) VALUES
 ('1', 'dzieci'),
 ('2', 'samotne matki'),
 ('3', 'bezdomni'),
 ('4', 'niepełnosprawni'),
 ('5', 'osoby starsze');
 
-INSERT INTO `oddam`.`organization_need` (`id`, `need`) VALUES
+INSERT INTO `oddam`.`org_needs` (`id`, `name`) VALUES
 ('1', 'ubrania dla dorosłych'),
 ('2', 'ubrania dla dzieci'),
 ('3', 'jedzenie'),
@@ -31,15 +31,15 @@ INSERT INTO `oddam`.`organization_need` (`id`, `need`) VALUES
 ('9', 'ubrania do wyrzucenia'),
 ('10', 'inne');
 
-INSERT INTO `oddam`.`organization` (`id`, `mission`, `name`, `organization_type_id`, `city_id`) VALUES
+INSERT INTO `oddam`.`organization` (`id`, `mission`, `name`, `type_id`, `city_id`) VALUES
 ('1', 'Pomoc dzieciom z ubogich rodzin.', 'Dbam o Zdrowie', '1', '1'),
 ('2', 'Pomoc osobom znajdującym się w trudnej sytuacji życiowej.', 'Dla dzieci', '1', '2'),
 ('3', 'Pomoc dla osób nie posiadających miejsca zamieszkania.', 'Bez domu', '1', '3');
 
-INSERT INTO `oddam`.`organization_organization_target` (`organization_id`, `organization_target_id`) VALUES
+INSERT INTO `oddam`.`organization_target` (`organization_id`, `target_id`) VALUES
 ('1', '1');
 
-INSERT INTO `oddam`.`organization_organization_need` (`organization_id`, `organization_need_id`) VALUES
+INSERT INTO `oddam`.`organization_need` (`organization_id`, `need_id`) VALUES
 ('1', '2'),
 ('1', '3'),
 ('1', '4'),
@@ -52,7 +52,7 @@ INSERT INTO `oddam`.`organization_organization_need` (`organization_id`, `organi
 ('3', '3'),
 ('3', '7');
 
-INSERT INTO `oddam`.`city` (`id`, `city`) VALUES
+INSERT INTO `oddam`.`city` (`id`, `name`) VALUES
 ('1', 'Gdańsk'),
 ('2', 'Kraków'),
 ('3', 'Poznań'),

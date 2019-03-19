@@ -36,6 +36,7 @@ public class AdminOrganizationController {
     public String adminOrganization(@AuthenticationPrincipal CurrentUser customUser, Model model) {
         model.addAttribute("user", customUser.getUser());
         model.addAttribute("newOrganization", new Organization());
+        model.addAttribute("organizationList", organizationRepository.findAll());
         model.addAttribute("organizationNeedList", organizationNeedRepository.findAll());
         model.addAttribute("organizationTypeList", organizationTypeRepository.findAll());
         model.addAttribute("organizationTargetList", organizationTargetRepository.findAll());

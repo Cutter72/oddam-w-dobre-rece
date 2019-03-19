@@ -66,21 +66,22 @@
                             <tr>
                                 <td>
                                     <div class="form-group">
-                                        <form:select path="organizationType">
-                                            <form:options items="${organizationTypeList}" itemLabel="type" itemValue="id"/>
+                                        <form:select path="type">
+                                            <form:options items="${organizationTypeList}" itemLabel="name" itemValue="id"/>
                                         </form:select>
                                     </div>
 
 
                                     <div class="form-group">
                                         <form:select path="city">
-                                            <form:options items="${cityList}" itemLabel="city" itemValue="id"/>
+                                            <form:options items="${cityList}" itemLabel="name" itemValue="id"/>
                                         </form:select>
                                     </div>
 
 
                                     <div class="form-group">
                                         <form:input  path="name" name="name" placeholder="name"/><br/>
+                                        ${duplicateName}
                                         <form:errors path="name" name="name" placeholder="name"/>
                                     </div>
 
@@ -91,12 +92,12 @@
                                 </td>
                                 <td>
                                     <div class="form-group">
-                                        <form:checkboxes path="organizationNeed" items="${organizationNeedList}" itemLabel="need" itemValue="id" element="div"/>
+                                        <form:checkboxes path="need" items="${organizationNeedList}" itemLabel="name" itemValue="id" element="div"/>
                                     </div>
                                 </td>
                                 <td>
                                     <div class="form-group">
-                                        <form:checkboxes path="organizationTarget" items="${organizationTargetList}" itemLabel="target" itemValue="id" element="div"/>
+                                        <form:checkboxes path="target" items="${organizationTargetList}" itemLabel="name" itemValue="id" element="div"/>
                                     </div>
                                 </td>
                             </tr>
@@ -107,30 +108,44 @@
                     </form:form>
                 </section>
 
-                <%--<section class="container">--%>
-                    <%--<h3 class="slogan--steps-title">--%>
-                        <%--Lista Organizacji--%>
-                    <%--</h3>--%>
-                    <%--<table class="table">--%>
-                        <%--<tr>--%>
-                            <%--<th>Email</th>--%>
-                            <%--<th>Imię</th>--%>
-                            <%--<th>Nazwisko</th>--%>
-                            <%--<th>Zarządzaj</th>--%>
-                        <%--</tr>--%>
-                        <%--<c:forEach items="${adminList}" var="admin">--%>
-                            <%--<tr>--%>
-                                <%--<td>${admin.email}</td>--%>
-                                <%--<td>${admin.firstName}</td>--%>
-                                <%--<td>${admin.lastName}</td>--%>
-                                <%--<td>--%>
-                                    <%--<a href="<jsp:include page="../links/hrefAdminEdit.jsp"/>/${admin.id}" class="btn btn--small">Edytuj</a>--%>
-                                    <%--<a href="<jsp:include page="../links/hrefAdminDelete.jsp"/>/${admin.id}" class="btn btn--small deleteBtn">Usuń</a>--%>
-                                <%--</td>--%>
-                            <%--</tr>--%>
-                        <%--</c:forEach>--%>
-                    <%--</table>--%>
-                <%--</section>--%>
+                <section class="container">
+                    <h3 class="slogan--steps-title">
+                        Lista Organizacji
+                    </h3>
+                    <table class="table">
+                        <tr>
+                            <th>Typ</th>
+                            <th>Nazwa</th>
+                            <th>Misja</th>
+                            <th>Miasto</th>
+                            <th>Potrzeby</th>
+                            <th>Grupa docelowa</th>
+                            <th>Zarządzaj</th>
+                        </tr>
+                        <c:forEach items="${organizationList}" var="organization">
+                            <tr>
+                                <td>${organization.type.name}</td>
+                                <td>${organization.name}</td>
+                                <td>${organization.mission}</td>
+                                <td>${organization.city.name}</td>
+                                <td>
+                                    <c:forEach items="${organization.need}" var="need">
+                                        <div>${need.name}</div>
+                                    </c:forEach>
+                                </td>
+                                <td>
+                                    <c:forEach items="${organization.target}" var="target">
+                                        <div>${target.name}</div>
+                                    </c:forEach>
+                                </td>
+                                <td>
+                                    <a href="<jsp:include page="../links/hrefAdminOrganizationEdit.jsp"/>/${organization.id}" class="btn btn--small">Edytuj</a>
+                                    <a href="<jsp:include page="../links/hrefAdminOrganizationDelete.jsp"/>/${organization.id}" class="btn btn--small deleteBtn">Usuń</a>
+                                </td>
+                            </tr>
+                        </c:forEach>
+                    </table>
+                </section>
 
             </div>
         </div>

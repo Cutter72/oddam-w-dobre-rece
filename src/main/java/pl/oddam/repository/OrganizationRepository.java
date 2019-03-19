@@ -12,5 +12,5 @@ import java.util.Optional;
 
 @Repository
 public interface OrganizationRepository extends JpaRepository<Organization, Long> {
-
+    Organization findByName(String name);
 }

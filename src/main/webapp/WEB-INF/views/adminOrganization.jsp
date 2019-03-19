@@ -59,31 +59,50 @@
                     <form:form method="post" modelAttribute="newOrganization">
                         <table class="table">
                             <tr>
-                                <th>
+                                <th>Dane organizacji</th>
+                                <th>Potrzeby</th>
+                                <th>Grupa docelowa</th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="form-group">
+                                        <form:select path="organizationType">
+                                            <form:options items="${organizationTypeList}" itemLabel="type" itemValue="id"/>
+                                        </form:select>
+                                    </div>
+
+
+                                    <div class="form-group">
+                                        <form:select path="city">
+                                            <form:options items="${cityList}" itemLabel="city" itemValue="id"/>
+                                        </form:select>
+                                    </div>
+
+
                                     <div class="form-group">
                                         <form:input  path="name" name="name" placeholder="name"/><br/>
                                         <form:errors path="name" name="name" placeholder="name"/>
                                     </div>
-                                </th>
-                                <th>
+
                                     <div class="form-group">
-                                        <form:input path="mission" name="mission" placeholder="mission"/><br/>
+                                        <form:textarea path="mission" name="mission" placeholder="mission"/><br/>
                                         <form:errors path="mission" name="mission" placeholder="mission"/>
                                     </div>
-                                </th>
-                                <th>
+                                </td>
+                                <td>
                                     <div class="form-group">
-                                        <form:select path="organizationType">
-                                        <form:options items="${organizationTypeList}" />
-                                        </form:select>
-                                        <br/>
-                                        <form:errors path="organizationType" type="organizationType" name="organizationType" placeholder="organizationType"/>
+                                        <form:checkboxes path="organizationNeed" items="${organizationNeedList}" itemLabel="need" itemValue="id" element="div"/>
                                     </div>
-                                </th>
+                                </td>
+                                <td>
+                                    <div class="form-group">
+                                        <form:checkboxes path="organizationTarget" items="${organizationTargetList}" itemLabel="target" itemValue="id" element="div"/>
+                                    </div>
+                                </td>
                             </tr>
                         </table>
                         <div class="form-group form-group--buttons">
-                            <button class="btn btn--small" type="submit">Dodaj</button>
+                            <button class="btn btn--small" type="submit">Dodaj organizację</button>
                         </div>
                     </form:form>
                 </section>

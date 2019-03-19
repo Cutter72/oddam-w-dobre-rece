@@ -12,7 +12,7 @@ import javax.validation.constraints.NotEmpty;
 @Data
 public class OrganizationNeed {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @NotEmpty
     private String need;

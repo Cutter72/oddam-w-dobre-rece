@@ -16,17 +16,6 @@ public class OrganizationTypeServiceImpl implements OrganizationTypeService {
     public OrganizationTypeServiceImpl(OrganizationTypeRepository organizationTypeRepository) {
         this.organizationTypeRepository = organizationTypeRepository;
     }
-
-
-    @Override
-    public Map<Long, String> getValueLabel() {
-        Map<Long, String> valueLabelMap = new HashMap<>();
-        List<OrganizationType> organizationList = organizationTypeRepository.findAll();
-        for (OrganizationType organizationType : organizationList) {
-            valueLabelMap.put(organizationType.getId(), organizationType.getType());
-        }
-        return valueLabelMap;
-    }
 }
 
 

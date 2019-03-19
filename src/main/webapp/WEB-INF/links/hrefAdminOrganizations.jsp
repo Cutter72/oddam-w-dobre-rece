@@ -1,1 +1,1 @@
-/admin/organizations
+/admin/organization

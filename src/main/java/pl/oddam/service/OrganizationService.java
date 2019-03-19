@@ -4,5 +4,5 @@ import pl.oddam.model.Organization;
 import pl.oddam.model.User;
 
 public interface OrganizationService {
-
+    void save(Organization organization);
 }

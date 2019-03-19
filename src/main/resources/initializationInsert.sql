@@ -29,8 +29,8 @@ INSERT INTO `oddam`.`organization_need` (`id`, `need`) VALUES
 ('6', 'zabawki'),
 ('7', 'ciepłe koce'),
 ('8', 'książki'),
-('8', 'ubrania do wyrzucenia'),
-('9', 'inne');
+('9', 'ubrania do wyrzucenia'),
+('10', 'inne');
 
 INSERT INTO `oddam`.`organization` (`id`, `mission`, `name`, `organization_type_id`, `city_id`) VALUES
 ('1', 'Pomoc dzieciom z ubogich rodzin.', 'Dbam o Zdrowie', '1', '1'),

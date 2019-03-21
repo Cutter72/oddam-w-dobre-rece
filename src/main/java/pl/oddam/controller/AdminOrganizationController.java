@@ -78,5 +78,36 @@ public class AdminOrganizationController {
         return "admin/organizationEdit";
     }
 
+    @PostMapping("/edit/{id}")
+    public String adminOrganizationEditSave(@AuthenticationPrincipal CurrentUser customUser, @Valid Organization organization, BindingResult result, Model model, @PathVariable Long id, ModelMap modelMap) {
+        if (result.hasErrors()) {
+            adminOrganization(customUser, model);
+            modelMap.put(BindingResult.class.getName() + ".organizationToEdit", result);
+            return "adminOrganization";
+        }
+        String existingName;
+        Organization duplicateOrganization;
+        try {
+            duplicateOrganization = organizationRepository.findByName(organization.getName());
+        } catch (NullPointerException e) {
+            organizationRepository.save(organization);
+            return "redirect:/admin/organization";
+        }
+        if (duplicateOrganization != null) {
+            existingName = duplicateOrganization.getName();
+            if (duplicateOrganization.getId() == id) {
+                organizationRepository.save(organization);
+                return "redirect:/admin/organization";
+            } else {
+                adminOrganizationEdit(customUser, model, id);
+                model.addAttribute("duplicateName", "Nazwa '" + existingName + "' jest już zajęta!");
+                return "admin/organizationEdit";
+            }
+        } else {
+            organizationRepository.save(organization);
+            return "redirect:/admin/organization";
+        }
+    }
+
 
 }

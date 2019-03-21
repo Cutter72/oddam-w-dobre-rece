@@ -54,7 +54,7 @@
 
                 <section class="container">
                     <h3 class="slogan--steps-title">
-                        Formularz dodawania nowej organizacji
+                        Formularz edycji organizacji
                     </h3>
                     <form:form method="post" modelAttribute="organizationToEdit">
                         <table class="table">

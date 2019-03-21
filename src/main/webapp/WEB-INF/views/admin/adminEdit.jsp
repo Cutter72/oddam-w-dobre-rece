@@ -55,7 +55,7 @@
 
                 <section class="container">
                     <h3 class="slogan--steps-title">
-                        Formularz edycji
+                        Formularz edycji administratora
                     </h3>
                     <form:form method="post" modelAttribute="userToEdit">
                         <table class="table">

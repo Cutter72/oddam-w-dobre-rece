@@ -65,7 +65,7 @@ public class AdminController {
             model.addAttribute("duplicateEmail", "Email " + existingEmail + " jest już zajęty!");
             return "admin";
         }
-        return "redirect:/admin";
+        return "redirect:/admin#list";
     }
 
     @GetMapping("/edit/{id}")
@@ -95,13 +95,13 @@ public class AdminController {
             duplicateUser = userServiceImpl.findByEmail(user.getEmail());
         } catch (NullPointerException e) {
             userServiceImpl.editAdmin(userToUpdate);
-            return "redirect:/admin";
+            return "redirect:/admin#list";
         }
         if (duplicateUser != null) {
             existingEmail = duplicateUser.getEmail();
             if (duplicateUser.getId() == id) {
                 userServiceImpl.editAdmin(userToUpdate);
-                return "redirect:/admin";
+                return "redirect:/admin#list";
             } else {
                 adminEdit(customUser, model, id);
                 model.addAttribute("duplicateEmail", "Email " + existingEmail + " jest już zajęty!");
@@ -109,14 +109,14 @@ public class AdminController {
             }
         } else {
             userServiceImpl.editAdmin(userToUpdate);
-            return "redirect:/admin";
+            return "redirect:/admin#list";
         }
     }
 
     @GetMapping("/delete/{id}")
     public String adminDelete(@PathVariable Long id) {
         userRepository.delete(userRepository.findById(id).get());
-        return "redirect:/admin";
+        return "redirect:/admin#list";
     }
 
 }

@@ -65,7 +65,7 @@ public class AdminUserController {
             model.addAttribute("duplicateEmail", "Email " + existingEmail + " jest już zajęty!");
             return "adminUser";
         }
-        return "redirect:/admin/user";
+        return "redirect:/admin/user#list";
     }
 
     @GetMapping("/edit/{id}")
@@ -95,13 +95,13 @@ public class AdminUserController {
             duplicateUser = userServiceImpl.findByEmail(user.getEmail());
         } catch (NullPointerException e) {
             userServiceImpl.editUser(userToUpdate);
-            return "redirect:/admin/user";
+            return "redirect:/admin/user#list";
         }
         if (duplicateUser != null) {
             existingEmail = duplicateUser.getEmail();
             if (duplicateUser.getId() == id) {
                 userServiceImpl.editUser(userToUpdate);
-                return "redirect:/admin/user";
+                return "redirect:/admin/user#list";
             } else {
                 adminUserEdit(customUser, model, id);
                 model.addAttribute("duplicateEmail", "Email " + existingEmail + " jest już zajęty!");
@@ -109,21 +109,21 @@ public class AdminUserController {
             }
         } else {
             userServiceImpl.editUser(userToUpdate);
-            return "redirect:/admin/user";
+            return "redirect:/admin/user#list";
         }
     }
 
     @GetMapping("/delete/{id}")
     public String adminUserDelete(@PathVariable Long id) {
         userRepository.delete(userRepository.findById(id).get());
-        return "redirect:/admin/user";
+        return "redirect:/admin/user#list";
     }
     @GetMapping("/disable/{id}")
     public String adminUserDisable(@PathVariable Long id) {
         User user = userRepository.findById(id).get();
         user.setEnabled(0);
         userRepository.save(user);
-        return "redirect:/admin/user";
+        return "redirect:/admin/user#list";
     }
 
     @GetMapping("/enable/{id}")
@@ -131,7 +131,7 @@ public class AdminUserController {
         User user = userRepository.findById(id).get();
         user.setEnabled(1);
         userRepository.save(user);
-        return "redirect:/admin/user";
+        return "redirect:/admin/user#list";
     }
 
 }

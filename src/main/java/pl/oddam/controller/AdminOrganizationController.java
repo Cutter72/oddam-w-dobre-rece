@@ -68,7 +68,7 @@ public class AdminOrganizationController {
             model.addAttribute("duplicateName", "Nazwa '" + existingName + "' jest już zajęta!");
             return "adminOrganization";
         }
-        return "redirect:/admin/organization";
+        return "redirect:/admin/organization#list";
     }
 
     @GetMapping("/edit/{id}")
@@ -91,13 +91,13 @@ public class AdminOrganizationController {
             duplicateOrganization = organizationRepository.findByName(organization.getName());
         } catch (NullPointerException e) {
             organizationRepository.save(organization);
-            return "redirect:/admin/organization";
+            return "redirect:/admin/organization#list";
         }
         if (duplicateOrganization != null) {
             existingName = duplicateOrganization.getName();
             if (duplicateOrganization.getId() == id) {
                 organizationRepository.save(organization);
-                return "redirect:/admin/organization";
+                return "redirect:/admin/organization#list";
             } else {
                 adminOrganizationEdit(customUser, model, id);
                 model.addAttribute("duplicateName", "Nazwa '" + existingName + "' jest już zajęta!");
@@ -105,8 +105,14 @@ public class AdminOrganizationController {
             }
         } else {
             organizationRepository.save(organization);
-            return "redirect:/admin/organization";
+            return "redirect:/admin/organization#list";
         }
+    }
+
+    @GetMapping("/delete/{id}")
+    public String adminOrganizationDelete(@PathVariable Long id) {
+        organizationRepository.delete(organizationRepository.findById(id).get());
+        return "redirect:/admin/organization#list";
     }
 
 

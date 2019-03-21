@@ -95,6 +95,7 @@
                     </form:form>
                 </section>
 
+                <a name="list"></a>
                 <section class="container">
                     <h3 class="slogan--steps-title">
                         Lista administratorów

@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", function () {
     for (var i = 0; i < deleteBtnList.length; i++) {
         deleteBtnList[i].addEventListener("click", function (evt) {
             evt.preventDefault();
-            if (confirm('Na pewno chcesz usunąć tego użytkownika?')) {
+            if (confirm('Na pewno chcesz usunąć ten rekord z bazy?')) {
                 window.location.href = this.href;
             }
         });

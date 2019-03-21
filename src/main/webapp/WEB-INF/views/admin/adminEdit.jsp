@@ -54,7 +54,7 @@
             <div class="tab-pane fade in active">
 
                 <section class="container">
-                    <h3 class="slogan--steps-title">
+                    <h3 class="slogan--steps-title" style="width: 100%">
                         Formularz edycji administratora
                     </h3>
                     <form:form method="post" modelAttribute="userToEdit">

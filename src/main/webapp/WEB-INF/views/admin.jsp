@@ -44,7 +44,7 @@
     </nav>
 
     <div class="container">
-        <div class="slogan--item">
+        <div class="slogan--item" style="width: 100%">
             <h2>
                 Zarządzanie Administratorami
             </h2>

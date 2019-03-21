@@ -97,7 +97,7 @@
 
                 <a name="list"></a>
                 <section class="container">
-                    <h3 class="slogan--steps-title">
+                    <h3 class="slogan--steps-title" style="width: 100%">
                         Lista użytkowników
                     </h3>
                     <table class="table">

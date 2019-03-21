@@ -44,7 +44,7 @@
     </nav>
 
     <div class="container">
-        <div class="slogan--item">
+        <div class="slogan--item" style="width: 100%">
             <h2>
                 Zarządzanie Użytkownikami
             </h2>
@@ -97,7 +97,7 @@
 
                 <a name="list"></a>
                 <section class="container">
-                    <h3 class="slogan--steps-title" style="width: 100%">
+                    <h3 class="slogan--steps-title">
                         Lista użytkowników
                     </h3>
                     <table class="table">

@@ -44,7 +44,7 @@
     </nav>
 
     <div class="container">
-        <div class="slogan--item">
+        <div class="slogan--item" style="width: 100%">
             <h2>
                 Zarządzanie Organizacjami
             </h2>
@@ -111,7 +111,7 @@
 
                 <a name="list"></a>
                 <section class="container">
-                    <h3 class="slogan--steps-title" style="width: 100%">
+                    <h3 class="slogan--steps-title">
                         Lista Organizacji
                     </h3>
                     <table class="table">

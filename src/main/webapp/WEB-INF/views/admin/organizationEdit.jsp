@@ -44,7 +44,7 @@
     </nav>
 
     <div class="container">
-        <div class="slogan--item">
+        <div class="slogan--item" style="width: 100%">
             <h2>
                 Zarządzanie Organizacjami
             </h2>
@@ -53,7 +53,7 @@
             <div class="tab-pane fade in active">
 
                 <section class="container">
-                    <h3 class="slogan--steps-title" style="width: 100%">
+                    <h3 class="slogan--steps-title">
                         Formularz edycji organizacji
                     </h3>
                     <form:form method="post" modelAttribute="organizationToEdit">

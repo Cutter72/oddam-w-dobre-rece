@@ -44,6 +44,7 @@ public class AdminOrganizationController {
         model.addAttribute("cityList", cityRepository.findAll());
         return "adminOrganization";
     }
+
     @GetMapping("/")
     public String adminOrganizationSlash() {
         return "redirect:/admin/organization";

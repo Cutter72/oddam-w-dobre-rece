@@ -117,7 +117,7 @@
                         <label>
                             <input
                                     type="checkbox"
-                                    name="need"
+                                    name="needList"
                                     value="${need.id}"
                             />
                             <span class="checkbox"></span>
@@ -156,53 +156,29 @@
             <div data-step="3">
                 <h3>Lokalizacja:</h3>
 
-                <div class="form-group form-group--dropdown">
-                    <select name="localization">
-                        <option value="0">- wybierz -</option>
-                        <option value="warsaw">Warszawa</option>
-                        <option value="wroclaw">Wrocław</option>
-                        <option value="poznan">Poznań</option>
-                        <option value="gdansk">Gdańsk</option>
-                    </select>
-                </div>
+                    <div class="form-group form-group--dropdown">
+                        <select name="city">
+                            <option value="0">Obojętnie</option>
+                            <c:forEach items="${cityList}" var="city">
+                            <option value="${city.id}">${city.name}</option>
+                            </c:forEach>
+                        </select>
+                    </div>
 
                 <div class="form-section">
                     <h4>Komu chcesz pomóc?</h4>
+
                     <div class="form-section--checkboxes">
-                        <div class="form-group form-group--checkbox">
-                            <label>
-                                <input type="checkbox" name="help[]" value="children"/>
-                                <span class="checkbox">dzieciom</span>
-                            </label>
-                        </div>
 
-                        <div class="form-group form-group--checkbox">
-                            <label>
-                                <input type="checkbox" name="help[]" value="mothers"/>
-                                <span class="checkbox">samotnym matkom</span>
-                            </label>
-                        </div>
+                        <c:forEach items="${organizationTargetList}" var="target">
+                            <div class="form-group form-group--checkbox">
+                                <label>
+                                    <input type="checkbox" name="targetList" value="${target.id}"/>
+                                    <span class="checkbox">${target.name}</span>
+                                </label>
+                            </div>
+                        </c:forEach>
 
-                        <div class="form-group form-group--checkbox">
-                            <label>
-                                <input type="checkbox" name="help[]" value="homeless"/>
-                                <span class="checkbox">bezdomnym</span>
-                            </label>
-                        </div>
-
-                        <div class="form-group form-group--checkbox">
-                            <label>
-                                <input type="checkbox" name="help[]" value="disabled"/>
-                                <span class="checkbox">niepełnosprawnym</span>
-                            </label>
-                        </div>
-
-                        <div class="form-group form-group--checkbox">
-                            <label>
-                                <input type="checkbox" name="help[]" value="old"/>
-                                <span class="checkbox">osobom starszym</span>
-                            </label>
-                        </div>
                     </div>
                 </div>
 

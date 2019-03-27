@@ -4,6 +4,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import pl.oddam.model.Organization;
 import pl.oddam.model.OrganizationNeed;
+import pl.oddam.model.OrganizationTarget;
 
 import java.util.Set;
 
@@ -11,4 +12,5 @@ import java.util.Set;
 public interface OrganizationRepository extends JpaRepository<Organization, Long> {
     Organization findByName(String name);
     Set<Organization> findAllByNeed(Set<OrganizationNeed> need);
+    Set<Organization> findAllByTarget(Set<OrganizationTarget> target);
 }

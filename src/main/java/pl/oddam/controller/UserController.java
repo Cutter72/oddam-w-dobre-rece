@@ -109,7 +109,7 @@ public class UserController {
         }
 
         System.out.println(organizationSetByName.retainAll(organizationSetByCity));
-
+//TODO : final Set of organization to display
 
         return "wejszło";
     }

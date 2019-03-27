@@ -13,6 +13,7 @@ import java.util.Set;
 @Repository
 public interface OrganizationRepository extends JpaRepository<Organization, Long> {
     Organization findByName(String name);
+    Set<Organization> findAllByNameIgnoreCaseContaining(String name);
     Set<Organization> findAllByCity(City city);
     Set<Organization> findAllByNeedIsIn(List<OrganizationNeed> need); // przyjmuje tylko pojedynczy argument
     Set<Organization> findAllByTargetIsIn(List<OrganizationTarget> target); // przyjmuje tylko pojedynczy argument

@@ -43,7 +43,6 @@ public class UserController {
     }
 
     @PostMapping("")
-    @ResponseBody
     public String userFormStepOneSearchOrganizations(@RequestParam(required = false) Long[] needList,
                                                      @RequestParam(required = false) Long cityId,
                                                      @RequestParam(required = false) Long[] targetList,
@@ -113,7 +112,7 @@ public class UserController {
 
 //TODO : final Set of organization to display
 
-        return "wejszło";
+        return "user/userStep4";
     }
 
     @GetMapping("/")

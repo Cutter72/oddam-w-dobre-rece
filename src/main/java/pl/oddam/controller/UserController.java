@@ -46,7 +46,8 @@ public class UserController {
     public String userFormStepOneSearchOrganizations(@RequestParam(required = false) Long[] needList,
                                                      @RequestParam(required = false) Long cityId,
                                                      @RequestParam(required = false) Long[] targetList,
-                                                     @RequestParam(required = false) String organizationName) {
+                                                     @RequestParam(required = false) String organizationName,
+                                                     Model model) {
 
         Iterable<Long> needListIterable = null;
         Iterable<Long> targetListIterable = null;
@@ -109,6 +110,8 @@ public class UserController {
             System.out.println(organization.getId());
             System.out.println(organization.getName());
         }
+
+        model.addAttribute("organizationList", finalOrganizationSet);
 
 //TODO : final Set of organization to display
 

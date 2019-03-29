@@ -77,8 +77,7 @@ public class OrganizationServiceImpl implements OrganizationService {
             } else if (needListIsNull) {
                 organizationSetToAdd = organizationRepository.findAllByTargetIsIn(organizationTargetRepository.findAllById(targetListIterable));
             } else if (targetListIsNull) {
-                List<OrganizationNeed> foundNeedSet = organizationNeedRepository.findAllById(needListIterable);
-                organizationSetToAdd = organizationRepository.findAllByNeedIsIn(foundNeedSet);
+                organizationSetToAdd = organizationRepository.findAllByNeedIsIn(organizationNeedRepository.findAllById(needListIterable));
             } else {
                 organizationSetToAdd = organizationRepository.findAllByNeedIsInAndTargetIsIn(organizationNeedRepository.findAllById(needListIterable),
                         organizationTargetRepository.findAllById(targetListIterable));

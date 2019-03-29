@@ -54,11 +54,6 @@ public class OrganizationServiceImpl implements OrganizationService {
         }
 
         finalOrganizationSet.addAll(returnAllByConditions(cityIsZero, needListIsNull, targetListIsNull, needListIterable, targetListIterable, cityId));
-
-        for (Organization organization : finalOrganizationSet) {
-            System.out.println(organization.getId());
-            System.out.println(organization.getName());
-        }
 //TODO : final Set of organization to display
         return finalOrganizationSet;
     }

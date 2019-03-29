@@ -117,7 +117,7 @@
                         <label>
                             <input
                                     type="checkbox"
-                                    name="needList"
+                                    name="needIdTab"
                                     value="${need.id}"
                             />
                             <span class="checkbox"></span>
@@ -171,7 +171,7 @@
                         <c:forEach items="${organizationTargetList}" var="target">
                             <div class="form-group form-group--checkbox">
                                 <label>
-                                    <input type="checkbox" name="targetList" value="${target.id}"/>
+                                    <input type="checkbox" name="targetIdTab" value="${target.id}"/>
                                     <span class="checkbox">${target.name}</span>
                                 </label>
                             </div>

@@ -33,37 +33,55 @@ public class OrganizationServiceImpl implements OrganizationService {
         Iterable<Long> needListIterable = null;
         Iterable<Long> targetListIterable = null;
 
-        boolean cityIsEmpty = true;
+        boolean cityIsZero = true;
         if (cityId != 0) {
-            cityIsEmpty = false;
+            cityIsZero = false;
         }
-        boolean needListIsEmpty = true;
-        if (needIdTab != null) {
-            needListIsEmpty = false;
+        boolean needListIsNull = isNull(needIdTab);
+        boolean targetListIsNull = isNull(targetIdTab);
+
+        if (!needListIsNull) {
             needListIterable = Arrays.asList(needIdTab);
         }
-        boolean targetListIsEmpty = true;
-        if (targetIdTab != null) {
-            targetListIsEmpty = false;
+        if (!targetListIsNull) {
             targetListIterable = Arrays.asList(targetIdTab);
         }
-
         Set<Organization> finalOrganizationSet = new HashSet<>();
-        Set<Organization> organizationSetToAdd;
 
         if (!organizationName.equalsIgnoreCase("")) {
             Set<Organization> organizationListNameLike = organizationRepository.findAllByNameIgnoreCaseContaining(organizationName);
             finalOrganizationSet.addAll(organizationListNameLike);
-
-
         }
 
-        if (cityIsEmpty) {
-            if (needListIsEmpty && targetListIsEmpty) {
+        finalOrganizationSet.addAll(returnAllByConditions(cityIsZero, needListIsNull, targetListIsNull, needListIterable, targetListIterable, cityId));
+
+        for (Organization organization : finalOrganizationSet) {
+            System.out.println(organization.getId());
+            System.out.println(organization.getName());
+        }
+//TODO : final Set of organization to display
+        return finalOrganizationSet;
+    }
+
+    <T> boolean isNull(T itemToCheck) {
+        if (itemToCheck == null) {
+            return true;
+        }
+        return false;
+    }
+
+    Set<Organization> returnAllByConditions(boolean cityIsZero, boolean needListIsNull, boolean targetListIsNull,
+                                            Iterable<Long> needListIterable, Iterable<Long> targetListIterable, Long cityId) {
+
+        Set<Organization> finalOrganizationSet = new HashSet<>();
+        Set<Organization> organizationSetToAdd;
+
+        if (cityIsZero) {
+            if (needListIsNull && targetListIsNull) {
                 organizationSetToAdd = new HashSet<>(organizationRepository.findAll());
-            } else if (needListIsEmpty) {
+            } else if (needListIsNull) {
                 organizationSetToAdd = organizationRepository.findAllByTargetIsIn(organizationTargetRepository.findAllById(targetListIterable));
-            } else if (targetListIsEmpty) {
+            } else if (targetListIsNull) {
                 List<OrganizationNeed> foundNeedSet = organizationNeedRepository.findAllById(needListIterable);
                 organizationSetToAdd = organizationRepository.findAllByNeedIsIn(foundNeedSet);
             } else {
@@ -71,12 +89,12 @@ public class OrganizationServiceImpl implements OrganizationService {
                         organizationTargetRepository.findAllById(targetListIterable));
             }
         } else {
-            if (needListIsEmpty && targetListIsEmpty) {
+            if (needListIsNull && targetListIsNull) {
                 organizationSetToAdd = organizationRepository.findAllByCity(cityRepository.findById(cityId).get());
-            } else if (needListIsEmpty) {
+            } else if (needListIsNull) {
                 organizationSetToAdd = organizationRepository.findAllByCityAndTargetIsIn(cityRepository.findById(cityId).get(),
                         organizationTargetRepository.findAllById(targetListIterable));
-            } else if (targetListIsEmpty) {
+            } else if (targetListIsNull) {
                 organizationSetToAdd = organizationRepository.findAllByCityAndNeedIsIn(cityRepository.findById(cityId).get(),
                         organizationNeedRepository.findAllById(needListIterable));
             } else {
@@ -86,15 +104,8 @@ public class OrganizationServiceImpl implements OrganizationService {
             }
         }
         finalOrganizationSet.addAll(organizationSetToAdd);
-
-        for (Organization organization : finalOrganizationSet) {
-            System.out.println(organization.getId());
-            System.out.println(organization.getName());
-        }
-
-
-//TODO : final Set of organization to display
-
         return finalOrganizationSet;
     }
+
+
 }

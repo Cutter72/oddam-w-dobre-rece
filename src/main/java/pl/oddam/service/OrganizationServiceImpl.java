@@ -2,7 +2,6 @@ package pl.oddam.service;
 
 import org.springframework.stereotype.Service;
 import pl.oddam.model.Organization;
-import pl.oddam.model.OrganizationNeed;
 import pl.oddam.repository.CityRepository;
 import pl.oddam.repository.OrganizationNeedRepository;
 import pl.oddam.repository.OrganizationRepository;
@@ -10,7 +9,6 @@ import pl.oddam.repository.OrganizationTargetRepository;
 
 import java.util.Arrays;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Service

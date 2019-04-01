@@ -1,5 +1,7 @@
 package pl.oddam.controller;
 
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,6 +15,7 @@ import pl.oddam.repository.RoleRepository;
 import pl.oddam.repository.UserRepository;
 import pl.oddam.service.UserServiceImpl;
 
+import javax.transaction.Transactional;
 import javax.validation.Valid;
 import java.util.Arrays;
 import java.util.HashSet;

@@ -10,6 +10,8 @@ import pl.oddam.repository.OrganizationNeedRepository;
 import pl.oddam.repository.OrganizationTargetRepository;
 import pl.oddam.service.OrganizationServiceImpl;
 
+import java.util.Arrays;
+
 @Controller
 @RequestMapping("/user")
 public class UserController {
@@ -39,10 +41,12 @@ public class UserController {
                                                      @RequestParam(required = false) Long cityId,
                                                      @RequestParam(required = false) Long[] targetIdTab,
                                                      @RequestParam(required = false) String organizationName,
+                                                     @RequestParam(required = false) Integer bags,
                                                      Model model) {
 
         model.addAttribute("organizationList", organizationServiceImpl.findAllByNameCityNeedTarget(organizationName, cityId, needIdTab, targetIdTab));
-
+        model.addAttribute("bags", bags);
+        model.addAttribute("selectedNeedsToGive", organizationNeedRepository.findAllById(Arrays.asList(needIdTab)));
         return "user/userStep4";
     }
 

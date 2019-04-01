@@ -169,7 +169,9 @@ document.addEventListener("DOMContentLoaded", function() {
     constructor(form) {
       this.$form = form;
       this.$bags = form.querySelector(".bags");
+      this.$form123 = document.querySelector(".form123");
       this.$needs = form.querySelectorAll(".need");
+      this.$targets = form.querySelectorAll(".target");
       this.$next = form.querySelectorAll(".next-step");
       this.$prev = form.querySelectorAll(".prev-step");
       this.$step = form.querySelector(".form--steps-counter span");
@@ -209,7 +211,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 this.currentStep++;
                 this.updateForm();
             } else {
-                alert("Proszę zaznaczyć conajmniej jedno pole.");
+                alert("Zaznacz co chcesz oddać.");
             }
         }else if(this.currentStep == 2){
             if (this.$bags.checkValidity()) {
@@ -217,6 +219,19 @@ document.addEventListener("DOMContentLoaded", function() {
                 this.updateForm();
             } else {
                 alert("Proszę wpisać ilość worków.");
+            }
+        }else if(this.currentStep == 3){
+            var isChecked = false;
+            this.$needs.forEach(checkbox => {
+                if(checkbox.checked){
+                isChecked = true;
+            }
+        });
+            if (isChecked) {
+                this.currentStep++;
+                this.updateForm();
+            } else {
+                alert("Zaznacz komu chcesz pomóc.");
             }
         } else {
             this.currentStep++;
@@ -268,9 +283,23 @@ document.addEventListener("DOMContentLoaded", function() {
      * TODO: validation, send data to server
      */
     submit(e) {
-      // e.preventDefault();
-      this.currentStep++;
-      this.updateForm();
+        e.preventDefault();
+        if(this.currentStep == 3){
+            var isChecked = false;
+            this.$targets.forEach(checkbox => {
+                if(checkbox.checked){
+                isChecked = true;
+            }
+        });
+            if (isChecked) {
+                this.$form123.submit();
+                console.log("wesło w submit");
+            } else {
+                alert("Zaznacz komu chcesz pomóc.");
+            }
+        } else {
+            console.log("hmm");
+        }
     }
   }
   const form = document.querySelector(".form--steps");

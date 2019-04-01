@@ -105,7 +105,7 @@
     <div class="form--steps-container">
         <div class="form--steps-counter">Krok <span>1</span>/5</div>
 
-        <form method="post">
+        <form method="post" class="form123">
             <!-- STEP 1: class .active is switching steps -->
 
             <div data-step="1" class="active">
@@ -119,6 +119,7 @@
                                     type="checkbox"
                                     name="needIdTab"
                                     value="${need.id}"
+                                    class="need"
                             />
                             <span class="checkbox"></span>
                             <span class="description">${need.name}</span>
@@ -140,7 +141,7 @@
                 <div class="form-group form-group--inline">
                     <label>
                         Liczba 60l worków:
-                        <input type="number" name="bags" step="1" min="1" required="required"/>
+                        <input type="number" class="bags" name="bags" step="1" min="1" required="required"/>
                     </label>
                 </div>
 

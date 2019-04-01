@@ -168,6 +168,8 @@ document.addEventListener("DOMContentLoaded", function() {
   class FormSteps {
     constructor(form) {
       this.$form = form;
+      this.$bags = form.querySelector(".bags");
+      this.$needs = form.querySelectorAll(".need");
       this.$next = form.querySelectorAll(".next-step");
       this.$prev = form.querySelectorAll(".prev-step");
       this.$step = form.querySelector(".form--steps-counter span");
@@ -196,8 +198,31 @@ document.addEventListener("DOMContentLoaded", function() {
       this.$next.forEach(btn => {
         btn.addEventListener("click", e => {
           e.preventDefault();
-          this.currentStep++;
-          this.updateForm();
+        if (this.currentStep == 1) {
+            var isChecked = false;
+            this.$needs.forEach(checkbox => {
+                if(checkbox.checked){
+                    isChecked = true;
+                }
+            });
+            if (isChecked) {
+                this.currentStep++;
+                this.updateForm();
+            } else {
+                alert("Proszę zaznaczyć conajmniej jedno pole.");
+            }
+        }else if(this.currentStep == 2){
+            if (this.$bags.checkValidity()) {
+                this.currentStep++;
+                this.updateForm();
+            } else {
+                alert("Proszę wpisać ilość worków.");
+            }
+        } else {
+            this.currentStep++;
+            this.updateForm();
+        }
+
         });
       });
 

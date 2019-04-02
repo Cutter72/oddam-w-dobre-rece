@@ -169,6 +169,7 @@ document.addEventListener("DOMContentLoaded", function() {
     constructor(form) {
       this.$form = form;
       this.$next = form.querySelectorAll(".next-step");
+      this.$organizations = document.querySelectorAll(".organization");
       this.$prev = form.querySelectorAll(".prev-step");
       this.$step = form.querySelector(".form--steps-counter span");
       this.currentStep = 4;
@@ -196,8 +197,30 @@ document.addEventListener("DOMContentLoaded", function() {
       this.$next.forEach(btn => {
         btn.addEventListener("click", e => {
           e.preventDefault();
-          this.currentStep++;
-          this.updateForm();
+        if (this.currentStep == 4) {
+            var isChecked = false;
+            this.$organizations.forEach(checkbox => {
+                if(checkbox.checked){
+                isChecked = true;
+            }
+        });
+            if (isChecked) {
+                this.currentStep++;
+                this.updateForm();
+            } else {
+                alert("Zaznacz organizację.");
+            }
+        }else if(this.currentStep == 5){
+            if (this.$bags.checkValidity()) {
+                this.currentStep++;
+                this.updateForm();
+            } else {
+                alert("Proszę wpisać ilość worków.");
+            }
+        }else {
+            this.currentStep++;
+            this.updateForm();
+        }
         });
       });
 

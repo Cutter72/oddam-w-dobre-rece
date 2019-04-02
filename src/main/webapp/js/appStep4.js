@@ -170,6 +170,7 @@ document.addEventListener("DOMContentLoaded", function() {
       this.$form = form;
       this.$next = form.querySelectorAll(".next-step");
       this.$organizations = document.querySelectorAll(".organization");
+      this.$requireds = document.querySelectorAll(".required");
       this.$prev = form.querySelectorAll(".prev-step");
       this.$step = form.querySelector(".form--steps-counter span");
       this.currentStep = 4;
@@ -211,11 +212,20 @@ document.addEventListener("DOMContentLoaded", function() {
                 alert("Zaznacz organizację.");
             }
         }else if(this.currentStep == 5){
-            if (this.$bags.checkValidity()) {
+            var notEmpty = true;
+            this.$requireds.forEach(textarea => {
+                if(textarea.checkValidity() && notEmpty){
+                console.log("jest git");
+            } else{
+                console.log("coś jest puste");
+                notEmpty = false;
+            }
+        });
+            if (notEmpty) {
                 this.currentStep++;
                 this.updateForm();
             } else {
-                alert("Proszę wpisać ilość worków.");
+                alert("Proszę wypełnić wszystkie pola.");
             }
         }else {
             this.currentStep++;

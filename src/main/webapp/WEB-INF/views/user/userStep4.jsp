@@ -125,30 +125,32 @@
 
                 <div class="form-section form-section--columns">
                     <div class="form-section--column">
-                        <h4>Adres odbioru</h4>
+                        * - pola oznaczone gwiazdka muszą być wypełnione
+                        <br/>
+                        <h4>Adres odbioru*</h4>
                         <div class="form-group form-group--inline">
-                            <label> Ulica <input type="text" name="address"/> </label>
+                            <label> Ulica* <input type="text" name="address" required="required" class="required"/> </label>
                         </div>
 
                         <div class="form-group form-group--inline">
-                            <label> Miasto <input type="text" name="city"/> </label>
+                            <label> Miasto* <input type="text" name="city" required="required" class="required"/> </label>
                         </div>
 
                         <div class="form-group form-group--inline">
                             <label>
-                                Kod pocztowy <input type="text" name="postcode"/>
+                                Kod pocztowy* <input type="text" name="postcode" required="required" class="required"/>
                             </label>
                         </div>
 
                         <div class="form-group form-group--inline">
                             <label>
-                                Numer telefonu <input type="phone" name="phone"/>
+                                Numer telefonu* <input type="phone" name="phone" required="required" class="required"/>
                             </label>
                         </div>
                     </div>
 
                     <div class="form-section--column">
-                        <h4>Termin odbioru</h4>
+                        <h4>Termin odbioru (opcjonalnie)</h4>
                         <div class="form-group form-group--inline">
                             <label> Data <input type="date" name="data"/> </label>
                         </div>

@@ -2,6 +2,15 @@ document.addEventListener("DOMContentLoaded", function() {
   /**
    * HomePage - Help section
    */
+  var urlParams = new URLSearchParams(window.location.search);
+    var step;
+    if (urlParams.has("step")){
+        step = urlParams.get("step");
+    } else {
+        window.history.pushState(null, "TitleURL","/user?step=4");
+        step = 4;
+    }
+
   class Help {
     constructor($el) {
       this.$el = $el;
@@ -173,7 +182,7 @@ document.addEventListener("DOMContentLoaded", function() {
       this.$requireds = document.querySelectorAll(".required");
       this.$prev = form.querySelectorAll(".prev-step");
       this.$step = form.querySelector(".form--steps-counter span");
-      this.currentStep = 4;
+      this.currentStep = step;
 
       this.$stepInstructions = form.querySelectorAll(".form--steps-instructions p");
       const $stepForms = form.querySelectorAll("form > div");
@@ -207,6 +216,7 @@ document.addEventListener("DOMContentLoaded", function() {
         });
             if (isChecked) {
                 this.currentStep++;
+                window.history.pushState(null, "TitleURL","/user?step="+this.currentStep);
                 this.updateForm();
             } else {
                 alert("Zaznacz organizację.");
@@ -215,20 +225,20 @@ document.addEventListener("DOMContentLoaded", function() {
             var notEmpty = true;
             this.$requireds.forEach(textarea => {
                 if(textarea.checkValidity() && notEmpty){
-                console.log("jest git");
-            } else{
-                console.log("coś jest puste");
+            } else {
                 notEmpty = false;
             }
         });
             if (notEmpty) {
                 this.currentStep++;
+                window.history.pushState(null, "TitleURL","/user?step="+this.currentStep);
                 this.updateForm();
             } else {
                 alert("Proszę wypełnić wszystkie pola.");
             }
         }else {
             this.currentStep++;
+            window.history.pushState(null, "TitleURL","/user?step="+this.currentStep);
             this.updateForm();
         }
         });
@@ -239,6 +249,7 @@ document.addEventListener("DOMContentLoaded", function() {
         btn.addEventListener("click", e => {
           e.preventDefault();
           this.currentStep--;
+        window.history.pushState(null, "TitleURL","/user?step="+this.currentStep);
           this.updateForm();
         });
       });
@@ -278,6 +289,7 @@ document.addEventListener("DOMContentLoaded", function() {
     submit(e) {
       // e.preventDefault();
       this.currentStep++;
+        // window.history.pushState(null, "TitleURL","/user?step="+this.currentStep);
       this.updateForm();
     }
   }

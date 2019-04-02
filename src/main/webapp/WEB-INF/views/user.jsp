@@ -105,7 +105,7 @@
     <div class="form--steps-container">
         <div class="form--steps-counter">Krok <span>1</span>/5</div>
 
-        <form method="post" class="form123">
+        <form method="post" class="form123" action="/user?step=4">
             <!-- STEP 1: class .active is switching steps -->
 
             <div data-step="1" class="active">
@@ -201,6 +201,7 @@
 
 <jsp:include page="../components/footer.jsp"/>
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="js/app.js"></script>
 </body>
 </html>

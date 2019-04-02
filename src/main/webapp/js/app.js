@@ -1,8 +1,17 @@
 document.addEventListener("DOMContentLoaded", function() {
-  /**
-   * HomePage - Help section
-   */
-  class Help {
+    /**
+     * HomePage - Help section
+     */
+    var urlParams = new URLSearchParams(window.location.search);
+    var step;
+    if (urlParams.has("step")){
+        step = urlParams.get("step");
+    } else {
+        window.history.pushState(null, "TitleURL","/user?step=1");
+        step = 1;
+    }
+
+    class Help {
     constructor($el) {
       this.$el = $el;
       this.$buttonsContainer = $el.querySelector(".help--buttons");
@@ -175,7 +184,7 @@ document.addEventListener("DOMContentLoaded", function() {
       this.$next = form.querySelectorAll(".next-step");
       this.$prev = form.querySelectorAll(".prev-step");
       this.$step = form.querySelector(".form--steps-counter span");
-      this.currentStep = 1;
+      this.currentStep = step;
 
       this.$stepInstructions = form.querySelectorAll(".form--steps-instructions p");
       const $stepForms = form.querySelectorAll("form > div");
@@ -209,6 +218,7 @@ document.addEventListener("DOMContentLoaded", function() {
             });
             if (isChecked) {
                 this.currentStep++;
+                window.history.pushState(null, "TitleURL","/user?step="+this.currentStep);
                 this.updateForm();
             } else {
                 alert("Zaznacz co chcesz oddać.");
@@ -216,6 +226,7 @@ document.addEventListener("DOMContentLoaded", function() {
         }else if(this.currentStep == 2){
             if (this.$bags.checkValidity()) {
                 this.currentStep++;
+                window.history.pushState(null, "TitleURL","/user?step="+this.currentStep);
                 this.updateForm();
             } else {
                 alert("Proszę wpisać ilość worków.");
@@ -229,12 +240,14 @@ document.addEventListener("DOMContentLoaded", function() {
         });
             if (isChecked) {
                 this.currentStep++;
+                window.history.pushState(null, "TitleURL","/user?step="+this.currentStep);
                 this.updateForm();
             } else {
                 alert("Zaznacz komu chcesz pomóc.");
             }
         } else {
             this.currentStep++;
+            window.history.pushState(null, "TitleURL","/user?step="+this.currentStep);
             this.updateForm();
         }
 
@@ -246,6 +259,7 @@ document.addEventListener("DOMContentLoaded", function() {
         btn.addEventListener("click", e => {
           e.preventDefault();
           this.currentStep--;
+        window.history.pushState(null, "TitleURL","/user?step="+this.currentStep);
           this.updateForm();
         });
       });
@@ -301,6 +315,7 @@ document.addEventListener("DOMContentLoaded", function() {
             console.log("hmm");
         }
     }
+
   }
   const form = document.querySelector(".form--steps");
   if (form !== null) {

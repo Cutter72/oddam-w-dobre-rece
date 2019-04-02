@@ -114,7 +114,7 @@
                 </c:forEach>
 
                 <div class="form-group form-group--buttons">
-                    <button type="button" class="btn prev-step">Wstecz</button>
+                    <a href="/user?step=3"><button type="button" class="btn">Wstecz</button></a>
                     <button type="button" class="btn next-step">Dalej</button>
                 </div>
             </div>
@@ -127,7 +127,7 @@
                     <div class="form-section--column">
                         * - pola oznaczone gwiazdka muszą być wypełnione
                         <br/>
-                        <h4>Adres odbioru*</h4>
+                        <h4>Adres odbioru</h4>
                         <div class="form-group form-group--inline">
                             <label> Ulica* <input type="text" name="address" required="required" class="required"/> </label>
                         </div>

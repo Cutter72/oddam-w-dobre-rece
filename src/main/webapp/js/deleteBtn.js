@@ -1,4 +1,3 @@
-console.log("Usuń buton weszło");
 $('document').ready(function () {
     var deleteBtnList = $('.deleteBtn');
     console.log(deleteBtnList);

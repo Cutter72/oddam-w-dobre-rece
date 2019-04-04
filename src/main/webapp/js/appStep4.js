@@ -1,13 +1,15 @@
 document.addEventListener("DOMContentLoaded", function() {
-  /**
-   * HomePage - Help section
-   */
+    /**
+     * HomePage - Help section
+     */
+    var scrollHere = document.getElementById("form-place");
   var urlParams = new URLSearchParams(window.location.search);
     var step;
     if (urlParams.has("step")){
         step = urlParams.get("step");
+        scrollHere.scrollIntoView();
     } else {
-        window.history.pushState(null, "TitleURL","/user?step=4");
+        window.history.pushState(null, "TitleURL","/user?step=4#Form");
         step = 4;
     }
 
@@ -216,7 +218,7 @@ document.addEventListener("DOMContentLoaded", function() {
         });
             if (isChecked) {
                 this.currentStep++;
-                window.history.pushState(null, "TitleURL","/user?step="+this.currentStep);
+                window.history.pushState(null, "TitleURL","/user?step="+this.currentStep+"#Form");
                 this.updateForm();
             } else {
                 alert("Zaznacz organizację.");
@@ -231,14 +233,14 @@ document.addEventListener("DOMContentLoaded", function() {
         });
             if (notEmpty) {
                 this.currentStep++;
-                window.history.pushState(null, "TitleURL","/user?step="+this.currentStep);
+                window.history.pushState(null, "TitleURL","/user?step="+this.currentStep+"#Form");
                 this.updateForm();
             } else {
-                alert("Proszę wypełnić wszystkie pola.");
+                alert("Proszę wypełnić wszystkie pola oznaczone gwiazdką.");
             }
         }else {
             this.currentStep++;
-            window.history.pushState(null, "TitleURL","/user?step="+this.currentStep);
+            window.history.pushState(null, "TitleURL","/user?step="+this.currentStep+"#Form");
             this.updateForm();
         }
         });
@@ -249,7 +251,7 @@ document.addEventListener("DOMContentLoaded", function() {
         btn.addEventListener("click", e => {
           e.preventDefault();
           this.currentStep--;
-        window.history.pushState(null, "TitleURL","/user?step="+this.currentStep);
+        window.history.pushState(null, "TitleURL","/user?step="+this.currentStep+"#Form");
           this.updateForm();
         });
       });
@@ -289,7 +291,7 @@ document.addEventListener("DOMContentLoaded", function() {
     submit(e) {
       // e.preventDefault();
       this.currentStep++;
-        // window.history.pushState(null, "TitleURL","/user?step="+this.currentStep);
+        // window.history.pushState(null, "TitleURL","/user?step="+this.currentStep+"#Form");
       this.updateForm();
     }
   }

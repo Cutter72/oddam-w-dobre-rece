@@ -114,7 +114,7 @@
                 </c:forEach>
 
                 <div class="form-group form-group--buttons">
-                    <a href="/user?step=1#Form" style="margin-right: 30px"><button type="button" class="btn">Wstecz</button></a>
+                    <a href="/user?step=3#Form" style="margin-right: 30px"><button type="button" class="btn">Wstecz</button></a>
                     <button type="button" class="btn next-step">Dalej</button>
                 </div>
             </div>

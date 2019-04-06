@@ -3,7 +3,9 @@ package pl.oddam.controller;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import pl.oddam.model.*;
 import pl.oddam.model.dto.StepOneToThreeParameters;
 import pl.oddam.repository.CityRepository;
@@ -11,6 +13,7 @@ import pl.oddam.repository.OrganizationNeedRepository;
 import pl.oddam.repository.OrganizationTargetRepository;
 import pl.oddam.service.OrganizationServiceImpl;
 
+import javax.servlet.http.HttpSession;
 import java.util.Arrays;
 
 @Controller
@@ -29,8 +32,11 @@ public class UserController {
     }
 
     @GetMapping("")
-    public String user(@AuthenticationPrincipal CurrentUser customUser, Model model) {
-        model.addAttribute("stepOneToThreeParameters", new StepOneToThreeParameters());
+    public String user(@AuthenticationPrincipal CurrentUser customUser, Model model, HttpSession sess) {
+        if (sess.getAttribute("stepOneToThreeParameters") == null) {
+            sess.setAttribute("stepOneToThreeParameters", new StepOneToThreeParameters());
+        }
+        model.addAttribute("stepOneToThreeParameters", sess.getAttribute("stepOneToThreeParameters"));
         model.addAttribute("user", customUser.getUser());
         model.addAttribute("organizationNeedList", organizationNeedRepository.findAll());
         model.addAttribute("organizationTargetList", organizationTargetRepository.findAll());
@@ -39,16 +45,12 @@ public class UserController {
     }
 
     @PostMapping("")
-    public String userFormStepOneSearchOrganizations(@RequestParam(required = false) Long[] needIdTab,
-                                                     @RequestParam(required = false) Long cityId,
-                                                     @RequestParam(required = false) Long[] targetIdTab,
-                                                     @RequestParam(required = false) String organizationName,
-                                                     @RequestParam(required = false) Integer bags,
-                                                     Model model) {
-
-        model.addAttribute("organizationList", organizationServiceImpl.findAllByNameCityNeedTarget(organizationName, cityId, needIdTab, targetIdTab));
-        model.addAttribute("bags", bags);
-        model.addAttribute("selectedNeedsToGive", organizationNeedRepository.findAllById(Arrays.asList(needIdTab)));
+    public String userFormStepOneSearchOrganizations(StepOneToThreeParameters stepOneToThreeParameters,
+                                                     Model model, HttpSession sess) {
+        model.addAttribute("organizationList", organizationServiceImpl.findAllByNameCityNeedTarget(stepOneToThreeParameters.getOrganizationName(), stepOneToThreeParameters.getCityId(), stepOneToThreeParameters.getNeedIdTab(), stepOneToThreeParameters.getTargetIdTab()));
+        model.addAttribute("bags", stepOneToThreeParameters.getBags());
+        model.addAttribute("selectedNeedsToGive", organizationNeedRepository.findAllById(Arrays.asList(stepOneToThreeParameters.getNeedIdTab())));
+        sess.setAttribute("stepOneToThreeParameters", stepOneToThreeParameters);
         return "user/userStep4";
     }
 

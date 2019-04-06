@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import pl.oddam.model.*;
+import pl.oddam.model.dto.StepOneToThreeParameters;
 import pl.oddam.repository.CityRepository;
 import pl.oddam.repository.OrganizationNeedRepository;
 import pl.oddam.repository.OrganizationTargetRepository;
@@ -29,6 +30,7 @@ public class UserController {
 
     @GetMapping("")
     public String user(@AuthenticationPrincipal CurrentUser customUser, Model model) {
+        model.addAttribute("stepOneToThreeParameters", new StepOneToThreeParameters());
         model.addAttribute("user", customUser.getUser());
         model.addAttribute("organizationNeedList", organizationNeedRepository.findAll());
         model.addAttribute("organizationTargetList", organizationTargetRepository.findAll());

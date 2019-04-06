@@ -105,7 +105,7 @@
     <div class="form--steps-container">
         <div class="form--steps-counter">Krok <span>1</span>/5</div>
 
-        <form method="post" class="form123" action="/user?step=4">
+        <form:form method="post" class="form123" action="/user?step=4" modelAttribute="stepOneToThreeParameters">
             <!-- STEP 1: class .active is switching steps -->
 
             <div data-step="1" class="active">
@@ -115,11 +115,11 @@
                 <c:forEach items="${organizationNeedList}" var="need">
                     <div class="form-group form-group--checkbox">
                         <label>
-                            <input
-                                    type="checkbox"
+                            <form:checkbox path="needIdTab"
+
                                     name="needIdTab"
                                     value="${need.id}"
-                                    class="need"
+                                    cssClass="need"
                             />
                             <span class="checkbox"></span>
                             <span class="description">${need.name}</span>
@@ -141,7 +141,7 @@
                 <div class="form-group form-group--inline">
                     <label>
                         Liczba 60l worków:
-                        <input type="number" class="bags" name="bags" step="1" min="1" required="required"/>
+                        <form:input path="bags" type="number" class="bags" name="bags" step="1" min="1" required="required"/>
                     </label>
                 </div>
 
@@ -156,12 +156,12 @@
                 <h3>Lokalizacja:</h3>
 
                     <div class="form-group form-group--dropdown">
-                        <select name="cityId">
-                            <option value="0">Obojętnie</option>
+                        <form:select path="cityId" name="cityId">
+                            <form:option value="0">Obojętnie</form:option>
                             <c:forEach items="${cityList}" var="city">
-                            <option value="${city.id}">${city.name}</option>
+                            <form:option value="${city.id}">${city.name}</form:option>
                             </c:forEach>
-                        </select>
+                        </form:select>
                     </div>
 
                 <div class="form-section">
@@ -172,7 +172,7 @@
                         <c:forEach items="${organizationTargetList}" var="target">
                             <div class="form-group form-group--checkbox">
                                 <label>
-                                    <input type="checkbox" class="target" name="targetIdTab" value="${target.id}"/>
+                                    <form:checkbox path="targetIdTab" cssClass="target" name="targetIdTab" value="${target.id}"/>
                                     <span class="checkbox">${target.name}</span>
                                 </label>
                             </div>
@@ -184,7 +184,7 @@
                 <div class="form-section">
                     <h4>Wpisz nazwę konkretnej organizacji (opcjonalnie)</h4>
                     <div class="form-group">
-                        <textarea rows="4" name="organizationName"></textarea>
+                        <form:textarea path="organizationName" rows="4" name="organizationName"></form:textarea>
                     </div>
                 </div>
 
@@ -195,7 +195,7 @@
                 </div>
             </div>
 
-        </form>
+        </form:form>
     </div>
 </section>
 

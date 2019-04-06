@@ -104,7 +104,7 @@
                             <input type="radio" name="organization" class="organization" value="${organization.id}"/>
                             <span class="checkbox radio"></span>
                             <span class="description">
-                  <div class="title">${organization.type.name} “${organization.name}”</div>
+                  <div class="title organizationInput">${organization.type.name} “${organization.name}”</div>
                   <div class="subtitle">
                     Cel i misja: ${organization.mission}
                   </div>
@@ -129,22 +129,22 @@
                         <br/>
                         <h4>Adres odbioru</h4>
                         <div class="form-group form-group--inline">
-                            <label> Ulica* <input type="text" name="address" required="required" class="required"/> </label>
+                            <label> Ulica* <input type="text" name="address" required="required" class="required streetInput"/> </label>
                         </div>
 
                         <div class="form-group form-group--inline">
-                            <label> Miasto* <input type="text" name="city" required="required" class="required"/> </label>
+                            <label> Miasto* <input type="text" name="city" required="required" class="required cityInput"/> </label>
                         </div>
 
                         <div class="form-group form-group--inline">
                             <label>
-                                Kod pocztowy* <input type="text" name="postcode" required="required" class="required"/>
+                                Kod pocztowy* <input type="text" name="postcode" required="required" class="required postCodeInput"/>
                             </label>
                         </div>
 
                         <div class="form-group form-group--inline">
                             <label>
-                                Numer telefonu* <input type="phone" name="phone" required="required" class="required"/>
+                                Numer telefonu* <input type="phone" name="phone" required="required" class="required callNumberInput"/>
                             </label>
                         </div>
                     </div>
@@ -190,8 +190,8 @@
 
                             <li>
                                 <span class="icon icon-hand"></span>
-                                <span class="summary--text">
-                                    Dla fundacji "Mam marzenie" w Warszawie
+                                <span class="summary--text organizationAndCitySummary">
+                                    Dla organizacji "Mam marzenie" w Warszawie
                                 </span>
                             </li>
                         </ul>
@@ -201,10 +201,10 @@
                         <div class="form-section--column">
                             <h4>Adres odbioru:</h4>
                             <ul>
-                                <li>Prosta 51</li>
-                                <li>Warszawa</li>
-                                <li>99-098</li>
-                                <li>123 456 789</li>
+                                <li class="streetSummary">Prosta 51</li>
+                                <li class="citySummary">Warszawa</li>
+                                <li class="postCodeSummary">99-098</li>
+                                <li class="callNumberSummary">123 456 789</li>
                             </ul>
                         </div>
 

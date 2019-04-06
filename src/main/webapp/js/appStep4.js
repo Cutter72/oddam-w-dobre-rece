@@ -186,6 +186,20 @@ document.addEventListener("DOMContentLoaded", function() {
       this.$step = form.querySelector(".form--steps-counter span");
       this.currentStep = step;
 
+      //variables for rewrite inputs tu summary page
+        //inputs
+      this.$organizationInput = document.querySelector(".organizationInput");
+      this.$streetInput = document.querySelector(".streetInput");
+      this.$cityInput = document.querySelector(".cityInput");
+      this.$postCodeInput = document.querySelector(".postCodeInput");
+      this.$callNumberInput = document.querySelector(".callNumberInput");
+      //outputs
+      this.$organizationAndCitySummary = document.querySelector(".organizationAndCitySummary");
+      this.$streetSummary = document.querySelector(".streetSummary");
+      this.$citySummary = document.querySelector(".citySummary");
+      this.$postCodeSummary = document.querySelector(".postCodeSummary");
+      this.$callNumberSummary = document.querySelector(".callNumberSummary");
+
       this.$stepInstructions = form.querySelectorAll(".form--steps-instructions p");
       const $stepForms = form.querySelectorAll("form > div");
       this.slides = [...this.$stepInstructions, ...$stepForms];
@@ -199,6 +213,18 @@ document.addEventListener("DOMContentLoaded", function() {
     init() {
       this.events();
       this.updateForm();
+    }
+
+    /**
+     * Rewrite inputs to summary page (Cutter72)
+     */
+
+    updateSummary() {
+      this.$organizationAndCitySummary.innerText = "Dla organizacji " + this.$organizationInput.value;
+      this.$streetSummary.innerText = this.$streetInput.value;
+      this.$citySummary.innerText = this.$cityInput.value;
+      this.$postCodeSummary.innerText = this.$postCodeInput.value;
+      this.$callNumberSummary.innerText = this.$callNumberInput.value;
     }
 
     /**
@@ -235,6 +261,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 this.currentStep++;
                 window.history.pushState(null, "TitleURL","/user?step="+this.currentStep+"#Form");
                 this.updateForm();
+                this.updateSummary();
             } else {
                 alert("Proszę wypełnić wszystkie pola oznaczone gwiazdką.");
             }
@@ -289,7 +316,7 @@ document.addEventListener("DOMContentLoaded", function() {
      * TODO: validation, send data to server
      */
     submit(e) {
-      // e.preventDefault();
+      e.preventDefault();
       this.currentStep++;
         // window.history.pushState(null, "TitleURL","/user?step="+this.currentStep+"#Form");
       this.updateForm();

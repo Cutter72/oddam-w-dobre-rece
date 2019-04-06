@@ -213,9 +213,9 @@ document.addEventListener("DOMContentLoaded", function() {
             var isChecked = false;
             this.$organizations.forEach(checkbox => {
                 if(checkbox.checked){
-                isChecked = true;
-            }
-        });
+                  isChecked = true;
+                }
+            });
             if (isChecked) {
                 this.currentStep++;
                 window.history.pushState(null, "TitleURL","/user?step="+this.currentStep+"#Form");
@@ -227,10 +227,10 @@ document.addEventListener("DOMContentLoaded", function() {
             var notEmpty = true;
             this.$requireds.forEach(textarea => {
                 if(textarea.checkValidity() && notEmpty){
-            } else {
+                } else {
                 notEmpty = false;
-            }
-        });
+                }
+            });
             if (notEmpty) {
                 this.currentStep++;
                 window.history.pushState(null, "TitleURL","/user?step="+this.currentStep+"#Form");

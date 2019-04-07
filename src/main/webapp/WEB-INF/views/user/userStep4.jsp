@@ -152,17 +152,17 @@
                     <div class="form-section--column">
                         <h4>Termin odbioru (opcjonalnie)</h4>
                         <div class="form-group form-group--inline">
-                            <label> Data <input type="date" name="data"/> </label>
+                            <label> Data <input type="date" name="data" class="dateInput"/> </label>
                         </div>
 
                         <div class="form-group form-group--inline">
-                            <label> Godzina <input type="time" name="time"/> </label>
+                            <label> Godzina <input type="time" name="time" class="timeInput"/> </label>
                         </div>
 
                         <div class="form-group form-group--inline">
                             <label>
                                 Uwagi dla kuriera
-                                <textarea name="more_info" rows="5"></textarea>
+                                <textarea name="more_info" rows="5" class="courierNoteInput"></textarea>
                             </label>
                         </div>
                     </div>
@@ -211,9 +211,9 @@
                         <div class="form-section--column">
                             <h4>Termin odbioru:</h4>
                             <ul>
-                                <li>13/12/2018</li>
-                                <li>15:40</li>
-                                <li>Brak uwag</li>
+                                <li class="dateSummary">13/12/2018</li>
+                                <li class="timeSummary">15:40</li>
+                                <li class="courierNoteSummary">Brak uwag</li>
                             </ul>
                         </div>
                     </div>

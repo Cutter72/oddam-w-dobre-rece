@@ -193,12 +193,18 @@ document.addEventListener("DOMContentLoaded", function() {
       this.$cityInput = document.querySelector(".cityInput");
       this.$postCodeInput = document.querySelector(".postCodeInput");
       this.$callNumberInput = document.querySelector(".callNumberInput");
+      this.$dateInput = document.querySelector(".dateInput");
+      this.$timeInput = document.querySelector(".timeInput");
+      this.$courierNoteInput = document.querySelector(".courierNoteInput");
       //outputs
       this.$organizationAndCitySummary = document.querySelector(".organizationAndCitySummary");
       this.$streetSummary = document.querySelector(".streetSummary");
       this.$citySummary = document.querySelector(".citySummary");
       this.$postCodeSummary = document.querySelector(".postCodeSummary");
       this.$callNumberSummary = document.querySelector(".callNumberSummary");
+      this.$dateSummary = document.querySelector(".dateSummary");
+      this.$timeSummary = document.querySelector(".timeSummary");
+      this.$courierNoteSummary = document.querySelector(".courierNoteSummary");
 
       this.$stepInstructions = form.querySelectorAll(".form--steps-instructions p");
       const $stepForms = form.querySelectorAll("form > div");
@@ -225,6 +231,9 @@ document.addEventListener("DOMContentLoaded", function() {
       this.$citySummary.innerText = this.$cityInput.value;
       this.$postCodeSummary.innerText = this.$postCodeInput.value;
       this.$callNumberSummary.innerText = this.$callNumberInput.value;
+      this.$dateSummary.innerText = this.$dateInput.value;
+      this.$timeSummary.innerText = this.$timeInput.value;
+      this.$courierNoteSummary.innerText = this.$courierNoteInput.value;
     }
 
     /**

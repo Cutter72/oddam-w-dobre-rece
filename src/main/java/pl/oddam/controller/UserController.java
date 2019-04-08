@@ -49,6 +49,7 @@ public class UserController {
                                                      Model model, HttpSession sess) {
         model.addAttribute("organizationList", organizationServiceImpl.findAllByNameCityNeedTarget(stepOneToThreeParameters.getOrganizationName(), stepOneToThreeParameters.getCityId(), stepOneToThreeParameters.getNeedIdTab(), stepOneToThreeParameters.getTargetIdTab()));
         model.addAttribute("bags", stepOneToThreeParameters.getBags());
+        model.addAttribute("gift", new Gift());
         model.addAttribute("selectedNeedsToGive", organizationNeedRepository.findAllById(Arrays.asList(stepOneToThreeParameters.getNeedIdTab())));
         sess.setAttribute("stepOneToThreeParameters", stepOneToThreeParameters);
         return "user/userStep4";

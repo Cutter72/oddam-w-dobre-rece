@@ -93,7 +93,7 @@
     <div class="form--steps-container">
         <div class="form--steps-counter">Krok <span>4</span>/5</div>
 
-        <form>
+        <form:form modelAttribute="gift">
             <!-- STEP 4 -->
             <div data-step="4">
                 <h3>Wybierz organizacje, której chcesz pomóc:</h3>
@@ -101,7 +101,7 @@
                 <c:forEach items="${organizationList}" var="organization">
                     <div class="form-group form-group--checkbox">
                         <label>
-                            <input type="radio" name="organization" class="organization" value="${organization.id}"/>
+                            <form:radiobutton path="organization" name="organization" cssClass="organization" value="${organization.id}"/>
                             <span class="checkbox radio"></span>
                             <span class="description">
                   <div class="title organizationInput">${organization.type.name} “${organization.name}”</div>
@@ -129,22 +129,22 @@
                         <br/>
                         <h4>Adres odbioru</h4>
                         <div class="form-group form-group--inline">
-                            <label> Ulica* <input type="text" name="address" required="required" class="required streetInput"/> </label>
+                            <label> Ulica* <form:input path="street" name="address" required="required" class="required streetInput"/> </label>
                         </div>
 
                         <div class="form-group form-group--inline">
-                            <label> Miasto* <input type="text" name="city" required="required" class="required cityInput"/> </label>
+                            <label> Miasto* <form:input path="city" name="city" required="required" class="required cityInput"/> </label>
                         </div>
 
                         <div class="form-group form-group--inline">
                             <label>
-                                Kod pocztowy* <input type="text" name="postcode" required="required" class="required postCodeInput"/>
+                                Kod pocztowy* <form:input path="postCode" name="postcode" required="required" class="required postCodeInput"/>
                             </label>
                         </div>
 
                         <div class="form-group form-group--inline">
                             <label>
-                                Numer telefonu* <input type="phone" name="phone" required="required" class="required callNumberInput"/>
+                                Numer telefonu* <form:input path="callNumber" name="phone" required="required" class="required callNumberInput"/>
                             </label>
                         </div>
                     </div>
@@ -162,7 +162,7 @@
                         <div class="form-group form-group--inline">
                             <label>
                                 Uwagi dla kuriera
-                                <textarea name="more_info" rows="5" class="courierNoteInput"></textarea>
+                                <form:textarea path="courierNote" name="more_info" rows="5" class="courierNoteInput"></form:textarea>
                             </label>
                         </div>
                     </div>
@@ -232,7 +232,7 @@
                     informacje o odbiorze.
                 </h2>
             </div>
-        </form>
+        </form:form>
     </div>
 </section>
 

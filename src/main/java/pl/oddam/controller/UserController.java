@@ -3,12 +3,11 @@ package pl.oddam.controller;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import pl.oddam.model.*;
 import pl.oddam.model.dto.StepOneToThreeParameters;
 import pl.oddam.repository.CityRepository;
+import pl.oddam.repository.GiftRepository;
 import pl.oddam.repository.OrganizationNeedRepository;
 import pl.oddam.repository.OrganizationTargetRepository;
 import pl.oddam.service.OrganizationServiceImpl;
@@ -23,12 +22,14 @@ public class UserController {
     private final OrganizationTargetRepository organizationTargetRepository;
     private final OrganizationServiceImpl organizationServiceImpl;
     private final CityRepository cityRepository;
+    private final GiftRepository giftRepository;
 
-    public UserController(OrganizationNeedRepository organizationNeedRepository, OrganizationTargetRepository organizationTargetRepository, OrganizationServiceImpl organizationServiceImpl, CityRepository cityRepository) {
+    public UserController(OrganizationNeedRepository organizationNeedRepository, OrganizationTargetRepository organizationTargetRepository, OrganizationServiceImpl organizationServiceImpl, CityRepository cityRepository, GiftRepository giftRepository) {
         this.organizationNeedRepository = organizationNeedRepository;
         this.organizationTargetRepository = organizationTargetRepository;
         this.organizationServiceImpl = organizationServiceImpl;
         this.cityRepository = cityRepository;
+        this.giftRepository = giftRepository;
     }
 
     @GetMapping("")
@@ -63,13 +64,13 @@ public class UserController {
 
     @PostMapping("/form")
     public String userFormSummary(Gift gift, HttpSession sess) {
-
+        giftRepository.save(gift);
         return "redirect:/user/form/success";
     }
 
     @GetMapping("/form/success")
-    public String userFormSuccess() {
-
+    public String userFormSuccess(@AuthenticationPrincipal CurrentUser customUser, Model model) {
+        model.addAttribute("user", customUser.getUser());
         return "user/formSuccess";
     }
 

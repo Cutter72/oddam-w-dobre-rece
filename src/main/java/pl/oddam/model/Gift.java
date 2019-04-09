@@ -1,6 +1,7 @@
 package pl.oddam.model;
 
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.sql.Date;
@@ -21,7 +22,9 @@ public class Gift {
     private String postCode;
     private String callNumber;
     private LocalDateTime created;
+    @DateTimeFormat(pattern = "mm/dd/yyyy")
     private Date preferredDateOfCollection;
+//    @DateTimeFormat(pattern = "hh:mm")
     private Time preferredTimeOfCollection;
     private String courierNote;
     private LocalDateTime timeCollected;

@@ -45,13 +45,18 @@ public class UserController {
     }
 
     @PostMapping("")
-    public String userFormStepOneSearchOrganizations(StepOneToThreeParameters stepOneToThreeParameters,
-                                                     Model model, HttpSession sess) {
+    public String userFormStepOneSearchOrganizations(StepOneToThreeParameters stepOneToThreeParameters, HttpSession sess) {
+        sess.setAttribute("stepOneToThreeParameters", stepOneToThreeParameters);
+        return "redirect:/user/form";
+    }
+
+    @GetMapping("/form")
+    public String userForm(@AuthenticationPrincipal CurrentUser customUser, Model model, HttpSession sess) {
+        StepOneToThreeParameters stepOneToThreeParameters = (StepOneToThreeParameters)sess.getAttribute("stepOneToThreeParameters");
         model.addAttribute("organizationList", organizationServiceImpl.findAllByNameCityNeedTarget(stepOneToThreeParameters.getOrganizationName(), stepOneToThreeParameters.getCityId(), stepOneToThreeParameters.getNeedIdTab(), stepOneToThreeParameters.getTargetIdTab()));
         model.addAttribute("bags", stepOneToThreeParameters.getBags());
         model.addAttribute("gift", new Gift());
         model.addAttribute("selectedNeedsToGive", organizationNeedRepository.findAllById(Arrays.asList(stepOneToThreeParameters.getNeedIdTab())));
-        sess.setAttribute("stepOneToThreeParameters", stepOneToThreeParameters);
         return "user/userStep4";
     }
 

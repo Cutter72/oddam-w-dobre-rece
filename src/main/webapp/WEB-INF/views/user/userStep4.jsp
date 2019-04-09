@@ -93,7 +93,7 @@
     <div class="form--steps-container">
         <div class="form--steps-counter">Krok <span>4</span>/5</div>
 
-        <form:form modelAttribute="gift">
+        <form:form modelAttribute="gift" method="post">
             <!-- STEP 4 -->
             <div data-step="4">
                 <h3>Wybierz organizacje, której chcesz pomóc:</h3>

@@ -61,6 +61,18 @@ public class UserController {
         return "user/userStep4";
     }
 
+    @PostMapping("/form")
+    public String userFormSummary(Gift gift, HttpSession sess) {
+
+        return "redirect:/user/form/success";
+    }
+
+    @GetMapping("/form/success")
+    public String userFormSuccess() {
+
+        return "user/formSuccess";
+    }
+
     @GetMapping("/")
     public String userSlash() {
         return "redirect:/user";

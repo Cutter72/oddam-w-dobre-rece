@@ -330,10 +330,10 @@ document.addEventListener("DOMContentLoaded", function() {
      * TODO: validation, send data to server
      */
     submit(e) {
-      e.preventDefault();
-      this.currentStep++;
+      // e.preventDefault();
+      // this.currentStep++;
         // window.history.pushState(null, "TitleURL","/user/form?step="+this.currentStep+"#Form");
-      this.updateForm();
+      // this.updateForm();
     }
   }
   const form = document.querySelector(".form--steps");

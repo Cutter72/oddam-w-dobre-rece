@@ -188,7 +188,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
       //variables for rewrite inputs tu summary page
         //inputs
-      this.$organizationInput = document.querySelector(".organizationInput");
+      this.$organization = document.querySelectorAll(".organization");
       this.$streetInput = document.querySelector(".streetInput");
       this.$cityInput = document.querySelector(".cityInput");
       this.$postCodeInput = document.querySelector(".postCodeInput");
@@ -226,7 +226,12 @@ document.addEventListener("DOMContentLoaded", function() {
      */
 
     updateSummary() {
-      this.$organizationAndCitySummary.innerText = "Dla organizacji " + this.$organizationInput.value;
+        console.log(this.$organization);
+      this.$organization.forEach(org => {
+          if(org.checked){
+            this.$organizationAndCitySummary.innerText = "Dla: " + org.nextElementSibling.nextElementSibling.firstElementChild.innerText;
+        }
+      });
       this.$streetSummary.innerText = this.$streetInput.value;
       this.$citySummary.innerText = this.$cityInput.value;
       this.$postCodeSummary.innerText = this.$postCodeInput.value;

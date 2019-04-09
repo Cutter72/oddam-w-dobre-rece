@@ -104,7 +104,7 @@
                             <form:radiobutton path="organization" name="organization" cssClass="organization" value="${organization.id}"/>
                             <span class="checkbox radio"></span>
                             <span class="description">
-                  <div class="title organizationInput">${organization.type.name} “${organization.name}”</div>
+                  <div class="title organizationInput">${organization.type.name} “${organization.name}” - ${organization.city.name}</div>
                   <div class="subtitle">
                     Cel i misja: ${organization.mission}
                   </div>

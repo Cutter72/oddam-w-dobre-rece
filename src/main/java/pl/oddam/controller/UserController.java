@@ -56,6 +56,7 @@ public class UserController {
         model.addAttribute("organizationList", organizationServiceImpl.findAllByNameCityNeedTarget(stepOneToThreeParameters.getOrganizationName(), stepOneToThreeParameters.getCityId(), stepOneToThreeParameters.getNeedIdTab(), stepOneToThreeParameters.getTargetIdTab()));
         model.addAttribute("bags", stepOneToThreeParameters.getBags());
         model.addAttribute("gift", new Gift());
+        model.addAttribute("user", customUser.getUser());
         model.addAttribute("selectedNeedsToGive", organizationNeedRepository.findAllById(Arrays.asList(stepOneToThreeParameters.getNeedIdTab())));
         return "user/userStep4";
     }

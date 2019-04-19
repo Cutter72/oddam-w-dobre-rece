@@ -71,6 +71,8 @@ public class UserController {
     @GetMapping("/form/success")
     public String userFormSuccess(@AuthenticationPrincipal CurrentUser customUser, Model model) {
         model.addAttribute("user", customUser.getUser());
+        //TODO set all attributest in gift
+
         return "user/formSuccess";
     }
 

@@ -1,0 +1,4 @@
+- Gift save parameters
+- general Step form rewrite or modify to fix bugs like:
+  * form behaviour after refresh page
+  * time redirect after form submit

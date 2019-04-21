@@ -7,7 +7,6 @@ document.addEventListener("DOMContentLoaded", function() {
     if (urlParams.has("step")){
         step = urlParams.get("step");
     } else {
-        // window.history.pushState(null, "TitleURL","/user?step=1");
         step = 1;
     }
 
@@ -218,7 +217,6 @@ document.addEventListener("DOMContentLoaded", function() {
             });
             if (isChecked) {
                 this.currentStep++;
-                window.history.pushState(null, "TitleURL","/user?step="+this.currentStep+"#Form");
                 this.updateForm();
             } else {
                 alert("Zaznacz co chcesz oddać.");
@@ -226,7 +224,6 @@ document.addEventListener("DOMContentLoaded", function() {
         }else if(this.currentStep == 2){
             if (this.$bags.checkValidity()) {
                 this.currentStep++;
-                window.history.pushState(null, "TitleURL","/user?step="+this.currentStep+"#Form");
                 this.updateForm();
             } else {
                 alert("Proszę wpisać ilość worków.");
@@ -240,14 +237,12 @@ document.addEventListener("DOMContentLoaded", function() {
         });
             if (isChecked) {
                 this.currentStep++;
-                window.history.pushState(null, "TitleURL","/user?step="+this.currentStep+"#Form");
                 this.updateForm();
             } else {
                 alert("Zaznacz komu chcesz pomóc.");
             }
         } else {
             this.currentStep++;
-            window.history.pushState(null, "TitleURL","/user?step="+this.currentStep+"#Form");
             this.updateForm();
         }
 

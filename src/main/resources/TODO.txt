@@ -1,6 +1,2 @@
 - Gift save parameters
-- general Step form rewrite or modify to fix bugs like:
-  * time redirect after form user/form/success to /user
-  * after refresh, form is reseted but stay in current step,
-    so 'Szukaj' button don't work due to empty inputs from previous steps
-  * change urls to user/form/step1 (or only /user) and user/form/step2
+- FormSuccess timer show/print

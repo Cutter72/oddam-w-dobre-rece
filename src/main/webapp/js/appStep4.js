@@ -4,14 +4,14 @@ document.addEventListener("DOMContentLoaded", function() {
      */
     var scrollHere = document.getElementById("form-place");
   var urlParams = new URLSearchParams(window.location.search);
-    var step;
-    if (urlParams.has("step")){
-        step = urlParams.get("step");
-        scrollHere.scrollIntoView();
-    } else {
-        window.history.pushState(null, "TitleURL","/user/form?step=4#Form");
-        step = 4;
-    }
+    var step = 4;
+    // if (urlParams.has("step")){
+    //     step = urlParams.get("step");
+    //     scrollHere.scrollIntoView();
+    // } else {
+    //     window.history.pushState(null, "TitleURL","/user/form/step2?step=4#Form");
+    //     step = 4;
+    // }
 
   class Help {
     constructor($el) {
@@ -258,7 +258,7 @@ document.addEventListener("DOMContentLoaded", function() {
             });
             if (isChecked) {
                 this.currentStep++;
-                window.history.pushState(null, "TitleURL","/user/form?step="+this.currentStep+"#Form");
+                window.history.pushState(null, "TitleURL","/user/form/step2?step="+this.currentStep+"#Form");
                 this.updateForm();
             } else {
                 alert("Zaznacz organizację.");
@@ -273,7 +273,7 @@ document.addEventListener("DOMContentLoaded", function() {
             });
             if (notEmpty) {
                 this.currentStep++;
-                window.history.pushState(null, "TitleURL","/user/form?step="+this.currentStep+"#Form");
+                window.history.pushState(null, "TitleURL","/user/form/step2?step="+this.currentStep+"#Form");
                 this.updateForm();
                 this.updateSummary();
             } else {
@@ -281,7 +281,7 @@ document.addEventListener("DOMContentLoaded", function() {
             }
         }else {
             this.currentStep++;
-            window.history.pushState(null, "TitleURL","/user/form?step="+this.currentStep+"#Form");
+            window.history.pushState(null, "TitleURL","/user/form/step2?step="+this.currentStep+"#Form");
             this.updateForm();
         }
         });
@@ -292,7 +292,7 @@ document.addEventListener("DOMContentLoaded", function() {
         btn.addEventListener("click", e => {
           e.preventDefault();
           this.currentStep--;
-        window.history.pushState(null, "TitleURL","/user/form?step="+this.currentStep+"#Form");
+        window.history.pushState(null, "TitleURL","/user/form/step2?step="+this.currentStep+"#Form");
           this.updateForm();
         });
       });
@@ -332,7 +332,7 @@ document.addEventListener("DOMContentLoaded", function() {
     submit(e) {
       // e.preventDefault();
       // this.currentStep++;
-        // window.history.pushState(null, "TitleURL","/user/form?step="+this.currentStep+"#Form");
+        // window.history.pushState(null, "TitleURL","/user/form/step2?step="+this.currentStep+"#Form");
       // this.updateForm();
     }
   }

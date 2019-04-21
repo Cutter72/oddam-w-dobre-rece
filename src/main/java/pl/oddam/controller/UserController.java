@@ -48,11 +48,13 @@ public class UserController {
     @PostMapping("")
     public String userFormStepOneSearchOrganizations(StepOneToThreeParameters stepOneToThreeParameters, HttpSession sess) {
         sess.setAttribute("stepOneToThreeParameters", stepOneToThreeParameters);
-        return "redirect:/user/form";
+        return "redirect:/user/form/step2#Form";
     }
 
-    @GetMapping("/form")
-    public String userForm(@AuthenticationPrincipal CurrentUser customUser, Model model, HttpSession sess) {
+
+
+    @GetMapping("/form/step2")
+    public String userForm2(@AuthenticationPrincipal CurrentUser customUser, Model model, HttpSession sess) {
         StepOneToThreeParameters stepOneToThreeParameters = (StepOneToThreeParameters)sess.getAttribute("stepOneToThreeParameters");
         model.addAttribute("organizationList", organizationServiceImpl.findAllByNameCityNeedTarget(stepOneToThreeParameters.getOrganizationName(), stepOneToThreeParameters.getCityId(), stepOneToThreeParameters.getNeedIdTab(), stepOneToThreeParameters.getTargetIdTab()));
         model.addAttribute("bags", stepOneToThreeParameters.getBags());
@@ -62,10 +64,10 @@ public class UserController {
         return "user/userStep4";
     }
 
-    @PostMapping("/form")
+    @PostMapping("/form/step2")
     public String userFormSummary(Gift gift, HttpSession sess) {
         giftRepository.save(gift);
-        return "redirect:/user/form/success";
+        return "redirect:/user/form/success#Form";
     }
 
     @GetMapping("/form/success")

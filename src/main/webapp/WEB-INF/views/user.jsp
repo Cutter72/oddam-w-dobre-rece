@@ -105,7 +105,7 @@
     <div class="form--steps-container">
         <div class="form--steps-counter">Krok <span>1</span>/5</div>
 
-        <form:form method="post" class="form123" action="/user?step=4" modelAttribute="stepOneToThreeParameters">
+        <form:form method="post" class="form123" modelAttribute="stepOneToThreeParameters">
             <!-- STEP 1: class .active is switching steps -->
 
             <div data-step="1" class="active">

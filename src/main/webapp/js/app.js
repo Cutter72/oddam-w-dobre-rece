@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", function() {
     if (urlParams.has("step")){
         step = urlParams.get("step");
     } else {
-        window.history.pushState(null, "TitleURL","/user?step=1");
+        // window.history.pushState(null, "TitleURL","/user?step=1");
         step = 1;
     }
 

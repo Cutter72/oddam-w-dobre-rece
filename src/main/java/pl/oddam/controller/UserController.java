@@ -65,16 +65,17 @@ public class UserController {
     }
 
     @PostMapping("/form/step2")
-    public String userFormSummary(Gift gift, HttpSession sess) {
+    public String userFormSummary(Gift gift) {
+        //TODO set all attributest in gift
         giftRepository.save(gift);
+
         return "redirect:/user/form/success#Form";
     }
 
     @GetMapping("/form/success")
-    public String userFormSuccess(@AuthenticationPrincipal CurrentUser customUser, Model model) {
+    public String userFormSuccess(@AuthenticationPrincipal CurrentUser customUser, Model model, HttpSession sess) {
         model.addAttribute("user", customUser.getUser());
-        //TODO set all attributest in gift
-
+        sess.removeAttribute("stepOneToThreeParameters");
         return "user/formSuccess";
     }
 

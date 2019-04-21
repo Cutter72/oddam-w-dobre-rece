@@ -1,6 +1,5 @@
 - Gift save parameters
 - general Step form rewrite or modify to fix bugs like:
-  * form behaviour after refresh page
   * time redirect after form user/form/success to /user
   * after refresh, form is reseted but stay in current step,
     so 'Szukaj' button don't work due to empty inputs from previous steps

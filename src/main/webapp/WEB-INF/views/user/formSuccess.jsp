@@ -92,6 +92,6 @@
 
 <jsp:include page="../../components/footer.jsp"/>
 
-<script src="/js/appStep4.js"></script>
+<script src="/js/timeRedirect.js"></script>
 </body>
 </html>

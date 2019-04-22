@@ -183,8 +183,8 @@
                         <ul>
                             <li>
                                 <span class="icon icon-bag"></span>
-                                <span class="summary--text">${bags} worki(ek) z:
-                                    <c:forEach items="${selectedNeedsToGive}" var="need">${need.name}, </c:forEach>
+                                <span class="summary--text">Worków: ${bags}, <br/>
+                                    Zawartość: <c:forEach items="${selectedNeedsToGive}" var="need">${need.name}, </c:forEach>
                                 </span>
                             </li>
 

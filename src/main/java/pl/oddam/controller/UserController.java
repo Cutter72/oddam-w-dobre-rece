@@ -51,11 +51,12 @@ public class UserController {
         return "redirect:/user/form/step2#Form";
     }
 
-
-
     @GetMapping("/form/step2")
     public String userForm2(@AuthenticationPrincipal CurrentUser customUser, Model model, HttpSession sess) {
         StepOneToThreeParameters stepOneToThreeParameters = (StepOneToThreeParameters)sess.getAttribute("stepOneToThreeParameters");
+        if (stepOneToThreeParameters == null) {
+            return "redirect:/user";
+        }
         model.addAttribute("organizationList", organizationServiceImpl.findAllByNameCityNeedTarget(stepOneToThreeParameters.getOrganizationName(), stepOneToThreeParameters.getCityId(), stepOneToThreeParameters.getNeedIdTab(), stepOneToThreeParameters.getTargetIdTab()));
         model.addAttribute("bags", stepOneToThreeParameters.getBags());
         model.addAttribute("gift", new Gift());

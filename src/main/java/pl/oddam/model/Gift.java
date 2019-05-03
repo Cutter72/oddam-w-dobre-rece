@@ -7,6 +7,7 @@ import javax.persistence.*;
 import java.sql.Date;
 import java.sql.Time;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 @Entity
 @Data
@@ -29,4 +30,9 @@ public class Gift {
     private String courierNote;
     private LocalDateTime timeCollected;
     private boolean collected;
+
+    @PrePersist
+    public void setCreationDate () {
+        this.created = LocalDateTime.now();
+    }
 }

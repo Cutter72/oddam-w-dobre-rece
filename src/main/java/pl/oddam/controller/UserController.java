@@ -13,6 +13,8 @@ import pl.oddam.repository.OrganizationTargetRepository;
 import pl.oddam.service.OrganizationServiceImpl;
 
 import javax.servlet.http.HttpSession;
+import java.sql.Date;
+import java.sql.Time;
 import java.util.Arrays;
 
 @Controller
@@ -66,9 +68,21 @@ public class UserController {
     }
 
     @PostMapping("/form/step2")
-    public String userFormSummary(Gift gift) {
-        //TODO set all attributest in gift
+    public String userFormSummary(Gift gift, @RequestParam String date, @RequestParam String time) {
+
+        String[] dateInts = date.split("-");
+        int year = Integer.parseInt(dateInts[0]);
+        int month = Integer.parseInt(dateInts[1]);
+        int day = Integer.parseInt(dateInts[2]);
+
+        String[] timeInts = time.split(":");
+        int hh = Integer.parseInt(timeInts[0]);
+        int mm = Integer.parseInt(timeInts[1]);
+        gift.setPreferredDateOfCollection(new Date(year-1900, month-1,day+1));
+        gift.setPreferredTimeOfCollection(new Time(hh+1,mm,0)); //why adding or substracting for database proper values?
+
         giftRepository.save(gift);
+
 
         return "redirect:/user/form/success#Form";
     }

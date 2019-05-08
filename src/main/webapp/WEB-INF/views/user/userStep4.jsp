@@ -152,7 +152,7 @@
                     <div class="form-section--column">
                         <h4>Termin odbioru (opcjonalnie)</h4>
                         <div class="form-group form-group--inline">
-                            <label> Data <input type="date" name="data" class="dateInput"/> </label>
+                            <label> Data <input type="date" name="date" class="dateInput"/> </label>
                         </div>
 
                         <div class="form-group form-group--inline">

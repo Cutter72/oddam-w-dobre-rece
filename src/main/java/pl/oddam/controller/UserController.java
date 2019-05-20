@@ -68,22 +68,28 @@ public class UserController {
     }
 
     @PostMapping("/form/step2")
-    public String userFormSummary(Gift gift, @RequestParam String date, @RequestParam String time) {
+    public String userFormSummary(Gift gift, @RequestParam(required = false) String date, @RequestParam(required = false) String time) {
 
-        String[] dateInts = date.split("-");
-        int year = Integer.parseInt(dateInts[0]);
-        int month = Integer.parseInt(dateInts[1]);
-        int day = Integer.parseInt(dateInts[2]);
+        if (date.equalsIgnoreCase("")) {
+            //do nothing
+        } else {
+            String[] dateInts = date.split("-");
+            int year = Integer.parseInt(dateInts[0]);
+            int month = Integer.parseInt(dateInts[1]);
+            int day = Integer.parseInt(dateInts[2]);
+            gift.setPreferredDateOfCollection(new Date(year-1900, month-1,day+1));
+        }
 
-        String[] timeInts = time.split(":");
-        int hh = Integer.parseInt(timeInts[0]);
-        int mm = Integer.parseInt(timeInts[1]);
-        gift.setPreferredDateOfCollection(new Date(year-1900, month-1,day+1));
-        gift.setPreferredTimeOfCollection(new Time(hh+1,mm,0)); //why adding or substracting for database proper values?
+        if (time.equalsIgnoreCase("")) {
+            //do nothing
+        } else {
+            String[] timeInts = time.split(":");
+            int hh = Integer.parseInt(timeInts[0]);
+            int mm = Integer.parseInt(timeInts[1]);
+            gift.setPreferredTimeOfCollection(new Time(hh + 1, mm, 0)); //why adding or substracting for database proper values?
+        }
 
         giftRepository.save(gift);
-
-
         return "redirect:/user/form/success#Form";
     }
 

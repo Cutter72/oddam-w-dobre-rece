@@ -55,7 +55,7 @@
 
                 <section class="container">
                     <h3 class="slogan--steps-title">
-                        Formularz edycji organizacji
+                        Formularz edycji daru
                     </h3>
                     <%-- Edit collections form here--%>
                 </section>
@@ -66,30 +66,19 @@
                     </h3>
                     <table class="table">
                         <tr>
-                            <th>Typ</th>
-                            <th>Nazwa</th>
-                            <th>Misja</th>
-                            <th>Miasto</th>
-                            <th>Potrzeby</th>
-                            <th>Grupa docelowa</th>
-                            <th>Zarządzaj</th>
+                            <th>Organizacja</th>
+                            <th>Worki</th>
+                            <th>Data złożenia</th>
+                            <th>Data odebrania</th>
+                            <th>Status</th>
                         </tr>
                         <c:forEach items="${giftList}" var="gift">
                             <tr>
-                                <td>${gift.type.name}</td>
-                                <td>${gift.name}</td>
-                                <td>${gift.mission}</td>
-                                <td>${gift.city.name}</td>
-                                <td>
-                                    <c:forEach items="${gift.need}" var="need">
-                                        <div>${need.name}</div>
-                                    </c:forEach>
-                                </td>
-                                <td>
-                                    <c:forEach items="${gift.target}" var="target">
-                                        <div>${target.name}</div>
-                                    </c:forEach>
-                                </td>
+                                <td>${gift.organization.name}</td>
+                                <td>${gift.bags}</td>
+                                <td>${gift.created}</td>
+                                <td>${gift.timeCollected}</td>
+                                <td>${gift.collected}</td>
                                 <td>
                                     <a href="<jsp:include page="../../links/hrefAdminOrganizationEdit.jsp"/>/${gift.id}" class="btn btn--small">Edytuj</a>
                                     <a href="<jsp:include page="../../links/hrefAdminOrganizationDelete.jsp"/>/${gift.id}" class="btn btn--small deleteBtn">Usuń</a>

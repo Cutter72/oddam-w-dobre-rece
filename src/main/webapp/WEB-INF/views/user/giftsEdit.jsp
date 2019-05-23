@@ -9,17 +9,16 @@
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
-    <title>Admin</title>
+    <title>Moje zbiórki</title>
     <link rel="stylesheet" href="<c:url value="../../../css/bootstrap/bootstrap.css"/>"/>
     <link rel="stylesheet" href="<c:url value="../../../css/style.css"/>"/>
-
 </head>
 <body>
 <header class="header--form-page" style="background-image: none">
     <nav class="container container--70" style="text-align: center">
         <ul class="nav--actions" style="text-align: center">
             <li class="logged-user">
-                Witaj ADMINIE ${user.firstName}
+                Witaj ${user.firstName}
                 <ul class="dropdown">
                     <li><a href="<jsp:include page="../../links/hrefUserProfile.jsp"/>">Profil</a></li>
                     <li><a href="<jsp:include page="../../links/hrefUserSettings.jsp"/>">Ustawienia</a></li>
@@ -36,11 +35,11 @@
         </ul>
 
         <ul>
-            <li><a href="<jsp:include page="../../links/hrefAdmin.jsp"/>" class="btn btn--without-border active">Zarządzanie Administratorami</a></li>
+            <li><a href="<jsp:include page="../../links/hrefAdmin.jsp"/>" class="btn btn--without-border">Zarządzanie Administratorami</a></li>
             <li><a href="<jsp:include page="../../links/hrefAdminUser.jsp"/>" class="btn btn--without-border">Zarządzanie Użytkownikami</a>
             </li>
             <li>
-                <a href="<jsp:include page="../../links/hrefAdminOrganizations.jsp"/>" class="btn btn--without-border">Zarządzanie Instytucjami</a>
+                <a href="<jsp:include page="../../links/hrefAdminOrganizations.jsp"/>" class="btn btn--without-border active">Zarządzanie Organizacjami</a>
             </li>
         </ul>
     </nav>
@@ -48,7 +47,7 @@
     <div class="container">
         <div class="slogan--item" style="width: 100%">
             <h2>
-                Zarządzanie Administratorami
+                Moje zbiórki
             </h2>
         </div>
         <div class="tab-content">
@@ -56,58 +55,44 @@
 
                 <section class="container">
                     <h3 class="slogan--steps-title">
-                        Formularz edycji administratora
+                        Formularz edycji organizacji
                     </h3>
-                    <form:form method="post" modelAttribute="userToEdit">
-                        <table class="table">
-                            <tr>
-                                <th>
-                                    <div class="form-group">
-                                        <form:input  path="firstName" name="firstName" placeholder="Imie"/><br/>
-                                        <form:errors path="firstName" name="firstName" placeholder="Imię"/>
-                                    </div>
-                                </th>
-                                <th>
-                                    <div class="form-group">
-                                        <form:input path="lastName" name="lastName" placeholder="Nazwisko"/><br/>
-                                        <form:errors path="lastName" name="lastName" placeholder="Nazwisko"/>
-                                    </div>
-                                </th>
-                                <th>
-                                    <div class="form-group">
-                                        <form:input path="email" type="email" name="email" placeholder="E-mail"/><br/>
-                                        ${duplicateEmail}
-                                        <form:errors path="email" type="email" name="email" placeholder="E-mail"/>
-                                    </div>
-                                </th>
-                            </tr>
-                        </table>
-                        <div class="form-group form-group--buttons">
-                            <a href="<jsp:include page="../../links/hrefAdmin.jsp"/>" class="btn btn--small">Anuluj</a>
-                            <button class="btn btn--small" type="submit">Zapisz zmiany</button>
-                        </div>
-                    </form:form>
+                    <%-- Edit collections form here--%>
                 </section>
 
                 <section class="container">
                     <h3 class="slogan--steps-title">
-                        Lista administratorów
+                        Lista moich darów
                     </h3>
                     <table class="table">
                         <tr>
-                            <th>Email</th>
-                            <th>Imię</th>
-                            <th>Nazwisko</th>
+                            <th>Typ</th>
+                            <th>Nazwa</th>
+                            <th>Misja</th>
+                            <th>Miasto</th>
+                            <th>Potrzeby</th>
+                            <th>Grupa docelowa</th>
                             <th>Zarządzaj</th>
                         </tr>
-                        <c:forEach items="${adminList}" var="admin">
+                        <c:forEach items="${giftList}" var="gift">
                             <tr>
-                                <td>${admin.email}</td>
-                                <td>${admin.firstName}</td>
-                                <td>${admin.lastName}</td>
+                                <td>${gift.type.name}</td>
+                                <td>${gift.name}</td>
+                                <td>${gift.mission}</td>
+                                <td>${gift.city.name}</td>
                                 <td>
-                                    <a href="<jsp:include page="../../links/hrefAdminEdit.jsp"/>/${admin.id}" class="btn btn--small">Edytuj</a>
-                                    <a href="<jsp:include page="../../links/hrefAdminDelete.jsp"/>/${admin.id}" class="btn btn--small deleteBtn">Usuń</a>
+                                    <c:forEach items="${gift.need}" var="need">
+                                        <div>${need.name}</div>
+                                    </c:forEach>
+                                </td>
+                                <td>
+                                    <c:forEach items="${gift.target}" var="target">
+                                        <div>${target.name}</div>
+                                    </c:forEach>
+                                </td>
+                                <td>
+                                    <a href="<jsp:include page="../../links/hrefAdminOrganizationEdit.jsp"/>/${gift.id}" class="btn btn--small">Edytuj</a>
+                                    <a href="<jsp:include page="../../links/hrefAdminOrganizationDelete.jsp"/>/${gift.id}" class="btn btn--small deleteBtn">Usuń</a>
                                 </td>
                             </tr>
                         </c:forEach>
@@ -118,7 +103,6 @@
         </div>
     </div>
 </header>
-
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="<c:url value="../../../js/confirm.js"/>" type="text/javascript"></script>
 </body>

@@ -97,6 +97,7 @@
             <!-- STEP 4 -->
             <div data-step="4">
                 <h3>Wybierz organizacje, której chcesz pomóc:</h3>
+                <h4 style="color: #b92c28">${noOrganizationFound}</h4>
 
                 <c:forEach items="${organizationList}" var="organization">
                     <div class="form-group form-group--checkbox">

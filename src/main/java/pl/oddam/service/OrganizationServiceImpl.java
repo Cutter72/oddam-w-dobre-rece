@@ -56,14 +56,14 @@ public class OrganizationServiceImpl implements OrganizationService {
         return finalOrganizationSet;
     }
 
-    <T> boolean isNull(T itemToCheck) {
+    public <T> boolean isNull(T itemToCheck) {
         if (itemToCheck == null) {
             return true;
         }
         return false;
     }
 
-    Set<Organization> returnAllByConditions(boolean cityIsZero, boolean needListIsNull, boolean targetListIsNull,
+    public Set<Organization> returnAllByConditions(boolean cityIsZero, boolean needListIsNull, boolean targetListIsNull,
                                             Iterable<Long> needListIterable, Iterable<Long> targetListIterable, Long cityId) {
 
         Set<Organization> finalOrganizationSet = new HashSet<>();

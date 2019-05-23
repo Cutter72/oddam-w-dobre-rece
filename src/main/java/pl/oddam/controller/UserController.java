@@ -6,16 +6,15 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import pl.oddam.model.*;
 import pl.oddam.model.dto.StepOneToThreeParameters;
-import pl.oddam.repository.CityRepository;
-import pl.oddam.repository.GiftRepository;
-import pl.oddam.repository.OrganizationNeedRepository;
-import pl.oddam.repository.OrganizationTargetRepository;
+import pl.oddam.repository.*;
 import pl.oddam.service.OrganizationServiceImpl;
 
 import javax.servlet.http.HttpSession;
 import java.sql.Date;
 import java.sql.Time;
 import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
 @Controller
 @RequestMapping("/user")
@@ -23,13 +22,15 @@ public class UserController {
     private final OrganizationNeedRepository organizationNeedRepository;
     private final OrganizationTargetRepository organizationTargetRepository;
     private final OrganizationServiceImpl organizationServiceImpl;
+    private final OrganizationRepository organizationRepository;
     private final CityRepository cityRepository;
     private final GiftRepository giftRepository;
 
-    public UserController(OrganizationNeedRepository organizationNeedRepository, OrganizationTargetRepository organizationTargetRepository, OrganizationServiceImpl organizationServiceImpl, CityRepository cityRepository, GiftRepository giftRepository) {
+    public UserController(OrganizationNeedRepository organizationNeedRepository, OrganizationTargetRepository organizationTargetRepository, OrganizationServiceImpl organizationServiceImpl, OrganizationRepository organizationRepository, CityRepository cityRepository, GiftRepository giftRepository) {
         this.organizationNeedRepository = organizationNeedRepository;
         this.organizationTargetRepository = organizationTargetRepository;
         this.organizationServiceImpl = organizationServiceImpl;
+        this.organizationRepository = organizationRepository;
         this.cityRepository = cityRepository;
         this.giftRepository = giftRepository;
     }
@@ -59,7 +60,12 @@ public class UserController {
         if (stepOneToThreeParameters == null) {
             return "redirect:/user";
         }
-        model.addAttribute("organizationList", organizationServiceImpl.findAllByNameCityNeedTarget(stepOneToThreeParameters.getOrganizationName(), stepOneToThreeParameters.getCityId(), stepOneToThreeParameters.getNeedIdTab(), stepOneToThreeParameters.getTargetIdTab()));
+        Set<Organization> organizationList = organizationServiceImpl.findAllByNameCityNeedTarget(stepOneToThreeParameters.getOrganizationName(), stepOneToThreeParameters.getCityId(), stepOneToThreeParameters.getNeedIdTab(), stepOneToThreeParameters.getTargetIdTab());
+        if (organizationList.size() < 1) {
+            organizationList = new HashSet<>(organizationRepository.findAll());
+            model.addAttribute("noOrganizationFound", "Niestety żadna organizacja nie spełnia podanych kryteriów. Oto lista wszystkich organizacji: ");
+        }
+        model.addAttribute("organizationList", organizationList);
         model.addAttribute("bags", stepOneToThreeParameters.getBags());
         model.addAttribute("gift", new Gift());
         model.addAttribute("user", customUser.getUser());

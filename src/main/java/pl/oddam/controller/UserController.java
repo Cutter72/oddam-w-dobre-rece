@@ -68,8 +68,9 @@ public class UserController {
     }
 
     @PostMapping("/form/step2")
-    public String userFormSummary(Gift gift, @RequestParam(required = false) String date, @RequestParam(required = false) String time) {
-
+    public String userFormSummary(Gift gift, @RequestParam(required = false) String date, @RequestParam(required = false) String time, @AuthenticationPrincipal CurrentUser customUser) {
+        User currentUser = customUser.getUser();
+        gift.setUser(currentUser);
         if (date.equalsIgnoreCase("")) {
             //do nothing
         } else {

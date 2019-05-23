@@ -13,7 +13,9 @@ public class Gift {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.DETACH, fetch = FetchType.EAGER)
+    private User user;
+    @ManyToOne(cascade = CascadeType.DETACH, fetch = FetchType.EAGER)
     private Organization organization;
     private Integer bags;
     private String street;

@@ -1,2 +1,2 @@
-- Gift save parameters
+- Gift bags dont save to DB
 - What to do when no organization was found

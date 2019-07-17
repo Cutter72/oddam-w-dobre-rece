@@ -74,12 +74,10 @@ public class UserController {
     }
 
     @PostMapping("/form/step2")
-    public String userFormSummary(Gift gift, @RequestParam(required = false) String date, @RequestParam(required = false) String time, @AuthenticationPrincipal CurrentUser customUser) {
+    public String userFormSummary(Gift gift, @RequestParam(required = false) String date, @RequestParam(required = false) String time, @AuthenticationPrincipal CurrentUser customUser, HttpSession sess) {
         User currentUser = customUser.getUser();
         gift.setUser(currentUser);
-        if (date.equalsIgnoreCase("")) {
-            //do nothing
-        } else {
+        if (!date.equalsIgnoreCase("")) {
             String[] dateInts = date.split("-");
             int year = Integer.parseInt(dateInts[0]);
             int month = Integer.parseInt(dateInts[1]);
@@ -87,14 +85,13 @@ public class UserController {
             gift.setPreferredDateOfCollection(new Date(year-1900, month-1,day+1));
         }
 
-        if (time.equalsIgnoreCase("")) {
-            //do nothing
-        } else {
+        if (!time.equalsIgnoreCase("")) {
             String[] timeInts = time.split(":");
             int hh = Integer.parseInt(timeInts[0]);
             int mm = Integer.parseInt(timeInts[1]);
             gift.setPreferredTimeOfCollection(new Time(hh + 1, mm, 0)); //why adding or substracting for database proper values?
         }
+        gift.setBags(((StepOneToThreeParameters)sess.getAttribute("stepOneToThreeParameters")).getBags());
 
         giftRepository.save(gift);
         return "redirect:/user/form/success#Form";

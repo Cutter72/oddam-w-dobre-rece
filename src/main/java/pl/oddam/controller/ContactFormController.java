@@ -1,7 +1,6 @@
 package pl.oddam.controller;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import pl.oddam.service.EmailServiceImpl;
 
@@ -14,17 +13,10 @@ public class ContactFormController {
         this.emailService = emailService;
     }
 
-    @GetMapping("/send")
-    public String send() {
-        emailService.sendSimpleMessage("cutter72@o2.pl","TESTTESTTEST","TESTTESTTEST");
-//        emailService.sendSimpleMessage("oddam.w.dobre.rece@o2.pl","TESTTESTTEST","TESTTESTTEST ąęółźżćń");
-        return "sendSuccess";
-    }
-
     @PostMapping("/send")
-    public String send(Model model) {
-//        emailService.sendSimpleMessage("cutter72@o2.pl","TESTTESTTEST","TESTTESTTEST ąęółźżćń");
-//        emailService.sendSimpleMessage("oddam.w.dobre.rece@o2.pl","TESTTESTTEST","TESTTESTTEST ąęółźżćń");
+    public String send(@RequestParam String name, @RequestParam String email, @RequestParam String text) {
+        emailService.sendSimpleMessage("oddam.w.dobre.rece@interia.pl", "oddam.w.dobre.rece@interia.pl", "Kontakt poprzez formularz od " + name, name + " " + email + " napisał/a\n\n\"" + text + "\"");
+        emailService.sendSimpleMessage("oddam.w.dobre.rece@interia.pl", email, "Dziękujęmy " + name + " za kontakt.", "Twoja widomosć jaką otrzymaliśmy to: \n\n\"" + text + "\"\n\n Odpowiemy tak szybko jak to możliwe.\nZ poważaniem zespół Oddam w dobre ręce :)");
         return "sendSuccess";
     }
 }

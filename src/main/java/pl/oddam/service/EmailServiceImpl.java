@@ -13,11 +13,11 @@ public class EmailServiceImpl {
         this.emailSender = emailSender;
     }
 
-    public void sendSimpleMessage(String to, String subject, String text) {
+    public void sendSimpleMessage(String from, String to, String subject, String text) {
         try {
             SimpleMailMessage emailToSend = new SimpleMailMessage();
             emailToSend.setTo(to);
-            emailToSend.setFrom("oddam.w.dobre.rece@interia.pl");
+            emailToSend.setFrom(from);
             emailToSend.setSubject(subject);
             emailToSend.setText(text);
             emailSender.send(emailToSend);

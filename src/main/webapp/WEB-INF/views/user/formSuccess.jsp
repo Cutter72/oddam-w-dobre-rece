@@ -87,7 +87,7 @@
                     Dziękujemy za przesłanie formularza. Na maila prześlemy wszelkie
                     informacje o odbiorze.
                 </h2>
-                <label>Przekierowanie na stronę główną użytkownika za: <label id="timer">5</label> s</div>
+                <label>Przekierowanie na stronę główną użytkownika za: <label id="timer">5</label> s</label></div>
             </div>
     </div>
 </section>

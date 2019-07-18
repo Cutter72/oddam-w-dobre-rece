@@ -26,8 +26,9 @@ public class ContactFormController {
         return "redirect:/contact/sent";
     }
 
-    @GetMapping("/sent")
+    @PostMapping("/sent")
     public String sent() {
+
         return "sent";
     }
 }

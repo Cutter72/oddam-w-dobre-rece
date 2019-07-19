@@ -16,6 +16,7 @@
 <jsp:include page="../components/header.jsp"/>
 
 <section class="login-page">
+    <h3 style="color: #5cb85c;">${registerSuccess}</h3>
     <h2>Zaloguj się</h2>
     <form method="post">
         <div class="form-group">

@@ -80,8 +80,8 @@
                                 <td>${gift.timeCollected}</td>
                                 <td>${gift.collected}</td>
                                 <td>
-                                    <a href="<jsp:include page="../../links/hrefAdminOrganizationEdit.jsp"/>/${gift.id}" class="btn btn--small">Edytuj</a>
-                                    <a href="<jsp:include page="../../links/hrefAdminOrganizationDelete.jsp"/>/${gift.id}" class="btn btn--small deleteBtn">Usuń</a>
+                                    <a href="<jsp:include page="../../links/hrefAdminGiftEdit.jsp"/>/${gift.id}" class="btn btn--small">Edytuj</a>
+                                    <a href="<jsp:include page="../../links/hrefAdminGiftDelete.jsp"/>/${gift.id}" class="btn btn--small deleteBtn">Usuń</a>
                                 </td>
                             </tr>
                         </c:forEach>

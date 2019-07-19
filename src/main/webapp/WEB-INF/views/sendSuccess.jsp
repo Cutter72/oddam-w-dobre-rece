@@ -54,8 +54,8 @@
             <div class="form--steps-counter"></div>
             <div data-step="7" class="active">
                 <h2>
-                    Dziękujemy za przesłanie formularza. Postaramy się jak najszybciej odpowiedzieć na podany adres
-                    e-mail.
+                    Dziękujemy za przesłanie formularza.
+                    <br/>Postaramy się jak najszybciej odpowiedzieć na podany adres e-mail.
                 </h2>
                 <label>Przekierowanie na stronę główną użytkownika za: <label id="timer">5</label> s</label></div>
         </div>

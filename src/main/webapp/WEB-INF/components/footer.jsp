@@ -10,7 +10,7 @@
         <form class="form--contact" method="post" action="/contact/send">
             <div class="form-group form-group--50"><input type="text" name="name" placeholder="Imię i Nazwisko" required/></div>
             <div class="form-group form-group--50"><input type="text" name="email" placeholder="E-mail" required/></div>
-            <div class="form-group"><textarea name="text" placeholder="Wiadomość" rows="1" required></textarea></div>
+            <div class="form-group"><textarea name="text" placeholder="Wiadomość" rows="5" required></textarea></div>
             <div class="g-recaptcha form-group" data-sitekey="6LeWZa4UAAAAAB6oRn5dNo86whatF2wBqS9nuOmo"></div>
             <br/>
             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>

@@ -54,7 +54,8 @@
             <div class="form--steps-counter"></div>
             <div data-step="7" class="active">
                 <h2>
-                    JESTEŚ ROBOTEM. WIADOMOŚĆ NIE ZOSTAŁA WYSŁANA.
+                    Nie zaznaczono reCAPTCHA lub jesteś robotem.
+                    <br/>WIADOMOŚĆ NIE ZOSTAŁA WYSŁANA. SPRÓBUJ PONOWNIE.
                 </h2>
                 <label>Przekierowanie na stronę główną użytkownika za: <label id="timer">5</label> s</label></div>
         </div>

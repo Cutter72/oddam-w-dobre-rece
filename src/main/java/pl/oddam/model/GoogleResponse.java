@@ -6,7 +6,10 @@ import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
 import java.util.Map;
-
+/*
+Class copied from:
+https://www.baeldung.com/spring-security-registration-captcha
+ */
 @Component
 @Data
 @JsonInclude(JsonInclude.Include.NON_NULL)
@@ -31,38 +34,17 @@ public class GoogleResponse {
     @JsonProperty("error-codes")
     private ErrorCode[] errorCodes;
 
-    @JsonIgnore
-    public boolean hasClientError() {
-        ErrorCode[] errors = getErrorCodes();
-        if(errors == null) {
-            return false;
-        }
-        for(ErrorCode error : errors) {
-            switch(error) {
-                case InvalidResponse:
-                case MissingResponse:
-                    return true;
-            }
-        }
-        return false;
-    }
-
-    static enum ErrorCode {
+    enum ErrorCode {
         MissingSecret,     InvalidSecret,
         MissingResponse,   InvalidResponse;
 
-        private static Map<String, ErrorCode> errorsMap = new HashMap<String, ErrorCode>(4);
+        private static Map<String, ErrorCode> errorsMap = new HashMap<>(4);
 
         static {
             errorsMap.put("missing-input-secret",   MissingSecret);
             errorsMap.put("invalid-input-secret",   InvalidSecret);
             errorsMap.put("missing-input-response", MissingResponse);
             errorsMap.put("invalid-input-response", InvalidResponse);
-        }
-
-        @JsonCreator
-        public static ErrorCode forValue(String value) {
-            return errorsMap.get(value.toLowerCase());
         }
     }
 }

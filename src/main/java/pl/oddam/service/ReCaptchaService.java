@@ -1,6 +1,9 @@
 package pl.oddam.service;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.apache.commons.io.IOUtils;
 import org.springframework.stereotype.Service;
+import pl.oddam.model.GoogleResponse;
 import pl.oddam.model.ReCaptchaKeys;
 
 import java.io.*;
@@ -29,21 +32,11 @@ public class ReCaptchaService {
         outStream.writeBytes(parameters);
         outStream.flush();
         outStream.close();
-
-
-        BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-        String inputLine;
-        StringBuffer response = new StringBuffer();
-
-        while ((inputLine = in.readLine()) != null) {
-            response.append(inputLine);
-        }
-        in.close();
-
-        // print result
-        System.out.println(response.toString());
+        //read response from google with Commmons IO
+        String strGoogleResponse = IOUtils.toString(new InputStreamReader(conn.getInputStream()));
         //parse JSON response and return 'success' value
-
-        return false;
+        ObjectMapper mapper = new ObjectMapper();
+        GoogleResponse googleResponse = mapper.readValue(strGoogleResponse, GoogleResponse.class);
+        return googleResponse.isSuccess();
     }
 }

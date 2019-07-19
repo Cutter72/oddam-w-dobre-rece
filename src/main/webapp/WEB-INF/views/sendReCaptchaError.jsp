@@ -63,6 +63,6 @@
     </section>
 </header>
 
-<script src="/js/timeRedirect.js"></script>
+<script src="/js/timeRedirectHome.js"></script>
 </body>
 </html>

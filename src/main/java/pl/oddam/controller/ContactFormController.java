@@ -20,7 +20,6 @@ public class ContactFormController {
 
     @PostMapping("/send")
     public String send(@RequestParam("g-recaptcha-response") String recaptchaResponse, @RequestParam String name, @RequestParam String email, @RequestParam String text) throws IOException {
-        System.out.println(recaptchaResponse);
         if (reCaptchaService.processResponse(recaptchaResponse)) {
             emailService.sendSimpleMessage("oddam.w.dobre.rece@interia.pl", "oddam.w.dobre.rece@interia.pl", "Kontakt poprzez formularz od " + name, name + " " + email + " napisał/a\n\n\"" + text + "\"");
             emailService.sendSimpleMessage("oddam.w.dobre.rece@interia.pl", email, "Dziękujęmy " + name + " za kontakt.", "Twoja widomosć jaką otrzymaliśmy to: \n\n\"" + text + "\"\n\n Odpowiemy tak szybko jak to możliwe.\nZ poważaniem,\nzespół Oddam w dobre ręce :)");

@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import pl.oddam.model.ReCaptchaKeys;
 import pl.oddam.model.User;
 import pl.oddam.service.ReCaptchaService;
 import pl.oddam.service.UserServiceImpl;
@@ -21,15 +22,18 @@ import java.io.IOException;
 public class RegisterController {
     private final UserServiceImpl userServiceImpl;
     private final ReCaptchaService reCaptchaService;
+    private final ReCaptchaKeys reCaptchaKeys;
 
-    public RegisterController(UserServiceImpl userServiceImpl, ReCaptchaService reCaptchaService) {
+    public RegisterController(UserServiceImpl userServiceImpl, ReCaptchaService reCaptchaService, ReCaptchaKeys reCaptchaKeys) {
         this.userServiceImpl = userServiceImpl;
         this.reCaptchaService = reCaptchaService;
+        this.reCaptchaKeys = reCaptchaKeys;
     }
 
     @GetMapping("")
     public String registerForm(Model model) {
         model.addAttribute("user", new User());
+        model.addAttribute("reCaptchaKey", reCaptchaKeys.getSiteKey());
         return "register";
     }
 

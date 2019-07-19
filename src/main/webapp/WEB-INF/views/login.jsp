@@ -18,7 +18,7 @@
 <section class="login-page">
     <h3 style="color: #5cb85c;">${registerSuccess}</h3>
     <h2>Zaloguj się</h2>
-    <form method="post">
+    <form action="/login" method="post">
         <div class="form-group">
             <input name="username" placeholder="Email" type="email"/>
         </div>

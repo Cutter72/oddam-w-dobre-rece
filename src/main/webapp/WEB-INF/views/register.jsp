@@ -40,7 +40,7 @@
             <%--<input type="password" name="password2" placeholder="Powtórz hasło" />--%>
         <%--</div>--%>
         <h3 style="color: #b92c28;">${captchaNotChecked}</h3>
-        <div class="g-recaptcha form-group" data-sitekey="6LeWZa4UAAAAAB6oRn5dNo86whatF2wBqS9nuOmo"></div>
+        <div class="g-recaptcha form-group" data-sitekey="${reCaptchaKey}"></div>
         <div class="form-group form-group--buttons">
             <a href="<jsp:include page="../links/hrefLogin.jsp"/>" class="btn btn--without-border">Zaloguj się</a>
             <button class="btn" type="submit">Załóż konto</button>

@@ -10,5 +10,6 @@ everyone can give away unnecessary things to trusted institutions.
 * Spring Security
 * Hibernate
 
-Online adress:
+Online adress*:
 https://hidden-reef-52319.herokuapp.com/
+*Please be patient, server usually sleep so sometimes need to wait a few seconds (max 30) to load the page.

@@ -9,6 +9,7 @@ everyone can give away unnecessary things to trusted institutions.
 * Spring Form
 * Spring Security
 * Hibernate
+* Google reCaptcha v2
 
 Online adress*: <br>
 https://hidden-reef-52319.herokuapp.com/ <br>

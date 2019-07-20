@@ -18,7 +18,7 @@
         </form>
     </div>
     <div class="bottom-line">
-        <span class="bottom-line--copy">Copyright &copy; 2018</span>
+        <a href="https://github.com/Cutter72" target="_blank"><span class="bottom-line--copy">Copyright &copy; 2019, Paweł Drelich</span></a>
         <div class="bottom-line--icons">
             <a href="#" class="btn btn--small"><img src="<c:url value="../../images/icon-facebook.svg"/>"/></a> <a href="#" class="btn btn--small"><img src="<c:url value="../../images/icon-instagram.svg"/>"/></a>
         </div>

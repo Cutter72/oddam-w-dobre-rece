@@ -2,7 +2,7 @@ package pl.oddam.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import pl.oddam.service.EmailServiceImpl;
+import pl.oddam.service.EmailService;
 import pl.oddam.service.ReCaptchaService;
 
 import java.io.IOException;
@@ -10,10 +10,10 @@ import java.io.IOException;
 @Controller
 @RequestMapping("/contact")
 public class ContactFormController {
-    private final EmailServiceImpl emailService;
+    private final EmailService emailService;
     private final ReCaptchaService reCaptchaService;
 
-    public ContactFormController(EmailServiceImpl emailService, ReCaptchaService reCaptchaService) {
+    public ContactFormController(EmailService emailService, ReCaptchaService reCaptchaService) {
         this.emailService = emailService;
         this.reCaptchaService = reCaptchaService;
     }

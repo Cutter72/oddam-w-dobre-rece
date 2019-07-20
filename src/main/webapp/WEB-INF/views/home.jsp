@@ -33,12 +33,12 @@
         <div class="slogan--item">
             <h1>
                 Zacznij pomagać!<br />
-                Oddaj niechciane rzeczy w zaufane ręce
+                Oddaj niechciane rzeczy w zaufane ręce*
             </h1>
 
             <ul class="slogan--buttons">
-                <li><a href="#" class="btn btn--large">Oddaj rzeczy</a></li>
-                <li><a href="#" class="btn btn--large">Zorganizuj zbiórkę</a></li>
+                <li><a href="/user" class="btn btn--large">Oddaj rzeczy</a></li>
+                <li><a href="/user" class="btn btn--large">Zorganizuj zbiórkę</a></li>
             </ul>
         </div>
     </div>

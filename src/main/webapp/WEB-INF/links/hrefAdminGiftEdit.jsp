@@ -1,1 +1,1 @@
-/admin/delete
+/admin/gift/edit

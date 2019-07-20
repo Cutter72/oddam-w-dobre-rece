@@ -1,4 +1,3 @@
-- add reCaptcha to registration form
 - registration form validation -> email and password retype
 - contact form email validation
 - check user enabled status (disabled = banned)

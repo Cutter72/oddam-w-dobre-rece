@@ -8,10 +8,11 @@
         <h3>Formularz kontaktowy</h3>
         <script src="https://www.google.com/recaptcha/api.js" async defer></script>
         <form class="form--contact" method="post" action="/contact/send">
-            <div class="form-group form-group--50"><input type="text" name="name" placeholder="Imię i Nazwisko"
+            <div class="form-group form-group--50"><input type="text" name="name" placeholder="Imię i Nazwisko" maxlength="31" value="${name}"
                                                           required/></div>
-            <div class="form-group form-group--50"><input type="text" name="email" placeholder="E-mail" required/></div>
-            <div class="form-group"><textarea name="text" placeholder="Wiadomość" rows="5" required></textarea></div>
+            <div class="form-group form-group--50"><input type="text" name="email" placeholder="E-mail" maxlength="31" value="${email}" required/></div>
+            <div class="form-group"><textarea name="text" placeholder="Wiadomość" rows="5" maxlength="255" required>${text}</textarea></div>
+            <h3 style="color: #b92c28;">${captchaNotChecked}</h3>
             <div class="g-recaptcha form-group" data-sitekey="6LeWZa4UAAAAAB6oRn5dNo86whatF2wBqS9nuOmo"></div>
             <br/>
             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>

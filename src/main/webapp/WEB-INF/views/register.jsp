@@ -21,20 +21,20 @@
     <form:form method="post" modelAttribute="user">
         <div class="form-group">
             <h3 style="color: #b92c28;"><form:errors path="firstName" name="firstName" placeholder="Imię" /></h3>
-            <form:input path="firstName" name="firstName" placeholder="Imie" />
+            <form:input path="firstName" name="firstName" placeholder="Imie" maxlength="15" />
         </div>
         <div class="form-group">
             <h3 style="color: #b92c28;"><form:errors path="lastName" name="lastName" placeholder="Nazwisko" /></h3>
-            <form:input path="lastName" name="lastName" placeholder="Nazwisko" />
+            <form:input path="lastName" name="lastName" placeholder="Nazwisko" maxlength="15"/>
         </div>
         <h3 style="color: #b92c28;">${duplicateEmail}</h3>
         <div class="form-group">
             <h3 style="color: #b92c28;"><form:errors path="email" type="email" name="email" placeholder="E-mail" /></h3>
-            <form:input path="email" type="email" name="email" placeholder="E-mail" />
+            <form:input path="email" type="email" name="email" placeholder="E-mail" maxlength="31"/>
         </div>
         <div class="form-group">
             <h3 style="color: #b92c28;"><form:errors path="password" type="password" name="password" placeholder="Hasło" /></h3>
-            <form:input path="password" type="password" name="password" placeholder="Hasło" />
+            <form:input path="password" type="password" name="password" placeholder="Hasło" maxlength="255"/>
         </div>
         <%--<div class="form-group">--%>
             <%--<input type="password" name="password2" placeholder="Powtórz hasło" />--%>

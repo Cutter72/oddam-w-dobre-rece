@@ -16,16 +16,17 @@
 <jsp:include page="../components/header.jsp"/>
 
 <section class="login-page">
-    <h3 style="color: #5cb85c;">${registerSuccess}</h3>
     <h2>Zaloguj się</h2>
+    <h3 style="color: #b92c28;">${errorLogin}</h3>
+    <h3 style="color: #5cb85c;">${registerSuccess}</h3>
     <form action="/login" method="post">
         <div class="form-group">
             <label>E-mail:</label><br/>
-            <input name="username" placeholder="Email" type="email"/>
+            <input name="username" placeholder="Email" type="email" required />
         </div>
         <div class="form-group">
             <label>Hasło:</label><br/>
-            <input type="password" name="password" placeholder="Hasło" autocomplete="current-password"/>
+            <input type="password" name="password" placeholder="Hasło" autocomplete="current-password" required />
             <a href="#" class="btn btn--small btn--without-border reset-password">Przypomnij hasło</a>
         </div>
 

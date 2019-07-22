@@ -9,8 +9,10 @@ document.addEventListener("DOMContentLoaded", function () {
     function passCheck() {
         if (pass1.value === pass2.value && pass1.value !== "") {
             submitBtn.disabled = false;
+            pass2.nextElementSibling.innerHTML = "<img width= \"15px\" src=\"https://upload.wikimedia.org/wikipedia/commons/8/80/Symbol_OK.svg\"/>";
         } else {
             submitBtn.disabled = true;
+            pass2.nextElementSibling.innerHTML = "❌";
         }
     }
 

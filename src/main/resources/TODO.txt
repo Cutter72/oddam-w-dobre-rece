@@ -1,4 +1,2 @@
-- registration form validation -> email and password retype
-- contact form email validation
 - check user enabled status (disabled = banned)
 - admin panel show Gifts

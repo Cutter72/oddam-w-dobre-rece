@@ -46,6 +46,7 @@ public class RegisterController {
     public String register(@RequestParam("g-recaptcha-response") String recaptchaResponse, @Valid User user, BindingResult result, Model model) throws IOException {
         if (reCaptchaService.processResponse(recaptchaResponse)) {
             if (result.hasErrors()) {
+                model.addAttribute("reCaptchaKey", reCaptchaKeys.getSiteKey());
                 return "register";
             }
             String existingEmail = null;
@@ -56,6 +57,7 @@ public class RegisterController {
             } finally {
                 if (existingEmail != null) {
                     model.addAttribute("duplicateEmail", "Email " + existingEmail + " jest już zajęty!");
+                    model.addAttribute("reCaptchaKey", reCaptchaKeys.getSiteKey());
                     return "register";
                 }
             }
@@ -63,6 +65,7 @@ public class RegisterController {
             return "login";
         } else {
             model.addAttribute("captchaNotChecked","Proszę zaznaczyć że nie jesteś robotem!");
+            model.addAttribute("reCaptchaKey", reCaptchaKeys.getSiteKey());
             return "register";
         }
     }

@@ -18,6 +18,7 @@
 
 <section class="login-page">
     <h2>Załóż konto</h2>
+    <h3 style="color: #b92c28;">${duplicateEmail}</h3>
     <form:form method="post" modelAttribute="user">
         <div class="form-group form-group--50">
             <h3 style="color: #b92c28;"><form:errors path="firstName" name="firstName" placeholder="Imię" /></h3>
@@ -32,7 +33,6 @@
 
         <div class="form-group">
             <h3 style="color: #b92c28;"><form:errors path="email" type="email" name="email" placeholder="E-mail" /></h3>
-            <h3 style="color: #b92c28;">${duplicateEmail}</h3>
             <label>E-mail:</label><br/>
             <form:input path="email" type="email" name="email" placeholder="E-mail" maxlength="31" required="required" />
         </div>

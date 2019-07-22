@@ -23,7 +23,7 @@
             <input name="username" placeholder="Email" type="email"/>
         </div>
         <div class="form-group">
-            <input type="password" name="password" placeholder="Hasło" />
+            <input type="password" name="password" placeholder="Hasło" autocomplete="current-password"/>
             <a href="#" class="btn btn--small btn--without-border reset-password">Przypomnij hasło</a>
         </div>
 

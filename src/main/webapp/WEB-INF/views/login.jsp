@@ -20,9 +20,11 @@
     <h2>Zaloguj się</h2>
     <form action="/login" method="post">
         <div class="form-group">
+            <label>E-mail:</label><br/>
             <input name="username" placeholder="Email" type="email"/>
         </div>
         <div class="form-group">
+            <label>Hasło:</label><br/>
             <input type="password" name="password" placeholder="Hasło" autocomplete="current-password"/>
             <a href="#" class="btn btn--small btn--without-border reset-password">Przypomnij hasło</a>
         </div>

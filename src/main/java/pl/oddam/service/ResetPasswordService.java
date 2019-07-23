@@ -30,7 +30,7 @@ public class ResetPasswordService {
     public void sendToken(String email) throws MessagingException {
         String token = passwordEncoder.encode(LocalDateTime.now().toString());
         String processedToken = token.replaceAll("[/?&=]", "");
-        String text = "Kliknij w link aby zresetowac swoje hasło: <a href=\""+domainSettings.getAddress()+"token/" + processedToken + "\">link</a>";
+        String text = "Kliknij w link aby zresetowac swoje hasło: <a href=\""+domainSettings.getAddress()+"token/" + processedToken + "\">link</a><br/>UWAGA! Ważność linku to 30 minut!";
         emailService.sendMimeMessage("oddam.w.dobre.rece@interia.pl", email, "Reset hasła w portalu Oddam w dobre ręce", text);
         ResetPassword resetPassword = new ResetPassword();
         resetPassword.setEmail(email);

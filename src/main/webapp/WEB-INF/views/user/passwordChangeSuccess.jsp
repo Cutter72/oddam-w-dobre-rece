@@ -49,15 +49,13 @@
         </ul>
     </nav>
     <section class="form--steps">
-
-        <div class="form--steps-container">
-            <div class="form--steps-counter"></div>
+        <div class="form--steps-counter">
             <div data-step="7" class="active">
                 <h2>
                     Hasło zostało zmienione.
                 </h2>
-                <label>Przekierowanie na stronę główną użytkownika za: <label id="timer">5</label> s</label></div>
-        </div>
+                <label>Przekierowanie na stronę główną użytkownika za: <label id="timer">5</label> s</label>
+            </div>
         </div>
     </section>
 </header>

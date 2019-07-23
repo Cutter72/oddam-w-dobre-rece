@@ -11,4 +11,9 @@ public class HomeController {
     public String home() {
         return "home";
     }
+
+    @GetMapping("/test")
+    public String testingViews() {
+        return "sendSuccess";
+    }
 }

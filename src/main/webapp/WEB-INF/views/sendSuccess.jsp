@@ -15,24 +15,6 @@
 <body>
 <header class="header--form-page">
     <nav class="container container--70">
-        <ul class="nav--actions">
-            <li class="logged-user">
-                Witaj ${user.firstName}
-                <ul class="dropdown">
-                    <li><a href="<jsp:include page="../links/hrefUserProfile.jsp"/>">Profil</a></li>
-                    <li><a href="<jsp:include page="../links/hrefUserSettings.jsp"/>">Ustawienia</a></li>
-                    <li><a href="<jsp:include page="../links/hrefUserGifts.jsp"/>">Moje dary</a></li>
-                    <li><a href="<jsp:include page="../links/hrefUserCollections.jsp"/>">Moje zbiórki</a></li>
-                    <li>
-                        <form action="/logout" method="post">
-                            <input class="btn--small" type="submit" value="Wyloguj">
-                            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-                        </form>
-                    </li>
-                </ul>
-            </li>
-        </ul>
-
         <ul>
             <li><a href="/" class="btn btn--without-border active">Start</a></li>
             <li><a href="<jsp:include page="../links/hrefWhat.jsp"/>" class="btn btn--without-border">O co
@@ -48,17 +30,13 @@
             </li>
         </ul>
     </nav>
-    <section class="form--steps">
-
-        <div class="form--steps-container">
-            <div class="form--steps-counter"></div>
-            <div data-step="7" class="active">
-                <h2>
-                    Dziękujemy za przesłanie formularza.
-                    <br/>Postaramy się jak najszybciej odpowiedzieć na podany adres e-mail.
-                </h2>
-                <label>Przekierowanie na stronę główną użytkownika za: <label id="timer">5</label> s</label></div>
-        </div>
+    <section class="login-page">
+        <div>
+            <h2>
+                Dziękujemy za przesłanie formularza.
+                <br/>Postaramy się jak najszybciej odpowiedzieć na podany adres e-mail.
+            </h2>
+            <h3>Przekierowanie na stronę główną użytkownika za: <span id="timer">5</span> s</h3>
         </div>
     </section>
 </header>

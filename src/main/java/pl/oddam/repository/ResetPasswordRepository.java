@@ -6,5 +6,6 @@ import pl.oddam.model.ResetPassword;
 
 @Repository
 public interface ResetPasswordRepository extends JpaRepository<ResetPassword, Long> {
+    ResetPassword findByToken(String token);
 
 }

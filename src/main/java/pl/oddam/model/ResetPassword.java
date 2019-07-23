@@ -21,7 +21,5 @@ public class ResetPassword {
     @NotEmpty
     private String token;
     @NotEmpty
-    private Timestamp resetStartTime;
-    @NotEmpty
-    private Timestamp resetEndTime;
+    private Long resetStartTime;
 }

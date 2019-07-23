@@ -29,4 +29,9 @@ public class ResetPasswordService {
         String text = "Kliknij w link aby zresetowac swoje hasło: <a href=\"http://localhost:8080/"+processedToken+"\">link</a>";
         emailService.sendMimeMessage("oddam.w.dobre.rece@interia.pl",email,"Reset hasła w portalu Oddam w dobre ręce",text);
     }
+
+    public boolean checkValidity() {
+
+        return false;
+    }
 }

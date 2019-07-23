@@ -27,7 +27,7 @@
         <div class="form-group">
             <label>Hasło:</label><br/>
             <input type="password" name="password" placeholder="Hasło" autocomplete="current-password" required />
-            <a href="#" class="btn btn--small btn--without-border reset-password">Przypomnij hasło</a>
+            <a href="/password/reset" class="btn btn--small btn--without-border reset-password">Zapomniałem hasła</a>
         </div>
 
         <div class="form-group form-group--buttons">

@@ -54,7 +54,7 @@
             </h2>
             <div class="btn btn--without-border" ><a href="<jsp:include page="../../links/hrefEditPersonalData.jsp"/>">Zmień dane osobowe</a></div>
             <br/>
-            <div class="btn btn--without-border"><a href="<jsp:include page="../../links/hrefEditPassword.jsp"/>">Zmień hasło</a></div>
+            <div class="btn btn--without-border"><a href="<jsp:include page="../../links/hrefPasswordChange.jsp"/>">Zmień hasło</a></div>
         </div>
     </div>
 </header>

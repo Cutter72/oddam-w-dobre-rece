@@ -54,8 +54,9 @@
             </h2>
             <div class="slogan--steps-title">Imię: <b>${user.firstName}</b></div>
             <div class="slogan--steps-title">Nazwisko: <b>${user.lastName}</b></div>
-            <div class="btn btn--without-border"><a href="<jsp:include page="../../links/hrefEditPersonalData.jsp"/>">Edytuj dane osobowe</a></div>
             <div class="slogan--steps-title">E-mail: <b>${user.email}</b></div>
+            <div class="btn btn--without-border"><a href="<jsp:include page="../../links/hrefEditPersonalData.jsp"/>">Edytuj dane osobowe</a></div><br/>
+            <div class="btn btn--without-border"><a href="<jsp:include page="../../links/hrefPasswordChange.jsp"/>">Zmień hasło</a></div>
         </div>
     </div>
 </header>

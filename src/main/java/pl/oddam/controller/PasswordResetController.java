@@ -2,18 +2,17 @@ package pl.oddam.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import pl.oddam.model.ReCaptchaKeys;
-import pl.oddam.model.User;
+import pl.oddam.service.EmailService;
 import pl.oddam.service.ReCaptchaService;
 import pl.oddam.service.UserServiceImpl;
 
+import javax.mail.MessagingException;
 import javax.transaction.Transactional;
-import javax.validation.Valid;
 import java.io.IOException;
 
 @Controller
@@ -23,44 +22,38 @@ public class PasswordResetController {
     private final UserServiceImpl userServiceImpl;
     private final ReCaptchaService reCaptchaService;
     private final ReCaptchaKeys reCaptchaKeys;
+    private final EmailService emailService;
 
-    public PasswordResetController(UserServiceImpl userServiceImpl, ReCaptchaService reCaptchaService, ReCaptchaKeys reCaptchaKeys) {
+    public PasswordResetController(UserServiceImpl userServiceImpl, ReCaptchaService reCaptchaService, ReCaptchaKeys reCaptchaKeys, EmailService emailService) {
         this.userServiceImpl = userServiceImpl;
         this.reCaptchaService = reCaptchaService;
         this.reCaptchaKeys = reCaptchaKeys;
+        this.emailService = emailService;
     }
 
     @GetMapping("")
-    public String changePasswordForm(Model model) {
-        model.addAttribute("user", new User());
+    public String resetPasswordForm(Model model) {
         model.addAttribute("reCaptchaKey", reCaptchaKeys.getSiteKey());
         return "resetPassword";
     }
 
     @PostMapping("")
-    public String register(@RequestParam("g-recaptcha-response") String recaptchaResponse, @Valid User user, BindingResult result, Model model) throws IOException {
+    public String resetPasswordPost(@RequestParam("g-recaptcha-response") String recaptchaResponse, @RequestParam String email, Model model) throws IOException, MessagingException {
         if (reCaptchaService.processResponse(recaptchaResponse)) {
-            if (result.hasErrors()) {
-                model.addAttribute("reCaptchaKey", reCaptchaKeys.getSiteKey());
-                return "register";
-            }
             String existingEmail = null;
             try {
-                existingEmail = userServiceImpl.findByEmail(user.getEmail()).getEmail();
+                existingEmail = userServiceImpl.findByEmail(email).getEmail();
+                emailService.sendMimeMessage("oddam.w.dobre.rece@interia.pl",email,"Reset hasła w portalu Oddam w dobre ręce","Kliknij w link aby zresetowac swoje hasło:<br/> link");
+                return "resetPasswordSuccess";
             } catch (NullPointerException e) {
-                userServiceImpl.saveUser(user);
-            } finally {
-                if (existingEmail != null) {
-                    model.addAttribute("duplicateEmail", "Email " + existingEmail + " jest już zajęty!");
-                    model.addAttribute("reCaptchaKey", reCaptchaKeys.getSiteKey());
-                    return "register";
-                }
+                model.addAttribute("noSuchEmail", "Nie posiadamy takiego ("+email+") adresu e-mail w naszej bazie!");
+                model.addAttribute("reCaptchaKey", reCaptchaKeys.getSiteKey());
+                return "resetPassword";
             }
-            model.addAttribute("registerSuccess","Konto pomyślnie zarejestrowane! Możesz się teraz zalogować.");
-            return "login";
         } else {
             model.addAttribute("captchaNotChecked","Proszę zaznaczyć że nie jesteś robotem!");
             model.addAttribute("reCaptchaKey", reCaptchaKeys.getSiteKey());
+            model.addAttribute("email", email);
             return "register";
         }
     }

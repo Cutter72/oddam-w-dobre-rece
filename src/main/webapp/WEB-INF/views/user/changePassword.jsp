@@ -55,7 +55,7 @@
 <section class="login-page">
     <h2>Zmień hasło</h2>
     <h3 style="color: #b92c28;">${wrongPassword}</h3>
-    <form method="post" action="/password/change">
+    <form method="post" action="<jsp:include page="../../links/hrefUserPasswordChange.jsp"/>">
         <div class="form-group">
             <label>Stare hasło:</label><br/>
             <input type="password" name="oldPassword" placeholder="Stare hasło" id="oldPassword" autocomplete="current-password" required maxlength="255"/>
@@ -74,6 +74,7 @@
         <div class="form-group form-group--buttons">
             <a href="<jsp:include page="../../links/hrefUserProfile.jsp"/>" class="btn btn--without-border">Anuluj</a>
             <button class="btn" type="submit" id="registrationSubmit" disabled>Zmień hasło</button>
+            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
         </div>
     </form>
 </section>

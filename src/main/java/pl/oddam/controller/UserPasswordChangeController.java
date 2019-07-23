@@ -57,11 +57,11 @@ public class UserPasswordChangeController {
         return "redirect:/password/change";
     }
 
-    @PostMapping("")
+    @PostMapping("/change")
     public String register(@RequestParam("g-recaptcha-response") String recaptchaResponse, @AuthenticationPrincipal CurrentUser customUser, Model model, @RequestParam String oldPassword, @RequestParam String password1) throws IOException {
         if (reCaptchaService.processResponse(recaptchaResponse)) {
             User user = customUser.getUser();
-            if (passwordEncoder.encode(oldPassword).equals(user.getPassword())) {
+            if (passwordEncoder.matches(oldPassword, user.getPassword())) {
                 user.setPassword(passwordEncoder.encode(password1));
                 userRepository.save(user);
                 return "user/passwordChangeSuccess";

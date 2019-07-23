@@ -35,7 +35,7 @@
             Dziękujemy za przesłanie formularza.
             <br/>Postaramy się jak najszybciej odpowiedzieć na podany adres e-mail.
         </h2>
-        <h1>Przekierowanie na stronę główną użytkownika za: <span id="timer">5</span> s</h1>
+        <h1>Przekierowanie na stronę główną za: <span id="timer">5</span> s</h1>
     </section>
 </header>
 

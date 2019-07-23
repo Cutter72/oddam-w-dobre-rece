@@ -18,8 +18,8 @@
 
 <section class="login-page">
     <h2>Zmień hasło</h2>
-    <h3 style="color: #b92c28;">${wrongPassword}</h3>
-    <form method="post" action="<jsp:include page="../links/hrefUserPasswordChange.jsp"/>">
+    <h1 style="color: #b92c28;">${wrongPassword}</h1>
+    <form method="post" action="<jsp:include page="../links/hrefPasswordResetNew.jsp"/>">
         <div class="form-group form-group--50">
             <label>Nowe hasło:</label><br/>
             <input type="password" name="password1" placeholder="Nowe hasło" id="password1" autocomplete="new-password" required maxlength="255"/>
@@ -34,6 +34,7 @@
         <div class="form-group form-group--buttons">
             <button class="btn" type="submit" id="registrationSubmit" disabled>Zmień hasło</button>
             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+            <input type="hidden" name="email" value="${email}"/>
         </div>
     </form>
 </section>

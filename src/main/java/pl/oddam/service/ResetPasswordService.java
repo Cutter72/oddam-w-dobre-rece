@@ -33,17 +33,17 @@ public class ResetPasswordService {
         resetPasswordRepository.save(resetPassword);
     }
 
-    public boolean checkValidity(String token) {
+    public String getEmail(String token) {
         try {
             ResetPassword resetPassword = resetPasswordRepository.findByToken(token);
             if (new Timestamp(System.currentTimeMillis()).getTime() - resetPassword.getResetStartTime() < 60000) {
                 resetPasswordRepository.delete(resetPassword);
-                return true;
+                return resetPassword.getEmail();
             } else {
-                return false;
+                return "";
             }
         } catch (NullPointerException ex) {
-            return false;
+            return "";
         }
     }
 }

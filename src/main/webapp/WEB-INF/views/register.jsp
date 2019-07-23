@@ -18,7 +18,7 @@
 
 <section class="login-page">
     <h2>Załóż konto</h2>
-    <h3 style="color: #b92c28;">${duplicateEmail}</h3>
+    <h1 style="color: #b92c28;">${duplicateEmail}</h1>
     <form:form method="post" modelAttribute="user">
         <div class="form-group form-group--50">
             <h3 style="color: #b92c28;"><form:errors path="firstName" name="firstName" placeholder="Imię" /></h3>

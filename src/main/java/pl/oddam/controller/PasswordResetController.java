@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import pl.oddam.model.ReCaptchaKeys;
+import pl.oddam.model.User;
 import pl.oddam.service.ReCaptchaService;
 import pl.oddam.service.ResetPasswordService;
 import pl.oddam.service.UserServiceImpl;
@@ -43,7 +44,7 @@ public class PasswordResetController {
             try {
                 userServiceImpl.findByEmail(email);
                 resetPasswordService.sendToken(email);
-                return "resetPasswordSuccess";
+                return "tokenSendSuccess";
             } catch (NullPointerException e) {
                 model.addAttribute("noSuchEmail", "Nie posiadamy takiego ("+email+") adresu e-mail w naszej bazie!");
                 model.addAttribute("reCaptchaKey", reCaptchaKeys.getSiteKey());
@@ -53,18 +54,22 @@ public class PasswordResetController {
             model.addAttribute("captchaNotChecked","Proszę zaznaczyć że nie jesteś robotem!");
             model.addAttribute("reCaptchaKey", reCaptchaKeys.getSiteKey());
             model.addAttribute("email", email);
-            return "register";
+            return "resetPassword";
         }
     }
 
     @PostMapping("/new")
-    public String setNewPassword(@RequestParam("g-recaptcha-response") String recaptchaResponse, Model model, @RequestParam String password1) throws IOException {
+    public String setNewPassword(@RequestParam("g-recaptcha-response") String recaptchaResponse, Model model, @RequestParam String password1, @RequestParam String email) throws IOException {
         if (reCaptchaService.processResponse(recaptchaResponse)) {
-            return "home";
+            User user = userServiceImpl.findByEmail(email);
+            user.setPassword(password1);
+            userServiceImpl.saveUser(user);
+            return "resetPasswordSuccess";
         } else {
             model.addAttribute("captchaNotChecked","Proszę zaznaczyć że nie jesteś robotem!");
             model.addAttribute("reCaptchaKey", reCaptchaKeys.getSiteKey());
-            return "resetPassword";
+            model.addAttribute("email", email);
+            return "newPassword";
         }
     }
 }

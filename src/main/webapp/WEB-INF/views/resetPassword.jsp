@@ -18,9 +18,9 @@
 
 <section class="login-page">
     <h2>Zresetuj hasło</h2>
-    <h3 style="color: #b92c28;">${noSuchEmail}</h3>
+    <h1 style="color: #b92c28;">${noSuchEmail}</h1>
     <form method="post" action="/password/reset">
-        <div class="form-group form-group--50">
+        <div class="form-group">
             <label>Podaj email:</label><br/>
             <input type="email " name="email" placeholder="E-mail" id="email" autocomplete="email" required maxlength="255" value="${email}"/>
         </div>

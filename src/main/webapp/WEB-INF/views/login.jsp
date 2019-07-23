@@ -17,8 +17,8 @@
 
 <section class="login-page">
     <h2>Zaloguj się</h2>
-    <h3 style="color: #b92c28;">${errorLogin}</h3>
-    <h3 style="color: #5cb85c;">${registerSuccess}</h3>
+    <h1 style="color: #b92c28;">${errorLogin}</h1>
+    <h1 style="color: #5cb85c;">${registerSuccess}</h1>
     <form action="/login" method="post">
         <div class="form-group">
             <label>E-mail:</label><br/>

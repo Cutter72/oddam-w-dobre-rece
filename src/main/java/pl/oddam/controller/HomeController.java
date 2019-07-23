@@ -31,9 +31,10 @@ public class HomeController {
 
     @GetMapping("/token/{token}")
     public String resetPassword(@PathVariable String token, Model model) {
-        if (resetPasswordService.checkValidity(token)) {
-            model.addAttribute("captchaNotChecked","Proszę zaznaczyć że nie jesteś robotem!");
+        String email = resetPasswordService.getEmail(token);
+        if (!email.equals("")) {
             model.addAttribute("reCaptchaKey", reCaptchaKeys.getSiteKey());
+            model.addAttribute("email", email);
             return "newPassword";
         } else {
             return "wrongToken";

@@ -54,7 +54,7 @@
 
 <section class="login-page">
     <h2>Zmień hasło</h2>
-    <h3 style="color: #b92c28;">${wrongPassword}</h3>
+    <h1 style="color: #b92c28;">${wrongPassword}</h1>
     <form method="post" action="<jsp:include page="../../links/hrefUserPasswordChange.jsp"/>">
         <div class="form-group">
             <label>Stare hasło:</label><br/>

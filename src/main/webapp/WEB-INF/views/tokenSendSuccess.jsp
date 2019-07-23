@@ -32,12 +32,12 @@
     </nav>
     <section class="login-page">
         <h2>
-            Hasło zmienione! Spróbuj się teraz zalogować.
+            Proszę sprawdzić podany adres e-mail.
         </h2>
-        <h1>Przekierowanie na stronę logowania za: <span id="timer">5</span> s</h1>
+        <h1>Przekierowanie na stronę główną za: <span id="timer">5</span> s</h1>
     </section>
 </header>
 
-<script src="/js/timeRedirectLogin.js"></script>
+<script src="/js/timeRedirectHome.js"></script>
 </body>
 </html>

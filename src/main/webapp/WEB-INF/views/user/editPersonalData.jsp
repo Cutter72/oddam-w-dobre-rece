@@ -47,30 +47,29 @@
             </li>
         </ul>
     </nav>
-
-    <div class="slogan container container--90">
-        <div class="slogan--item" style="text-align: center">
-            <h2>
-                <span class="uppercase">Zmień swoje dane osobowe</span>
-            </h2>
-            <section class="login-page" style="text-align: center">
-                <form:form method="post" modelAttribute="user">
-                    <div class="form-group">
-                        <span class="slogan--steps-title">Imię: </span><form:input path="firstName" name="firstName" placeholder="${user.firstName}" />
-                        <form:errors path="firstName" name="firstName" placeholder="Imię" />
-                    </div>
-                    <div class="form-group">
-                        <span class="slogan--steps-title">Nazwisko: </span><form:input path="lastName" name="lastName" placeholder="${user.lastName}" />
-                        <form:errors path="lastName" name="lastName" placeholder="Nazwisko" />
-                    </div>
-                    <div class="form-group form-group--buttons">
-                        <a href="/user" class="btn btn--without-border">Anuluj</a>
-                        <button class="btn" type="submit">Zmień</button>
-                    </div>
-                </form:form>
-            </section>
-        </div>
+<section class="login-page">
+    <div class="slogan--item" style="text-align: center">
+        <h2>
+            <span class="uppercase">Zmień swoje dane osobowe</span>
+        </h2>
+        <section class="login-page" style="text-align: center">
+            <form:form method="post" modelAttribute="user">
+                <div class="form-group">
+                    <span class="slogan--steps-title">Imię: </span><form:input path="firstName" name="firstName" placeholder="${user.firstName}" />
+                    <form:errors path="firstName" name="firstName" placeholder="Imię" />
+                </div>
+                <div class="form-group">
+                    <span class="slogan--steps-title">Nazwisko: </span><form:input path="lastName" name="lastName" placeholder="${user.lastName}" />
+                    <form:errors path="lastName" name="lastName" placeholder="Nazwisko" />
+                </div>
+                <div class="form-group form-group--buttons">
+                    <a href="/user/profile" class="btn btn--without-border">Anuluj</a>
+                    <button class="btn" type="submit">Zmień</button>
+                </div>
+            </form:form>
+        </section>
     </div>
+</section>
 </header>
 
 <jsp:include page="../../components/footer.jsp"/>

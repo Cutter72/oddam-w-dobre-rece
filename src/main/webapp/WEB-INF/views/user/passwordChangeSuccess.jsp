@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%--<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>--%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <!DOCTYPE html>
 <html lang="pl">
@@ -9,11 +9,11 @@
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
-    <title>User</title>
-    <link rel="stylesheet" href="<c:url value="../../../css/style.css"/>"/>
+    <title>Wiadomość wysłana.</title>
+    <link rel="stylesheet" href="/css/style.css"/>
 </head>
 <body>
-<header class="header--form-page">
+<header class="header--form-page" style="background-image: none; height: 120px">
     <nav class="container container--70">
         <ul class="nav--actions">
             <li class="logged-user">
@@ -35,7 +35,8 @@
 
         <ul>
             <li><a href="/" class="btn btn--without-border active">Start</a></li>
-            <li><a href="<jsp:include page="../../links/hrefWhat.jsp"/>" class="btn btn--without-border">O co chodzi?</a>
+            <li><a href="<jsp:include page="../../links/hrefWhat.jsp"/>" class="btn btn--without-border">O co
+                chodzi?</a>
             </li>
             <li><a href="<jsp:include page="../../links/hrefAbout.jsp"/>" class="btn btn--without-border">O nas</a></li>
             <li>
@@ -47,34 +48,20 @@
             </li>
         </ul>
     </nav>
+    <section class="form--steps">
 
-    <div class="slogan container container--90">
-        <div class="slogan--item" style="text-align: center">
-            <h2>
-                <span class="uppercase">Zmień swoje dane osobowe</span>
-            </h2>
-            <section class="login-page" style="text-align: center">
-                <form method="post">
-                    <div class="form-group">
-                        <span class="slogan--steps-title">Obecne hasło: </span><input name="oldPassword" type="password" placeholder="Obecne hasło" />
-                    </div>
-                    <div class="form-group">
-                        <span class="slogan--steps-title">Nowe hasło: </span><input name="newPassword" type="password" placeholder="Nowe hasło" />
-                        <br/>
-                        <span class="slogan--steps-title">${success}</span>
-                    </div>
-                    <div class="form-group form-group--buttons">
-                        <a href="/user" class="btn btn--without-border">Anuluj</a>
-                        <button class="btn" type="submit" >Zmień</button>
-                        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-                    </div>
-                </form>
-            </section>
+        <div class="form--steps-container">
+            <div class="form--steps-counter"></div>
+            <div data-step="7" class="active">
+                <h2>
+                    Hasło zostało zmienione.
+                </h2>
+                <label>Przekierowanie na stronę główną użytkownika za: <label id="timer">5</label> s</label></div>
         </div>
-    </div>
+        </div>
+    </section>
 </header>
 
-<jsp:include page="../../components/footer.jsp"/>
-
+<script src="/js/timeRedirectHome.js"></script>
 </body>
 </html>

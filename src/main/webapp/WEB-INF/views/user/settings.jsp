@@ -47,16 +47,16 @@
         </ul>
     </nav>
 
-    <div class="slogan container container--90">
-        <div class="slogan--item" style="text-align: center">
+    <section class="login-page">
+        <div class="form-group" style="text-align: center">
             <h2>
                 <span class="uppercase">Ustawienia</span>
             </h2>
             <div class="btn btn--without-border" ><a href="<jsp:include page="../../links/hrefEditPersonalData.jsp"/>">Zmień dane osobowe</a></div>
             <br/>
-            <div class="btn btn--without-border"><a href="<jsp:include page="../../links/hrefPasswordChange.jsp"/>">Zmień hasło</a></div>
+            <div class="btn btn--without-border"><a href="<jsp:include page="../../links/hrefUserPasswordChange.jsp"/>">Zmień hasło</a></div>
         </div>
-    </div>
+    </section>
 </header>
 
 <jsp:include page="../../components/footer.jsp"/>

@@ -14,10 +14,47 @@
 </head>
 <body>
 
-<jsp:include page="../../components/header.jsp"/>
+<header class="header--form-page">
+    <nav class="container container--70">
+        <ul class="nav--actions">
+            <li class="logged-user">
+                Witaj ${user.firstName}
+                <ul class="dropdown">
+                    <li><a href="<jsp:include page="../../links/hrefUserProfile.jsp"/>">Profil</a></li>
+                    <li><a href="<jsp:include page="../../links/hrefUserSettings.jsp"/>">Ustawienia</a></li>
+                    <li><a href="<jsp:include page="../../links/hrefUserGifts.jsp"/>">Moje dary</a></li>
+                    <li><a href="<jsp:include page="../../links/hrefUserCollections.jsp"/>">Moje zbiórki</a></li>
+                    <li>
+                        <form action="/logout" method="post">
+                            <input class="btn--small" type="submit" value="Wyloguj">
+                            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                        </form>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+
+        <ul>
+            <li><a href="/" class="btn btn--without-border active">Start</a></li>
+            <li><a href="<jsp:include page="../../links/hrefWhat.jsp"/>" class="btn btn--without-border">O co
+                chodzi?</a>
+            </li>
+            <li><a href="<jsp:include page="../../links/hrefAbout.jsp"/>" class="btn btn--without-border">O nas</a></li>
+            <li>
+                <a href="<jsp:include page="../../links/hrefOrganizations.jsp"/>" class="btn btn--without-border"
+                >Fundacje i organizacje</a
+                >
+            </li>
+            <li><a href="<jsp:include page="../../links/hrefContact.jsp"/>" class="btn btn--without-border">Kontakt</a>
+            </li>
+        </ul>
+    </nav>
+
+
 
 <section class="login-page">
     <h2>Zmień hasło</h2>
+    <h3 style="color: #b92c28;">${wrongPassword}</h3>
     <form method="post" action="/password/change">
         <div class="form-group">
             <label>Stare hasło:</label><br/>
@@ -40,6 +77,7 @@
         </div>
     </form>
 </section>
+</header>
 
 <jsp:include page="../../components/footer.jsp"/>
 <script src="<c:url value="../../../js/passValidation.js"/>"></script>

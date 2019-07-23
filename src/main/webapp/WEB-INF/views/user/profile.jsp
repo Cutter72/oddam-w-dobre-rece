@@ -46,9 +46,9 @@
             </li>
         </ul>
     </nav>
+    <section class="login-page">
 
-    <div class="slogan container container--90">
-        <div class="slogan--item" style="text-align: center">
+        <div class="form-group" style="text-align: center">
             <h2>
                 <span class="uppercase">twój profil</span>
             </h2>
@@ -56,9 +56,10 @@
             <div class="slogan--steps-title">Nazwisko: <b>${user.lastName}</b></div>
             <div class="slogan--steps-title">E-mail: <b>${user.email}</b></div>
             <div class="btn btn--without-border"><a href="<jsp:include page="../../links/hrefEditPersonalData.jsp"/>">Edytuj dane osobowe</a></div><br/>
-            <div class="btn btn--without-border"><a href="<jsp:include page="../../links/hrefPasswordChange.jsp"/>">Zmień hasło</a></div>
+            <div class="btn btn--without-border"><a href="<jsp:include page="../../links/hrefUserPasswordChange.jsp"/>">Zmień hasło</a></div>
         </div>
-    </div>
+
+    </section>
 </header>
 
 <jsp:include page="../../components/footer.jsp"/>

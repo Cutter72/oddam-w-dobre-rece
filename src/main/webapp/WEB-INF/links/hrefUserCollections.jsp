@@ -1,1 +1,1 @@
-/user/collections
+#

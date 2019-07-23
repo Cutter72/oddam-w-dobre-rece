@@ -32,13 +32,13 @@ public class PasswordResetController {
     }
 
     @GetMapping("")
-    public String resetPasswordForm(Model model) {
+    public String sendTokenForm(Model model) {
         model.addAttribute("reCaptchaKey", reCaptchaKeys.getSiteKey());
         return "resetPassword";
     }
 
     @PostMapping("")
-    public String resetPasswordPost(@RequestParam("g-recaptcha-response") String recaptchaResponse, @RequestParam String email, Model model) throws IOException, MessagingException {
+    public String sendTokenPost(@RequestParam("g-recaptcha-response") String recaptchaResponse, @RequestParam String email, Model model) throws IOException, MessagingException {
         if (reCaptchaService.processResponse(recaptchaResponse)) {
             try {
                 userServiceImpl.findByEmail(email);
@@ -54,6 +54,17 @@ public class PasswordResetController {
             model.addAttribute("reCaptchaKey", reCaptchaKeys.getSiteKey());
             model.addAttribute("email", email);
             return "register";
+        }
+    }
+
+    @PostMapping("/new")
+    public String setNewPassword(@RequestParam("g-recaptcha-response") String recaptchaResponse, Model model, @RequestParam String password1) throws IOException {
+        if (reCaptchaService.processResponse(recaptchaResponse)) {
+            return "home";
+        } else {
+            model.addAttribute("captchaNotChecked","Proszę zaznaczyć że nie jesteś robotem!");
+            model.addAttribute("reCaptchaKey", reCaptchaKeys.getSiteKey());
+            return "resetPassword";
         }
     }
 }

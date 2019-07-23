@@ -20,6 +20,5 @@ public class ResetPassword {
     private String email;
     @NotEmpty
     private String token;
-    @NotEmpty
     private Long resetStartTime;
 }

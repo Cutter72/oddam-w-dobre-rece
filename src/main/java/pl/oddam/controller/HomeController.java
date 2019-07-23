@@ -14,6 +14,6 @@ public class HomeController {
 
     @GetMapping("/test")
     public String testingViews() {
-        return "sendSuccess";
+        return "user/formSuccess";
     }
 }

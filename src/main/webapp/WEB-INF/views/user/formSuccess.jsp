@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="/css/style.css"/>
 </head>
 <body>
-<header class="header--form-page" style="background-image: none; height: 120px">
+<header class="header--form-page">
     <nav class="container container--70">
         <ul class="nav--actions">
             <li class="logged-user">
@@ -48,25 +48,14 @@
             </li>
         </ul>
     </nav>
+    <section class="login-page">
+        <h2>
+            Dziękujemy za przesłanie formularza.<br/>Na maila prześlemy wszelkie informacje o odbiorze.
+        </h2>
+        <h1>Przekierowanie na stronę główną użytkownika za: <span id="timer">5</span> s</h1>
+    </section>
 </header>
 
-<a name="Form" id="form-place"></a>
-<section class="form--steps">
-
-    <div class="form--steps-container">
-        <div class="form--steps-counter"></div>
-            <div data-step="7" class="active">
-                <h2>
-                    Dziękujemy za przesłanie formularza. Na maila prześlemy wszelkie
-                    informacje o odbiorze.
-                </h2>
-                <label>Przekierowanie na stronę główną użytkownika za: <label id="timer">5</label> s</label></div>
-            </div>
-    </div>
-</section>
-
-<jsp:include page="../../components/footer.jsp"/>
-
-<script src="/js/timeRedirect.js"></script>
+<script src="/js/timeRedirectUser.js"></script>
 </body>
 </html>

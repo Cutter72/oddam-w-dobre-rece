@@ -5,18 +5,18 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import pl.oddam.model.ReCaptchaKeys;
+import pl.oddam.model.DomainSettings;
 import pl.oddam.service.ResetPasswordService;
 
 @Controller
 @RequestMapping("")
 public class HomeController {
     private final ResetPasswordService resetPasswordService;
-    private final ReCaptchaKeys reCaptchaKeys;
+    private final DomainSettings domainSettings;
 
-    public HomeController(ResetPasswordService resetPasswordService, ReCaptchaKeys reCaptchaKeys) {
+    public HomeController(ResetPasswordService resetPasswordService, DomainSettings domainSettings) {
         this.resetPasswordService = resetPasswordService;
-        this.reCaptchaKeys = reCaptchaKeys;
+        this.domainSettings = domainSettings;
     }
 
     @GetMapping("")
@@ -33,7 +33,7 @@ public class HomeController {
     public String resetPassword(@PathVariable String token, Model model) {
         String email = resetPasswordService.getEmail(token);
         if (!email.equals("")) {
-            model.addAttribute("reCaptchaKey", reCaptchaKeys.getSiteKey());
+            model.addAttribute("reCaptchaKey", domainSettings.getSiteKey());
             model.addAttribute("email", email);
             return "newPassword";
         } else {

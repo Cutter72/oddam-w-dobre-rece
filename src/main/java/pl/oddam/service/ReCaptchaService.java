@@ -4,7 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.commons.io.IOUtils;
 import org.springframework.stereotype.Service;
 import pl.oddam.model.GoogleResponse;
-import pl.oddam.model.ReCaptchaKeys;
+import pl.oddam.model.DomainSettings;
 
 import java.io.*;
 import java.net.HttpURLConnection;
@@ -12,10 +12,10 @@ import java.net.URL;
 
 @Service
 public class ReCaptchaService {
-    private ReCaptchaKeys reCaptchaKeys;
+    private DomainSettings domainSettings;
 
-    public ReCaptchaService(ReCaptchaKeys reCaptchaKeys) {
-        this.reCaptchaKeys = reCaptchaKeys;
+    public ReCaptchaService(DomainSettings domainSettings) {
+        this.domainSettings = domainSettings;
     }
 
     public boolean processResponse(String recaptchaResponse) throws IOException {
@@ -25,7 +25,7 @@ public class ReCaptchaService {
         //request header
         conn.setRequestMethod("POST");
         //params string
-        String parameters = "secret=" + reCaptchaKeys.getSecretKey() + "&response=" + recaptchaResponse;
+        String parameters = "secret=" + domainSettings.getSecretKey() + "&response=" + recaptchaResponse;
         //send post request
         conn.setDoOutput(true);
         DataOutputStream outStream = new DataOutputStream(conn.getOutputStream());

@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import pl.oddam.model.ReCaptchaKeys;
+import pl.oddam.model.DomainSettings;
 import pl.oddam.model.User;
 import pl.oddam.service.ReCaptchaService;
 import pl.oddam.service.UserServiceImpl;
@@ -22,18 +22,18 @@ import java.io.IOException;
 public class RegisterController {
     private final UserServiceImpl userServiceImpl;
     private final ReCaptchaService reCaptchaService;
-    private final ReCaptchaKeys reCaptchaKeys;
+    private final DomainSettings domainSettings;
 
-    public RegisterController(UserServiceImpl userServiceImpl, ReCaptchaService reCaptchaService, ReCaptchaKeys reCaptchaKeys) {
+    public RegisterController(UserServiceImpl userServiceImpl, ReCaptchaService reCaptchaService, DomainSettings domainSettings) {
         this.userServiceImpl = userServiceImpl;
         this.reCaptchaService = reCaptchaService;
-        this.reCaptchaKeys = reCaptchaKeys;
+        this.domainSettings = domainSettings;
     }
 
     @GetMapping("")
     public String registerForm(Model model) {
         model.addAttribute("user", new User());
-        model.addAttribute("reCaptchaKey", reCaptchaKeys.getSiteKey());
+        model.addAttribute("reCaptchaKey", domainSettings.getSiteKey());
         return "register";
     }
 
@@ -46,7 +46,7 @@ public class RegisterController {
     public String register(@RequestParam("g-recaptcha-response") String recaptchaResponse, @Valid User user, BindingResult result, Model model) throws IOException {
         if (reCaptchaService.processResponse(recaptchaResponse)) {
             if (result.hasErrors()) {
-                model.addAttribute("reCaptchaKey", reCaptchaKeys.getSiteKey());
+                model.addAttribute("reCaptchaKey", domainSettings.getSiteKey());
                 return "register";
             }
             String existingEmail = null;
@@ -57,7 +57,7 @@ public class RegisterController {
             } finally {
                 if (existingEmail != null) {
                     model.addAttribute("duplicateEmail", "Email " + existingEmail + " jest już zajęty!");
-                    model.addAttribute("reCaptchaKey", reCaptchaKeys.getSiteKey());
+                    model.addAttribute("reCaptchaKey", domainSettings.getSiteKey());
                     return "register";
                 }
             }
@@ -65,7 +65,7 @@ public class RegisterController {
             return "login";
         } else {
             model.addAttribute("captchaNotChecked","Proszę zaznaczyć że nie jesteś robotem!");
-            model.addAttribute("reCaptchaKey", reCaptchaKeys.getSiteKey());
+            model.addAttribute("reCaptchaKey", domainSettings.getSiteKey());
             return "register";
         }
     }

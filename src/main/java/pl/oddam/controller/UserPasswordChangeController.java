@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import pl.oddam.model.CurrentUser;
-import pl.oddam.model.ReCaptchaKeys;
+import pl.oddam.model.DomainSettings;
 import pl.oddam.model.User;
 import pl.oddam.repository.UserRepository;
 import pl.oddam.service.ReCaptchaService;
@@ -23,13 +23,13 @@ import java.io.IOException;
 public class UserPasswordChangeController {
     private final UserRepository userRepository;
     private final ReCaptchaService reCaptchaService;
-    private final ReCaptchaKeys reCaptchaKeys;
+    private final DomainSettings domainSettings;
     private final BCryptPasswordEncoder passwordEncoder;
 
-    public UserPasswordChangeController(UserRepository userRepository, ReCaptchaService reCaptchaService, ReCaptchaKeys reCaptchaKeys, BCryptPasswordEncoder passwordEncoder) {
+    public UserPasswordChangeController(UserRepository userRepository, ReCaptchaService reCaptchaService, DomainSettings domainSettings, BCryptPasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.reCaptchaService = reCaptchaService;
-        this.reCaptchaKeys = reCaptchaKeys;
+        this.domainSettings = domainSettings;
         this.passwordEncoder = passwordEncoder;
     }
 
@@ -38,7 +38,7 @@ public class UserPasswordChangeController {
     @GetMapping("/change")
     public String changePasswordForm(@AuthenticationPrincipal CurrentUser customUser, Model model) {
         model.addAttribute("user", customUser.getUser());
-        model.addAttribute("reCaptchaKey", reCaptchaKeys.getSiteKey());
+        model.addAttribute("reCaptchaKey", domainSettings.getSiteKey());
         return "user/changePassword";
     }
 
@@ -67,14 +67,14 @@ public class UserPasswordChangeController {
                 return "user/passwordChangeSuccess";
             } else {
                 model.addAttribute("user", customUser.getUser());
-                model.addAttribute("reCaptchaKey", reCaptchaKeys.getSiteKey());
+                model.addAttribute("reCaptchaKey", domainSettings.getSiteKey());
                 model.addAttribute("wrongPassword", "Niepoprawne hasło!");
                 return "user/changePassword";
             }
         } else {
             model.addAttribute("user", customUser.getUser());
             model.addAttribute("captchaNotChecked","Proszę zaznaczyć że nie jesteś robotem!");
-            model.addAttribute("reCaptchaKey", reCaptchaKeys.getSiteKey());
+            model.addAttribute("reCaptchaKey", domainSettings.getSiteKey());
             return "user/changePassword";
         }
     }

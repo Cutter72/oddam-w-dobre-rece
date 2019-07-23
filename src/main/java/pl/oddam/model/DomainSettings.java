@@ -5,9 +5,11 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
 @Component
-@ConfigurationProperties("google.recaptcha")
+@ConfigurationProperties("domain")
 @Data
-public class ReCaptchaKeys {
+public class DomainSettings {
     private String siteKey;
     private String secretKey;
+    private String address;
+    private Long tokenTimeoutMillis;
 }

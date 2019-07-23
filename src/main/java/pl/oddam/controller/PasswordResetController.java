@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import pl.oddam.model.ReCaptchaKeys;
+import pl.oddam.model.DomainSettings;
 import pl.oddam.model.User;
 import pl.oddam.service.ReCaptchaService;
 import pl.oddam.service.ResetPasswordService;
@@ -22,19 +22,19 @@ import java.io.IOException;
 public class PasswordResetController {
     private final UserServiceImpl userServiceImpl;
     private final ReCaptchaService reCaptchaService;
-    private final ReCaptchaKeys reCaptchaKeys;
+    private final DomainSettings domainSettings;
     private final ResetPasswordService resetPasswordService;
 
-    public PasswordResetController(UserServiceImpl userServiceImpl, ReCaptchaService reCaptchaService, ReCaptchaKeys reCaptchaKeys, ResetPasswordService resetPasswordService) {
+    public PasswordResetController(UserServiceImpl userServiceImpl, ReCaptchaService reCaptchaService, DomainSettings domainSettings, ResetPasswordService resetPasswordService) {
         this.userServiceImpl = userServiceImpl;
         this.reCaptchaService = reCaptchaService;
-        this.reCaptchaKeys = reCaptchaKeys;
+        this.domainSettings = domainSettings;
         this.resetPasswordService = resetPasswordService;
     }
 
     @GetMapping("")
     public String sendTokenForm(Model model) {
-        model.addAttribute("reCaptchaKey", reCaptchaKeys.getSiteKey());
+        model.addAttribute("reCaptchaKey", domainSettings.getSiteKey());
         return "resetPassword";
     }
 
@@ -47,12 +47,12 @@ public class PasswordResetController {
                 return "tokenSendSuccess";
             } catch (NullPointerException e) {
                 model.addAttribute("noSuchEmail", "Nie posiadamy takiego ("+email+") adresu e-mail w naszej bazie!");
-                model.addAttribute("reCaptchaKey", reCaptchaKeys.getSiteKey());
+                model.addAttribute("reCaptchaKey", domainSettings.getSiteKey());
                 return "resetPassword";
             }
         } else {
             model.addAttribute("captchaNotChecked","Proszę zaznaczyć że nie jesteś robotem!");
-            model.addAttribute("reCaptchaKey", reCaptchaKeys.getSiteKey());
+            model.addAttribute("reCaptchaKey", domainSettings.getSiteKey());
             model.addAttribute("email", email);
             return "resetPassword";
         }
@@ -67,7 +67,7 @@ public class PasswordResetController {
             return "resetPasswordSuccess";
         } else {
             model.addAttribute("captchaNotChecked","Proszę zaznaczyć że nie jesteś robotem!");
-            model.addAttribute("reCaptchaKey", reCaptchaKeys.getSiteKey());
+            model.addAttribute("reCaptchaKey", domainSettings.getSiteKey());
             model.addAttribute("email", email);
             return "newPassword";
         }

@@ -62,7 +62,9 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void activateUser(User user) {
-
+    public void activateUser(String email) {
+        User user = userRepository.findByEmail(email);
+        user.setEnabled(1);
+        userRepository.save(user);
     }
 }

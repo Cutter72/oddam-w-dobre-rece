@@ -11,5 +11,6 @@ public class DomainSettings {
     private String siteKey;
     private String secretKey;
     private String address;
+    private String mail;
     private Long tokenTimeoutMillis;
 }

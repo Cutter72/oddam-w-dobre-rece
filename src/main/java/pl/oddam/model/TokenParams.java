@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 
 @Entity
 @Data
-public class ResetPassword {
+public class TokenParams {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

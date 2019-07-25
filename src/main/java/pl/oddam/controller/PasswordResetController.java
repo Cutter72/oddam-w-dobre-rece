@@ -2,14 +2,12 @@ package pl.oddam.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import pl.oddam.model.DomainSettings;
 import pl.oddam.model.User;
 import pl.oddam.service.ReCaptchaService;
-import pl.oddam.service.ResetPasswordService;
+import pl.oddam.service.PasswordResetService;
+import pl.oddam.service.TokenService;
 import pl.oddam.service.UserServiceImpl;
 
 import javax.mail.MessagingException;
@@ -23,13 +21,15 @@ public class PasswordResetController {
     private final UserServiceImpl userServiceImpl;
     private final ReCaptchaService reCaptchaService;
     private final DomainSettings domainSettings;
-    private final ResetPasswordService resetPasswordService;
+    private final PasswordResetService passwordResetService;
+    private final TokenService tokenService;
 
-    public PasswordResetController(UserServiceImpl userServiceImpl, ReCaptchaService reCaptchaService, DomainSettings domainSettings, ResetPasswordService resetPasswordService) {
+    public PasswordResetController(UserServiceImpl userServiceImpl, ReCaptchaService reCaptchaService, DomainSettings domainSettings, PasswordResetService passwordResetService, TokenService tokenService) {
         this.userServiceImpl = userServiceImpl;
         this.reCaptchaService = reCaptchaService;
         this.domainSettings = domainSettings;
-        this.resetPasswordService = resetPasswordService;
+        this.passwordResetService = passwordResetService;
+        this.tokenService = tokenService;
     }
 
     @GetMapping("")
@@ -43,7 +43,7 @@ public class PasswordResetController {
         if (reCaptchaService.processResponse(recaptchaResponse)) {
             try {
                 userServiceImpl.findByEmail(email);
-                resetPasswordService.sendToken(email);
+                passwordResetService.sendToken(email);
                 return "tokenSendSuccess";
             } catch (NullPointerException e) {
                 model.addAttribute("noSuchEmail", "Nie posiadamy takiego ("+email+") adresu e-mail w naszej bazie!");
@@ -70,6 +70,19 @@ public class PasswordResetController {
             model.addAttribute("reCaptchaKey", domainSettings.getSiteKey());
             model.addAttribute("email", email);
             return "newPassword";
+        }
+    }
+
+    @GetMapping("/{token}")
+    public String tokenCheck(@PathVariable String token, Model model) {
+        if (tokenService.checkValidity(token,1800000)) {
+            String email = tokenService.getEmail(token);
+            model.addAttribute("reCaptchaKey", domainSettings.getSiteKey());
+            model.addAttribute("email", email);
+            tokenService.deleteAllByEmail(email);
+            return "newPassword";
+        } else {
+            return "wrongToken";
         }
     }
 }

@@ -1,6 +1,7 @@
 package pl.oddam.model;
 
 import lombok.Data;
+import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -22,6 +23,7 @@ public class User {
     @NotEmpty
     private String email;
     private String password;
+    @ColumnDefault("0")
     private int enabled;
     @ManyToMany(cascade = CascadeType.DETACH, fetch = FetchType.EAGER)
     @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"),

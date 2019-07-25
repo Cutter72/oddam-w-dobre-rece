@@ -8,4 +8,5 @@ public interface UserService {
     void saveAdmin(User user);
     void editAdmin(User user);
     void editUser(User user);
+    void activateUser(User user);
 }

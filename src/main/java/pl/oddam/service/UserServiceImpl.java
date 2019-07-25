@@ -30,7 +30,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public void saveUser(User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        user.setEnabled(1);
+
         Role userRole = roleRepository.findByName("ROLE_USER");
         user.setRoles(new HashSet<Role>(Arrays.asList(userRole)));
         userRepository.save(user);
@@ -39,7 +39,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public void saveAdmin(User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        user.setEnabled(1);
+
         Role userRole = roleRepository.findByName("ROLE_ADMIN");
         user.setRoles(new HashSet<Role>(Arrays.asList(userRole)));
         userRepository.save(user);
@@ -47,7 +47,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void editAdmin(User user) {
-        user.setEnabled(1);
+
         Role userRole = roleRepository.findByName("ROLE_ADMIN");
         user.setRoles(new HashSet<Role>(Arrays.asList(userRole)));
         userRepository.save(user);
@@ -55,9 +55,14 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void editUser(User user) {
-        user.setEnabled(1);
+
         Role userRole = roleRepository.findByName("ROLE_USER");
         user.setRoles(new HashSet<Role>(Arrays.asList(userRole)));
         userRepository.save(user);
+    }
+
+    @Override
+    public void activateUser(User user) {
+
     }
 }

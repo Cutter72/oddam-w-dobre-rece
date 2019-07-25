@@ -20,5 +20,5 @@ public class TokenParams {
     private String email;
     @NotEmpty
     private String token;
-    private Long resetStartTime;
+    private Long creationTimeStamp;
 }

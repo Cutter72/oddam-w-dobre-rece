@@ -29,7 +29,7 @@ public class TokenService {
     public TokenParams createNewToken(String email) {
         TokenParams newToken = new TokenParams();
         newToken.setEmail(email);
-        newToken.setResetStartTime(new Timestamp(System.currentTimeMillis()).getTime());
+        newToken.setCreationTimeStamp(new Timestamp(System.currentTimeMillis()).getTime());
         newToken.setToken(generate(email));
         tokenParamsRepository.save(newToken);
         return newToken;
@@ -52,7 +52,7 @@ public class TokenService {
     public boolean checkValidity(String token, long expectedTimeout) {
         if (tokenExist(token)) {
             TokenParams tokenToCheck = tokenParamsRepository.findByToken(token);
-            return (System.currentTimeMillis() - tokenToCheck.getResetStartTime()) < expectedTimeout;
+            return (System.currentTimeMillis() - tokenToCheck.getCreationTimeStamp()) < expectedTimeout;
         }
         return false;
     }

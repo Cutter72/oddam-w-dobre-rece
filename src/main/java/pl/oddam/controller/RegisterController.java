@@ -4,6 +4,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import pl.oddam.model.DomainSettings;
 import pl.oddam.model.User;
 import pl.oddam.service.*;
@@ -44,7 +45,7 @@ public class RegisterController {
     }
 
     @PostMapping("")
-    public String register(@RequestParam("g-recaptcha-response") String recaptchaResponse, @Valid User user, BindingResult result, Model model) throws IOException, MessagingException {
+    public String register(@RequestParam("g-recaptcha-response") String recaptchaResponse, @Valid User user, BindingResult result, Model model, RedirectAttributes ra) throws IOException, MessagingException {
         if (reCaptchaService.processResponse(recaptchaResponse)) {
             if (result.hasErrors()) {
                 model.addAttribute("reCaptchaKey", domainSettings.getSiteKey());
@@ -63,8 +64,8 @@ public class RegisterController {
                 }
             }
             registerService.sendToken(user.getEmail());
-            model.addAttribute("registerSuccess","Konto pomyślnie zarejestrowane! Na maila przesłaliśmy link aktywacyjny. Pamiętaj o sprawdzeniu folderu SPAM!");
-            return "login";
+            ra.addFlashAttribute("registerSuccess","Konto pomyślnie zarejestrowane! Na maila przesłaliśmy link aktywacyjny. Pamiętaj o sprawdzeniu folderu SPAM!");
+            return "redirect:/login";
         } else {
             model.addAttribute("captchaNotChecked","Proszę zaznaczyć że nie jesteś robotem!");
             model.addAttribute("reCaptchaKey", domainSettings.getSiteKey());
@@ -73,12 +74,12 @@ public class RegisterController {
     }
 
     @GetMapping("/{token}")
-    public String tokenCheck(@PathVariable String token, Model model) {
+    public String tokenCheck(@PathVariable String token, Model model, RedirectAttributes ra) {
         if (tokenService.checkValidity(token,domainSettings.getRegisterTimeoutMillis())) {
             userServiceImpl.activateUser(tokenService.getEmail(token));
-            model.addAttribute("registerSuccess", "Konto pomyślnie aktywowane!");
+            ra.addFlashAttribute("registerSuccess", "Konto pomyślnie aktywowane!");
             tokenService.deleteAllByEmail(tokenService.getEmail(token));
-            return "login";
+            return "redirect:/login";
         } else {
             model.addAttribute("accountActivationFailure", "Coś poszło nie tak!");
             return "wrongToken";

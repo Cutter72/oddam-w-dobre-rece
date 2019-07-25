@@ -63,7 +63,7 @@ public class RegisterController {
                 }
             }
             registerService.sendToken(user.getEmail());
-            model.addAttribute("registerSuccess","Konto pomyślnie zarejestrowane! Na maila przesłaliśmy link aktywacyjny. Po jego kliknięciu możesz się zalogować!");
+            model.addAttribute("registerSuccess","Konto pomyślnie zarejestrowane! Na maila przesłaliśmy link aktywacyjny. Pamiętaj o sprawdzeniu folderu SPAM!");
             return "login";
         } else {
             model.addAttribute("captchaNotChecked","Proszę zaznaczyć że nie jesteś robotem!");
@@ -74,7 +74,7 @@ public class RegisterController {
 
     @GetMapping("/{token}")
     public String tokenCheck(@PathVariable String token, Model model) {
-        if (tokenService.checkValidity(token,86400000)) {
+        if (tokenService.checkValidity(token,domainSettings.getRegisterTimeoutMillis())) {
             userServiceImpl.activateUser(tokenService.getEmail(token));
             model.addAttribute("registerSuccess", "Konto pomyślnie aktywowane!");
             tokenService.deleteAllByEmail(tokenService.getEmail(token));

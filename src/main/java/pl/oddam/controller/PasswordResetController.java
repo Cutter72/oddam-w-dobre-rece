@@ -75,7 +75,7 @@ public class PasswordResetController {
 
     @GetMapping("/{token}")
     public String tokenCheck(@PathVariable String token, Model model) {
-        if (tokenService.checkValidity(token,1800000)) {
+        if (tokenService.checkValidity(token,domainSettings.getPasswordResetTimeoutMillis())) {
             String email = tokenService.getEmail(token);
             model.addAttribute("reCaptchaKey", domainSettings.getSiteKey());
             model.addAttribute("email", email);

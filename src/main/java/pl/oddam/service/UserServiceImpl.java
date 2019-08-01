@@ -67,4 +67,10 @@ public class UserServiceImpl implements UserService {
         user.setEnabled(1);
         userRepository.save(user);
     }
+    @Override
+    public void deActivateUser(String email) {
+        User user = userRepository.findByEmail(email);
+        user.setEnabled(0);
+        userRepository.save(user);
+    }
 }

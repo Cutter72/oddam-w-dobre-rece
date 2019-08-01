@@ -9,4 +9,6 @@ public interface UserService {
     void editAdmin(User user);
     void editUser(User user);
     void activateUser(String email);
+
+    void deActivateUser(String email);
 }

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class LoginController {
     @GetMapping("")
     public String login() {
+        System.out.println("wejszło w /login");
         return "login";
     }
     @GetMapping("/")
@@ -20,9 +21,11 @@ public class LoginController {
     }
     @PostMapping("")
     public String login(@RequestParam(value = "error", defaultValue = "false") boolean error, Model model) {
+        System.out.println("post /login");
         if (error) {
             model.addAttribute("errorLogin", "Użytkownik lub hasło nieprawidłowe!");
         }
+
         return "login";
     }
 }

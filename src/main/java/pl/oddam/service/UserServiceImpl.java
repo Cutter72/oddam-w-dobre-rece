@@ -64,13 +64,13 @@ public class UserServiceImpl implements UserService {
     @Override
     public void activateUser(String email) {
         User user = userRepository.findByEmail(email);
-        user.setEnabled(1);
+        user.setEnabled(true);
         userRepository.save(user);
     }
     @Override
     public void deActivateUser(String email) {
         User user = userRepository.findByEmail(email);
-        user.setEnabled(0);
+        user.setEnabled(false);
         userRepository.save(user);
     }
 }

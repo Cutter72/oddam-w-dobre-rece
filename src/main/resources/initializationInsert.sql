@@ -1,6 +1,6 @@
 -- Init first admin, email= 'qwe@qwe' pssword = 'qwe'
 INSERT INTO `oddam`.`users` (`id`, `email`, `enabled`, `first_name`, `last_name`, `password`) VALUES
-('1', 'qwe@qwe', '1', 'qwe', 'qwe', '$2a$10$rfENR7ab5VWoMjah/q5R4.M0uB5Jg66vzqaai318x374VCe0ZsJc6');
+('1', 'qwe@qwe', 'true', 'qwe', 'qwe', '$2a$10$rfENR7ab5VWoMjah/q5R4.M0uB5Jg66vzqaai318x374VCe0ZsJc6');
 INSERT INTO `oddam`.`user_role` (`user_id`, `role_id`) VALUES
 ('1', '1');
 INSERT INTO `oddam`.`role` (`role_id`, `role`) VALUES

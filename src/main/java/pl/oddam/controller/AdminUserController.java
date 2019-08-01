@@ -124,7 +124,7 @@ public class AdminUserController {
     @GetMapping("/disable/{id}")
     public String adminUserDisable(@PathVariable Long id) {
         User user = userRepository.findById(id).get();
-        user.setEnabled(0);
+        user.setEnabled(false);
         userRepository.save(user);
         return "redirect:/admin/user#list";
     }
@@ -132,7 +132,7 @@ public class AdminUserController {
     @GetMapping("/enable/{id}")
     public String adminUserEnable(@PathVariable Long id) {
         User user = userRepository.findById(id).get();
-        user.setEnabled(1);
+        user.setEnabled(true);
         userRepository.save(user);
         return "redirect:/admin/user#list";
     }

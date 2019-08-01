@@ -10,6 +10,7 @@ public class CustomPermissionEvaluator implements PermissionEvaluator {
 
     @Override
     public boolean hasPermission(Authentication authentication, Object targetDomainObject, Object permission) {
+        System.out.println(targetDomainObject+" "+permission+" -hasPermission1");
         if ((authentication == null) || (targetDomainObject == null) || !(permission instanceof String)){
             return false;
         }
@@ -20,6 +21,7 @@ public class CustomPermissionEvaluator implements PermissionEvaluator {
 
     @Override
     public boolean hasPermission(Authentication authentication, Serializable targetId, String targetType, Object permission) {
+        System.out.println(targetType+" "+permission+" -hasPermission2");
         if ((authentication == null) || (targetType == null) || !(permission instanceof String)) {
             return false;
         }
@@ -27,6 +29,7 @@ public class CustomPermissionEvaluator implements PermissionEvaluator {
     }
 
     private boolean hasPrivilege(Authentication auth, String targetType, String permission) {
+        System.out.println(permission+" -hasPrivilege");
         for (GrantedAuthority grantedAuth : auth.getAuthorities()) {
             if (grantedAuth.getAuthority().startsWith(targetType)) {
                 if (grantedAuth.getAuthority().contains(permission)) {

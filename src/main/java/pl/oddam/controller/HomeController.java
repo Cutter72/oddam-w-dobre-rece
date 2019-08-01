@@ -1,5 +1,6 @@
 package pl.oddam.controller;
 
+import org.springframework.security.access.prepost.PostAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,7 +13,7 @@ public class HomeController {
     public String home() {
         return "home";
     }
-
+    @PostAuthorize("hasPermission(returnObject, 'dupa')")
     @GetMapping("/test")
     public String testingViews() {
         return "user/formSuccess";

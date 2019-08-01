@@ -23,7 +23,6 @@ public class LoginController {
         if (error) {
             model.addAttribute("errorLogin", "Użytkownik lub hasło nieprawidłowe!");
         }
-
         return "login";
     }
 }

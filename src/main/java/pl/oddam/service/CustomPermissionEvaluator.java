@@ -15,7 +15,7 @@ public class CustomPermissionEvaluator implements PermissionEvaluator {
             return false;
         }
         String targetType = targetDomainObject.getClass().getSimpleName().toUpperCase();
-
+        System.out.println(targetType);
         return hasPrivilege(authentication, targetType, permission.toString().toUpperCase());
     }
 
@@ -31,10 +31,8 @@ public class CustomPermissionEvaluator implements PermissionEvaluator {
     private boolean hasPrivilege(Authentication auth, String targetType, String permission) {
         System.out.println(permission+" -hasPrivilege");
         for (GrantedAuthority grantedAuth : auth.getAuthorities()) {
-            if (grantedAuth.getAuthority().startsWith(targetType)) {
-                if (grantedAuth.getAuthority().contains(permission)) {
-                    return true;
-                }
+            if (grantedAuth.getAuthority().contains(permission)) {
+                return true;
             }
         }
         return false;

@@ -13,7 +13,7 @@ public class HomeController {
     public String home() {
         return "home";
     }
-    @PostAuthorize("hasPermission(returnObject, 'dupa')")
+    @PostAuthorize("hasPermission(returnObject, 'true')")
     @GetMapping("/test")
     public String testingViews() {
         return "user/formSuccess";

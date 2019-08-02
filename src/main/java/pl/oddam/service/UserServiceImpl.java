@@ -62,15 +62,27 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void activateUser(String email) {
+    public void activateNewUser(String email) {
         User user = userRepository.findByEmail(email);
         user.setEnabled(true);
+        Role role = roleRepository.findByName("ROLE_USER");
+        user.setRoles(new HashSet<>(Arrays.asList(role)));
         userRepository.save(user);
     }
     @Override
-    public void deActivateUser(String email) {
-        User user = userRepository.findByEmail(email);
+    public void banUser(Long id) {
+        User user = userRepository.findById(id).get();
         user.setEnabled(false);
+        Role role = roleRepository.findByName("ROLE_USER_DEACTIVATED");
+        user.setRoles(new HashSet<>(Arrays.asList(role)));
+        userRepository.save(user);
+    }
+    @Override
+    public void unBanUser(Long id) {
+        User user = userRepository.findById(id).get();
+        user.setEnabled(true);
+        Role role = roleRepository.findByName("ROLE_USER");
+        user.setRoles(new HashSet<>(Arrays.asList(role)));
         userRepository.save(user);
     }
 }

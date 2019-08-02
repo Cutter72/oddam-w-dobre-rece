@@ -13,10 +13,10 @@ public class HomeController {
         return "home";
     }
 
-    @GetMapping("/error")
-    public String error() {
-        return "error";
-    }
+//    @GetMapping("/error")
+//    public String error() {
+//        return "error";
+//    }
     @GetMapping("/test")
     public String testingViews() {
         return "user/formSuccess";

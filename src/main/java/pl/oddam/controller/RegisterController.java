@@ -76,7 +76,7 @@ public class RegisterController {
     @GetMapping("/{token}")
     public String tokenCheck(@PathVariable String token, Model model, RedirectAttributes ra) {
         if (tokenService.checkValidity(token,domainSettings.getRegisterTimeoutMillis())) {
-            userServiceImpl.activateUser(tokenService.getEmail(token));
+            userServiceImpl.activateNewUser(tokenService.getEmail(token));
             ra.addFlashAttribute("registerSuccess", "Konto pomyślnie aktywowane!");
             tokenService.deleteAllByEmail(tokenService.getEmail(token));
             return "redirect:/login";

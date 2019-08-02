@@ -8,7 +8,7 @@ public interface UserService {
     void saveAdmin(User user);
     void editAdmin(User user);
     void editUser(User user);
-    void activateUser(String email);
-
-    void deActivateUser(String email);
+    void activateNewUser(String email);
+    void banUser(Long id);
+    void unBanUser(Long id);
 }

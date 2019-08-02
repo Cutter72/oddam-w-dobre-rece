@@ -24,16 +24,20 @@ public class UserCheckController {
 
     @GetMapping("")
     public String admin(@AuthenticationPrincipal CurrentUser customUser) {
-        User entityUser;
-        try{
-            entityUser = customUser.getUser();
-        }catch(NullPointerException e){
+        User user;
+        try {
+            user = customUser.getUser();
+        } catch (NullPointerException ex) {
             return "redirect:/login";
         }
-        Role userRole = roleRepository.findByName("ROLE_ADMIN");
-        if (entityUser.getRoles().equals(new HashSet<Role>(Arrays.asList(userRole)))) {
+        Role adminRole = roleRepository.findByName("ROLE_ADMIN");
+        Role userRole = roleRepository.findByName("ROLE_USER");
+        if (user.getRoles().contains(adminRole)) {
             return "redirect:/admin";
         }
-        return "redirect:/user";
+        if (user.getRoles().contains(userRole)) {
+            return "redirect:/user";
+        }
+        return "redirect:/account/deactivated";
     }
 }

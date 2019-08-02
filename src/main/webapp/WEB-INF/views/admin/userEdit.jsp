@@ -111,7 +111,7 @@
                                     <a href="<jsp:include page="../../links/hrefAdminUserEdit.jsp"/>/${user.id}" class="btn btn--small">Edytuj</a>
                                     <a href="<jsp:include page="../../links/hrefAdminUserDelete.jsp"/>/${user.id}" class="btn btn--small deleteBtn">Usuń</a>
                                     <c:choose>
-                                        <c:when test="${user.enabled=='1'}">
+                                        <c:when test="${user.enabled}">
                                             <a href="<jsp:include page="../../links/hrefAdminUserDisable.jsp"/>/${user.id}" class="btn btn--small">Zablokuj</a>
                                         </c:when>
                                         <c:otherwise>

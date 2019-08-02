@@ -19,6 +19,8 @@ import javax.transaction.Transactional;
 import javax.validation.Valid;
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @Controller
 @RequestMapping("/admin/user")
@@ -38,7 +40,11 @@ public class AdminUserController {
         model.addAttribute("user", customUser.getUser());
         model.addAttribute("newUser", new User());
         Role userRole = roleRepository.findByName("ROLE_USER");
-        model.addAttribute("userList", userRepository.findAllByRoles(new HashSet<Role>(Arrays.asList(userRole))));
+        Role bannedUserRole = roleRepository.findByName("ROLE_USER_DEACTIVATED");
+        List<User> userList = userRepository.findAllByRoles(new HashSet<Role>(Arrays.asList(userRole)));
+        userList.addAll(userRepository.findAllByRoles(new HashSet<Role>(Arrays.asList(bannedUserRole))));
+        userList.sort((User u1, User u2) -> (int)(u1.getId()-u2.getId()));
+        model.addAttribute("userList", userList);
         return "adminUser";
     }
 
@@ -123,17 +129,13 @@ public class AdminUserController {
     }
     @GetMapping("/disable/{id}")
     public String adminUserDisable(@PathVariable Long id) {
-        User user = userRepository.findById(id).get();
-        user.setEnabled(false);
-        userRepository.save(user);
+        userServiceImpl.banUser(id);
         return "redirect:/admin/user#list";
     }
 
     @GetMapping("/enable/{id}")
     public String adminUserEnable(@PathVariable Long id) {
-        User user = userRepository.findById(id).get();
-        user.setEnabled(true);
-        userRepository.save(user);
+        userServiceImpl.unBanUser(id);
         return "redirect:/admin/user#list";
     }
 

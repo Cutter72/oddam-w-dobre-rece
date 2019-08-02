@@ -32,7 +32,7 @@
     </nav>
     <section class="login-page">
         <h2 class="color-red" style="color: red;">
-            Error! Nie masz dostępu do zasobów lub zostałeś zbanowany!<br/>
+            Nie masz dostępu do zasobów lub zostałeś zbanowany!<br/>
             Skontaktuj się z nami poprzez formularz kontaktowy.
         </h2>
         <h1>Przekierowanie na stronę główną za: <span id="timer">5</span> s</h1>

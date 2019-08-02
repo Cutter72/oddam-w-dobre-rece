@@ -21,4 +21,9 @@ public class HomeController {
     public String testingViews() {
         return "user/formSuccess";
     }
+    @GetMapping("/account/deactivated")
+    public String accountDeactivated() {
+        //todo logout code
+        return "accountDeactivated";
+    }
 }

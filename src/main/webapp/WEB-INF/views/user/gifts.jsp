@@ -15,8 +15,8 @@
 </head>
 <body>
 <header class="header--form-page" style="background-image: none">
-    <nav class="container container--70" style="text-align: center">
-        <ul class="nav--actions" style="text-align: center">
+    <nav class="container container--70">
+        <ul class="nav--actions">
             <li class="logged-user">
                 Witaj ${user.firstName}
                 <ul class="dropdown">
@@ -35,11 +35,16 @@
         </ul>
 
         <ul>
-            <li><a href="<jsp:include page="../../links/hrefAdmin.jsp"/>" class="btn btn--without-border">Zarządzanie Administratorami</a></li>
-            <li><a href="<jsp:include page="../../links/hrefAdminUser.jsp"/>" class="btn btn--without-border">Zarządzanie Użytkownikami</a>
+            <li><a href="/" class="btn btn--without-border active">Start</a></li>
+            <li><a href="<jsp:include page="../../links/hrefWhat.jsp"/>" class="btn btn--without-border">O co chodzi?</a>
             </li>
+            <li><a href="<jsp:include page="../../links/hrefAbout.jsp"/>" class="btn btn--without-border">O nas</a></li>
             <li>
-                <a href="<jsp:include page="../../links/hrefAdminOrganizations.jsp"/>" class="btn btn--without-border active">Zarządzanie Organizacjami</a>
+                <a href="<jsp:include page="../../links/hrefOrganizations.jsp"/>" class="btn btn--without-border"
+                >Fundacje i organizacje</a
+                >
+            </li>
+            <li><a href="<jsp:include page="../../links/hrefContact.jsp"/>" class="btn btn--without-border">Kontakt</a>
             </li>
         </ul>
     </nav>
@@ -70,7 +75,7 @@
                             <th>Worki</th>
                             <th>Data złożenia</th>
                             <th>Data odebrania</th>
-                            <th>Status</th>
+                            <th>Odebrane?</th>
                         </tr>
                         <c:forEach items="${giftList}" var="gift">
                             <tr>
@@ -79,15 +84,10 @@
                                 <td>${gift.created}</td>
                                 <td>${gift.timeCollected}</td>
                                 <td>${gift.collected}</td>
-                                <td>
-                                    <a href="<jsp:include page="../../links/hrefAdminGiftEdit.jsp"/>/${gift.id}" class="btn btn--small">Edytuj</a>
-                                    <a href="<jsp:include page="../../links/hrefAdminGiftDelete.jsp"/>/${gift.id}" class="btn btn--small deleteBtn">Usuń</a>
-                                </td>
                             </tr>
                         </c:forEach>
                     </table>
                 </section>
-
             </div>
         </div>
     </div>

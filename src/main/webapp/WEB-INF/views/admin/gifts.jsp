@@ -71,6 +71,8 @@
                             <th>Data złożenia</th>
                             <th>Data odebrania</th>
                             <th>Odebrane?</th>
+                            <th>Notatka dla kuriera</th>
+                            <th>Szczegóły</th>
                         </tr>
                         <c:forEach items="${giftList}" var="gift">
                             <tr>
@@ -79,6 +81,17 @@
                                 <td>${gift.created}</td>
                                 <td>${gift.timeCollected}</td>
                                 <td>${gift.collected}</td>
+                                <td>${gift.courierNote}</td>
+                                <td class="showDetailsBtn">Pokaż</td>
+                            </tr>
+                            <tr class="details" hidden>
+                                <td>${gift.organization.name}</td>
+                                <td>${gift.bags}</td>
+                                <td>${gift.created}</td>
+                                <td>${gift.timeCollected}</td>
+                                <td>${gift.collected}</td>
+                                <td>${gift.courierNote}</td>
+                                <td>Szczegóły</td>
                             </tr>
                         </c:forEach>
                     </table>
@@ -89,5 +102,6 @@
 </header>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="<c:url value="../../../js/confirm.js"/>" type="text/javascript"></script>
+<script src="<c:url value="../../../js/showDetails.js"/>" type="text/javascript"></script>
 </body>
 </html>

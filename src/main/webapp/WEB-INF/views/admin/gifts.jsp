@@ -87,7 +87,7 @@
                             <tr style="background-color: lightgrey" hidden>
                                 <td><b>Ulica:</b><br/>
                                     ${gift.street}</td>
-                                <td><b>Misto:</b><br/>
+                                <td><b>Miasto:</b><br/>
                                     ${gift.city}</td>
                                 <td><b>Kod pocztowy:</b><br/>
                                     ${gift.postCode}</td>

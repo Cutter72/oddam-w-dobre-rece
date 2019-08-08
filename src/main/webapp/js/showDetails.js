@@ -3,14 +3,15 @@ document.addEventListener("DOMContentLoaded", function () {
 
     showDetailsBtn.forEach(btn => {
          btn.addEventListener("click", function () {
-             console.log("weszło w guzik");
-             var details = this.parentElement.nextElementSibling;
-             console.log(details.hidden);
-             if (details.hidden) {
-                 details.hidden = false;
-             } else {
-                 details.hidden = true;
-             }
+         var details = this.parentElement.nextElementSibling;
+        console.log(btn);
+        if (details.hidden) {
+            btn.innerText = "Ukryj";
+            details.hidden = false;
+        } else {
+            btn.innerText = "Pokaż";
+            details.hidden = true;
+        }
          });
      })
 });

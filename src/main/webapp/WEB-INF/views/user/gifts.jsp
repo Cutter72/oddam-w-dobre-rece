@@ -72,18 +72,37 @@
                     <table class="table">
                         <tr>
                             <th>Organizacja</th>
+                            <th>Miasto organizacji</th>
                             <th>Worki</th>
                             <th>Data złożenia</th>
-                            <th>Data odebrania</th>
+                            <th>Preferowana data odebrania</th>
                             <th>Odebrane?</th>
+                            <th>Szczegóły</th>
                         </tr>
                         <c:forEach items="${giftList}" var="gift">
                             <tr>
                                 <td>${gift.organization.name}</td>
+                                <td>${gift.organization.city.name}</td>
                                 <td>${gift.bags}</td>
                                 <td>${gift.created}</td>
-                                <td>${gift.timeCollected}</td>
+                                <td>${gift.preferredDateOfCollection}</td>
                                 <td>${gift.collected}</td>
+                                <td class="showDetailsBtn btn btn--without-border">Pokaż</td>
+                            </tr>
+                            <tr style="background-color: lightgrey" hidden>
+                                <td><b>Ulica:</b><br/>
+                                        ${gift.street}</td>
+                                <td><b>Miasto:</b><br/>
+                                        ${gift.city}</td>
+                                <td><b>Kod pocztowy:</b><br/>
+                                        ${gift.postCode}</td>
+                                <td><b>Telefon:</b><br/>
+                                        ${gift.callNumber}</td>
+                                <td><b>Notatka dla kuriera:</b><br/>
+                                        ${gift.courierNote}</td>
+                                <td><b>Odebrano dnia:</b><br/>
+                                        ${gift.timeCollected}</td>
+                                <td></td>
                             </tr>
                         </c:forEach>
                     </table>
@@ -94,5 +113,6 @@
 </header>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="<c:url value="../../../js/confirm.js"/>" type="text/javascript"></script>
+<script src="<c:url value="../../../js/showDetails.js"/>" type="text/javascript"></script>
 </body>
 </html>

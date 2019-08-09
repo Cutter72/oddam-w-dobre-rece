@@ -23,6 +23,7 @@ public class Gift {
     private String postCode;
     private String callNumber;
     private LocalDateTime created;
+    private LocalDateTime updated;
     private Date preferredDateOfCollection;
     private Time preferredTimeOfCollection;
     private String courierNote;
@@ -31,6 +32,11 @@ public class Gift {
 
     @PrePersist
     public void setCreationDate () {
+        this.created = LocalDateTime.now();
+    }
+
+    @PreUpdate
+    public void setUpdatedDate () {
         this.created = LocalDateTime.now();
     }
 }

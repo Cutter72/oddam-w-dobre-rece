@@ -39,4 +39,9 @@ public class UserGiftsController {
         return "redirect:/user/gifts";
     }
 
+    @GetMapping("/edit/{id}")
+    public String userGiftEdit() {
+        return "/user/gifts";
+    }
+
 }

@@ -84,7 +84,7 @@
                                 <td>${gift.collected}</td>
                                 <td class="showDetailsBtn btn btn--without-border">Pokaż</td>
                             </tr>
-                            <tr style="background-color: lightgrey" hidden>
+                            <tr style="background-color: #f0f0f0" hidden>
                                 <td><b>Ulica:</b><br/>
                                     ${gift.street}</td>
                                 <td><b>Miasto:</b><br/>

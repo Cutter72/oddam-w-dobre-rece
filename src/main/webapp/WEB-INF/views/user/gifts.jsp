@@ -67,9 +67,9 @@
                             <th>Organizacja</th>
                             <th>Miasto organizacji</th>
                             <th>Worki</th>
-                            <th>Data utworzenia</th>
+                            <th>Data utworzenia <a href="/user/gifts?sortingBy=created&sortingOrder=asc" class="btn--small btn--without-border">ASC</a>/<a href="/user/gifts?sortingBy=created&sortingOrder=des" class="btn--small btn--without-border">DES</a></th>
                             <th>Preferowana data odebrania</th>
-                            <th>Odebrane?</th>
+                            <th>Odebrane? <a href="/user/gifts?sortingBy=dateCollected&sortingOrder=asc" class="btn--small btn--without-border">ASC</a>/<a href="/user/gifts?sortingBy=dateCollected&sortingOrder=des" class="btn--small btn--without-border">DES</a></th>
                             <th>Szczegóły</th>
                         </tr>
                         <c:forEach items="${giftList}" var="gift">

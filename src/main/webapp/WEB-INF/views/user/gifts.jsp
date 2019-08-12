@@ -67,7 +67,7 @@
                             <th>Organizacja</th>
                             <th>Miasto organizacji</th>
                             <th>Worki</th>
-                            <th>Data złożenia</th>
+                            <th>Data utworzenia</th>
                             <th>Preferowana data odebrania</th>
                             <th>Odebrane?</th>
                             <th>Szczegóły</th>
@@ -78,7 +78,7 @@
                                 <td>${gift.organization.city.name}</td>
                                 <td>${gift.bags}</td>
                                 <td>${gift.created}</td>
-                                <td>${gift.preferredDateOfCollection}</td>
+                                <td>${gift.preferredDateOfCollection} ${gift.preferredTimeOfCollection}</td>
                                 <td>
                                     <c:choose>
                                         <c:when test="${gift.collected}">
@@ -125,7 +125,7 @@
     </div>
 </header>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="<c:url value="../../../js/confirm.js"/>" type="text/javascript"></script>
 <script src="<c:url value="../../../js/showDetails.js"/>" type="text/javascript"></script>
+<script src="<c:url value="../../../js/makeStatusTrue.js"/>" type="text/javascript"></script>
 </body>
 </html>

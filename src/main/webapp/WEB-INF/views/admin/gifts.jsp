@@ -77,10 +77,10 @@
                                 <td>
                                     <c:choose>
                                         <c:when test="${gift.collected}">
-                                            Tak
+                                            Tak<img width= "15px" src="https://upload.wikimedia.org/wikipedia/commons/8/80/Symbol_OK.svg"/>
                                         </c:when>
                                         <c:otherwise>
-                                            <span>Nie<br/></span>
+                                            <span>Nie ❌️</span>
                                             <span class="makeStatusTrue btn btn--without-border">Ustaw jako odebrane</span>
                                             <div hidden>
                                             <form method="post">

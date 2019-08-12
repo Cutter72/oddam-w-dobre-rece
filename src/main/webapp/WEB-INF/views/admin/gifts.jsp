@@ -55,27 +55,6 @@
 
                 <section class="container">
                     <h3 class="slogan--steps-title">
-                        Formularz edycji daru
-                    </h3>
-                    <form method="post">
-                        <table class="table">
-                            <tr>
-                                <th>
-                                    <div class="form-group">
-                                        <label> Data <input type="date" name="date" class="dateInput"/> </label>
-                                    </div>
-                                </th>
-                            </tr>
-                        </table>
-                        <div class="form-group form-group--buttons">
-                            <a href="<jsp:include page="../../links/hrefUserGifts.jsp"/>" class="btn btn--small">Anuluj</a>
-                            <button class="btn btn--small" type="submit">Zapisz zmiany</button>
-                        </div>
-                    </form>
-                </section>
-
-                <section class="container">
-                    <h3 class="slogan--steps-title">
                         Lista moich darów
                     </h3>
                     <table class="table">
@@ -95,9 +74,27 @@
                                 <td>${gift.bags}</td>
                                 <td>${gift.created}</td>
                                 <td>${gift.preferredDateOfCollection}</td>
-                                <td>${gift.collected}</td>
+                                <td>
+                                    <c:choose>
+                                        <c:when test="${gift.collected}">
+                                            Tak
+                                        </c:when>
+                                        <c:otherwise>
+                                            <span>Nie<br/></span>
+                                            <span class="makeStatusTrue btn btn--without-border">Ustaw jako odebrane</span>
+                                            <div hidden>
+                                            <form method="post">
+                                                <input type="date" name="date" class="dateInput" required/><br/>
+                                                <button type="submit" class="btn">Ustaw</button>
+                                                <a href="/user/gifts" class="btn">Anuluj</a>
+                                                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                                                <input type="hidden" name="giftId" value="${gift.id}"/>
+                                            </form>
+                                            </div>
+                                        </c:otherwise>
+                                    </c:choose>
+                                    </td>
                                 <td class="showDetailsBtn btn btn--without-border">Pokaż</td>
-                                <td class="makeStatusTrue btn btn--without-border">Ustaw jako odebrane</td>
                             </tr>
                             <tr style="background-color: #f0f0f0" hidden>
                                 <td><b>Ulica:</b><br/>
@@ -111,7 +108,7 @@
                                 <td><b>Notatka dla kuriera:</b><br/>
                                     ${gift.courierNote}</td>
                                 <td><b>Odebrano dnia:</b><br/>
-                                    ${gift.timeCollected}</td>
+                                    ${gift.dateCollected}</td>
                                 <td><b>Aktualizowano dnia:</b><br/>
                                     ${gift.updated}</td>
                             </tr>
@@ -125,5 +122,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="<c:url value="../../../js/confirm.js"/>" type="text/javascript"></script>
 <script src="<c:url value="../../../js/showDetails.js"/>" type="text/javascript"></script>
+<script src="<c:url value="../../../js/makeStatusTrue.js"/>" type="text/javascript"></script>
 </body>
 </html>

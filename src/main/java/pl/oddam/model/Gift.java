@@ -5,6 +5,7 @@ import lombok.Data;
 import javax.persistence.*;
 import java.sql.Date;
 import java.sql.Time;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
@@ -27,7 +28,7 @@ public class Gift {
     private Date preferredDateOfCollection;
     private Time preferredTimeOfCollection;
     private String courierNote;
-    private LocalDateTime timeCollected;
+    private LocalDate dateCollected;
     private boolean collected;
 
     @PrePersist

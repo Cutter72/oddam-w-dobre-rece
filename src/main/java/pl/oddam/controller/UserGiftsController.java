@@ -3,11 +3,14 @@ package pl.oddam.controller;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import pl.oddam.model.CurrentUser;
+import pl.oddam.model.Gift;
 import pl.oddam.model.User;
 import pl.oddam.repository.*;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Controller
 @RequestMapping("/user/gifts")
@@ -39,9 +42,18 @@ public class UserGiftsController {
         return "redirect:/user/gifts";
     }
 
-    @GetMapping("/edit/{id}")
-    public String userGiftEdit() {
-        return "/user/gifts";
+    @PostMapping("")
+    public String userGiftEdit(@RequestParam Long giftId, @RequestParam String date) {
+        String[] dateStrings = date.split("-");
+        int[] dateInts = new int[dateStrings.length];
+        for (int i = 0 ; i < dateStrings.length ; i++) {
+            dateInts[i] = Integer.parseInt(dateStrings[i]);
+        }
+        Gift gift = giftRepository.findById(giftId).get();
+        gift.setDateCollected(LocalDate.of(dateInts[0], dateInts[1], dateInts[2]).plusDays(1)); //why databse save it one day back?
+        gift.setCollected(true);
+        giftRepository.save(gift);
+        return "redirect:/user/gifts";
     }
 
 }

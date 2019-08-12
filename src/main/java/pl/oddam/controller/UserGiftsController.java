@@ -10,7 +10,6 @@ import pl.oddam.model.User;
 import pl.oddam.repository.*;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.Comparator;
 import java.util.List;
 
@@ -41,9 +40,9 @@ public class UserGiftsController {
         } else if (sortingBy.equals("created") && sortingOrder.equals("des")) {
             giftList.sort(Comparator.nullsFirst(Comparator.comparing(Gift::getCreated)).reversed());
         } else if (sortingBy.equals("dateCollected") && sortingOrder.equals("asc")) {
-            giftList.sort(Comparator.nullsFirst(Comparator.comparing(Gift::isCollected)));
+            giftList.sort(Comparator.nullsFirst(Comparator.comparing(Gift::getDateCollected, Comparator.nullsFirst(Comparator.naturalOrder()))));
         } else if (sortingBy.equals("dateCollected") && sortingOrder.equals("des")) {
-            giftList.sort(Comparator.nullsFirst(Comparator.comparing(Gift::isCollected)).reversed());
+            giftList.sort(Comparator.nullsFirst(Comparator.comparing(Gift::getDateCollected, Comparator.nullsFirst(Comparator.naturalOrder()))).reversed());
         }
         model.addAttribute("giftList", giftList);
         return destinationView;

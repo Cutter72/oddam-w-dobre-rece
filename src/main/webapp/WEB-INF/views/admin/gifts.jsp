@@ -77,14 +77,14 @@
                                 <td>
                                     <c:choose>
                                         <c:when test="${gift.collected}">
-                                            Tak<img width= "15px" src="https://upload.wikimedia.org/wikipedia/commons/8/80/Symbol_OK.svg"/>
+                                            Tak<img width= "20px" src="https://upload.wikimedia.org/wikipedia/commons/8/80/Symbol_OK.svg"/>
                                         </c:when>
                                         <c:otherwise>
                                             <span>Nie ❌️</span>
                                             <span class="makeStatusTrue btn btn--without-border">Ustaw jako odebrane</span>
                                             <div hidden>
                                             <form method="post">
-                                                <input type="date" name="date" class="dateInput" required/><br/>
+                                                <label>Podaj datę odebrania:</label><input type="date" name="date" class="dateInput" required/><br/>
                                                 <button type="submit" class="btn">Ustaw</button>
                                                 <a href="/user/gifts" class="btn">Anuluj</a>
                                                 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>

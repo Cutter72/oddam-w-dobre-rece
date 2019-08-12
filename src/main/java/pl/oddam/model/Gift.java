@@ -38,6 +38,6 @@ public class Gift {
 
     @PreUpdate
     public void setUpdatedDate () {
-        this.created = LocalDateTime.now();
+        this.updated = LocalDateTime.now();
     }
 }

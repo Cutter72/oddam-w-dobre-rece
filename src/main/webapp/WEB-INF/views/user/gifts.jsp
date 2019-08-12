@@ -60,13 +60,6 @@
 
                 <section class="container">
                     <h3 class="slogan--steps-title">
-                        Formularz edycji daru
-                    </h3>
-                    <%-- Edit collections form here--%>
-                </section>
-
-                <section class="container">
-                    <h3 class="slogan--steps-title">
                         Lista moich darów
                     </h3>
                     <table class="table">
@@ -86,7 +79,26 @@
                                 <td>${gift.bags}</td>
                                 <td>${gift.created}</td>
                                 <td>${gift.preferredDateOfCollection}</td>
-                                <td>${gift.collected}</td>
+                                <td>
+                                    <c:choose>
+                                        <c:when test="${gift.collected}">
+                                            Tak<img width= "20px" src="https://upload.wikimedia.org/wikipedia/commons/8/80/Symbol_OK.svg"/>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <span>Nie ❌️</span>
+                                            <span class="makeStatusTrue btn btn--without-border">Ustaw jako odebrane</span>
+                                            <div hidden>
+                                                <form method="post">
+                                                    <label>Podaj datę odebrania:</label><input type="date" name="date" class="dateInput" required/><br/>
+                                                    <button type="submit" class="btn">Ustaw</button>
+                                                    <a href="/user/gifts" class="btn">Anuluj</a>
+                                                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                                                    <input type="hidden" name="giftId" value="${gift.id}"/>
+                                                </form>
+                                            </div>
+                                        </c:otherwise>
+                                    </c:choose>
+                                </td>
                                 <td class="showDetailsBtn btn btn--without-border">Pokaż</td>
                             </tr>
                             <tr style="background-color: #f0f0f0" hidden>
@@ -101,8 +113,9 @@
                                 <td><b>Notatka dla kuriera:</b><br/>
                                         ${gift.courierNote}</td>
                                 <td><b>Odebrano dnia:</b><br/>
-                                        ${gift.timeCollected}</td>
-                                <td></td>
+                                        ${gift.dateCollected}</td>
+                                <td><b>Aktualizowano dnia:</b><br/>
+                                        ${gift.updated}</td>
                             </tr>
                         </c:forEach>
                     </table>

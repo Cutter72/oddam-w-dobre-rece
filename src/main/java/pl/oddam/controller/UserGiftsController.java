@@ -11,6 +11,8 @@ import pl.oddam.repository.*;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Comparator;
+import java.util.List;
 
 @Controller
 @RequestMapping("/user/gifts")
@@ -24,7 +26,7 @@ public class UserGiftsController {
     }
 
     @GetMapping("")
-    public String userGifts(@AuthenticationPrincipal CurrentUser customUser, Model model) {
+    public String userGifts(@AuthenticationPrincipal CurrentUser customUser, Model model, @RequestParam(defaultValue = "none") String sortingBy, @RequestParam(defaultValue = "default") String sortingOrder) {
         User user = customUser.getUser();
         String destinationView;
         if (user.getRoles().contains(roleRepository.findByName("ROLE_ADMIN"))) {
@@ -33,7 +35,17 @@ public class UserGiftsController {
             destinationView = "user/gifts";
         }
         model.addAttribute("user", user);
-        model.addAttribute("giftList", giftRepository.findAllByUser(user));
+        List<Gift> giftList = giftRepository.findAllByUser(user);
+        if (sortingBy.equals("created") && sortingOrder.equals("asc")) {
+            giftList.sort(Comparator.nullsFirst(Comparator.comparing(Gift::getCreated)));
+        } else if (sortingBy.equals("created") && sortingOrder.equals("des")) {
+            giftList.sort(Comparator.nullsFirst(Comparator.comparing(Gift::getCreated)).reversed());
+        } else if (sortingBy.equals("dateCollected") && sortingOrder.equals("asc")) {
+            giftList.sort(Comparator.nullsFirst(Comparator.comparing(Gift::isCollected)));
+        } else if (sortingBy.equals("dateCollected") && sortingOrder.equals("des")) {
+            giftList.sort(Comparator.nullsFirst(Comparator.comparing(Gift::isCollected)).reversed());
+        }
+        model.addAttribute("giftList", giftList);
         return destinationView;
     }
 

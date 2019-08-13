@@ -37,7 +37,7 @@
             </h1>
 
             <ul class="slogan--buttons">
-                <li><a href="/user#Form" class="btn btn--large">Oddaj rzeczy</a></li>
+                <li style="justify-content: center;"><a href="/user#Form" class="btn btn--large">Oddaj rzeczy</a></li>
             </ul>
         </div>
     </div>

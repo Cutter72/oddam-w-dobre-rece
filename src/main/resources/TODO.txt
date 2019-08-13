@@ -1,2 +1,2 @@
-- check user enabled status (disabled = banned)
-- admin panel show Gifts
+- session.isAdmin = false bug when bypassing /usercheck
+- stepForm new architecture

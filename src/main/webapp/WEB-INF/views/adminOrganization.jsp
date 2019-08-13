@@ -41,6 +41,7 @@
             <li>
                 <a href="<jsp:include page="../links/hrefAdminOrganizations.jsp"/>" class="btn btn--without-border active">Zarządzanie Organizacjami</a>
             </li>
+            <li><a href="<jsp:include page="../links/hrefAdminGiftsManagement.jsp"/>" class="btn btn--without-border">Zarządzanie Darami</a></li>
         </ul>
     </nav>
 

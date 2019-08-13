@@ -36,11 +36,9 @@
 
         <ul>
             <li><a href="<jsp:include page="../links/hrefAdmin.jsp"/>" class="btn btn--without-border active">Zarządzanie Administratorami</a></li>
-            <li><a href="<jsp:include page="../links/hrefAdminUser.jsp"/>" class="btn btn--without-border">Zarządzanie Użytkownikami</a>
-            </li>
-            <li>
-                <a href="<jsp:include page="../links/hrefAdminOrganizations.jsp"/>" class="btn btn--without-border">Zarządzanie Instytucjami</a>
-            </li>
+            <li><a href="<jsp:include page="../links/hrefAdminUser.jsp"/>" class="btn btn--without-border">Zarządzanie Użytkownikami</a></li>
+            <li><a href="<jsp:include page="../links/hrefAdminOrganizations.jsp"/>" class="btn btn--without-border">Zarządzanie Instytucjami</a></li>
+            <li><a href="<jsp:include page="../links/hrefAdminGiftsManagement.jsp"/>" class="btn btn--without-border">Zarządzanie Darami</a></li>
         </ul>
     </nav>
 

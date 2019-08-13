@@ -2,13 +2,8 @@ document.addEventListener("DOMContentLoaded", function() {
     /**
      * HomePage - Help section
      */
-    var urlParams = new URLSearchParams(window.location.search);
-    var step;
-    if (urlParams.has("step")){
-        step = urlParams.get("step");
-    } else {
-        step = 1;
-    }
+
+    var step = 1;
 
     class Help {
     constructor($el) {
@@ -254,7 +249,6 @@ document.addEventListener("DOMContentLoaded", function() {
         btn.addEventListener("click", e => {
           e.preventDefault();
           this.currentStep--;
-        window.history.pushState(null, "TitleURL","/user?step="+this.currentStep+"#Form");
           this.updateForm();
         });
       });

@@ -193,6 +193,7 @@
                     <button type="button" class="btn prev-step">Wstecz</button>
                     <button type="submit" class="btn">Szukaj</button>
                     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                    <input type="hidden" name="step" value="1"/>
                 </div>
             </div>
 

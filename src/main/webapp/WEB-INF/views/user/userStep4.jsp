@@ -90,7 +90,7 @@
                 </c:forEach>
 
                 <div class="form-group form-group--buttons">
-                    <a href="/user?step=3#Form" style="margin-right: 30px"><button type="button" class="btn">Wstecz</button></a>
+                    <a href="/user#Form" style="margin-right: 30px"><button type="button" class="btn">Wstecz</button></a>
                     <button type="button" class="btn next-step">Dalej</button>
                 </div>
             </div>
@@ -199,6 +199,7 @@
                     <button type="button" class="btn prev-step">Wstecz</button>
                     <button type="submit" class="btn">Potwierdzam</button>
                     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                    <input type="hidden" name="step" value="4"/>
                 </div>
             </div>
 

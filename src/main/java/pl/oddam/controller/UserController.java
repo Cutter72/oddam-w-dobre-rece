@@ -1,7 +1,5 @@
 package pl.oddam.controller;
 
-import org.springframework.security.access.prepost.PostAuthorize;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -38,71 +36,84 @@ public class UserController {
     }
 
     @GetMapping("")
-    public String user(@AuthenticationPrincipal CurrentUser customUser, Model model, HttpSession sess) {
-        if (sess.getAttribute("stepOneToThreeParameters") == null) {
-            sess.setAttribute("stepOneToThreeParameters", new StepOneToThreeParameters());
+    public String user(@AuthenticationPrincipal CurrentUser customUser, Model model, HttpSession sess, @RequestParam(defaultValue = "1") int step) {
+        if (step == 1) {
+            if (sess.getAttribute("stepOneToThreeParameters") == null) {
+                model.addAttribute("stepOneToThreeParameters", new StepOneToThreeParameters());
+            } else {
+                model.addAttribute("stepOneToThreeParameters", sess.getAttribute("stepOneToThreeParameters"));
+            }
+            model.addAttribute("user", customUser.getUser());
+            model.addAttribute("organizationNeedList", organizationNeedRepository.findAll());
+            model.addAttribute("organizationTargetList", organizationTargetRepository.findAll());
+            model.addAttribute("cityList", cityRepository.findAll());
+            if ((boolean) sess.getAttribute("isAdmin")) {
+                model.addAttribute("adminPanel", "<li><a href=\"/admin\">Panel Admina</a></li>");
+            }
+            return "user";
+        } else if (step == 4 && sess.getAttribute("stepOneToThreeParameters") != null) {
+            StepOneToThreeParameters stepOneToThreeParameters = (StepOneToThreeParameters) sess.getAttribute("stepOneToThreeParameters");
+            Set<Organization> organizationList = organizationServiceImpl.findAllByNameCityNeedTarget(stepOneToThreeParameters.getOrganizationName(), stepOneToThreeParameters.getCityId(), stepOneToThreeParameters.getNeedIdTab(), stepOneToThreeParameters.getTargetIdTab());
+            if (organizationList.size() < 1) {
+                organizationList = new HashSet<>(organizationRepository.findAll());
+                model.addAttribute("noOrganizationFound", "Niestety żadna organizacja nie spełnia podanych kryteriów. Oto lista wszystkich organizacji: ");
+            }
+            model.addAttribute("organizationList", organizationList);
+            model.addAttribute("bags", stepOneToThreeParameters.getBags());
+            model.addAttribute("gift", new Gift());
+            model.addAttribute("user", customUser.getUser());
+            model.addAttribute("selectedNeedsToGive", organizationNeedRepository.findAllById(Arrays.asList(stepOneToThreeParameters.getNeedIdTab())));
+            if ((boolean) sess.getAttribute("isAdmin")) {
+                model.addAttribute("adminPanel", "<li><a href=\"/admin\">Panel Admina</a></li>");
+            }
+            return "user/userStep4";
+        } else {
+            return "redirect:/user";
         }
-        model.addAttribute("stepOneToThreeParameters", sess.getAttribute("stepOneToThreeParameters"));
-        model.addAttribute("user", customUser.getUser());
-        model.addAttribute("organizationNeedList", organizationNeedRepository.findAll());
-        model.addAttribute("organizationTargetList", organizationTargetRepository.findAll());
-        model.addAttribute("cityList", cityRepository.findAll());
-        if ((boolean)sess.getAttribute("isAdmin")) {
-            model.addAttribute("adminPanel", "<li><a href=\"/admin\">Panel Admina</a></li>");
-        }
-        return "user";
     }
 
     @PostMapping("")
-    public String userFormStepOneSearchOrganizations(StepOneToThreeParameters stepOneToThreeParameters, HttpSession sess) {
-        sess.setAttribute("stepOneToThreeParameters", stepOneToThreeParameters);
-        return "redirect:/user/form/step2#Form";
-    }
-
-    @GetMapping("/form/step2")
-    public String userForm2(@AuthenticationPrincipal CurrentUser customUser, Model model, HttpSession sess) {
-        StepOneToThreeParameters stepOneToThreeParameters = (StepOneToThreeParameters)sess.getAttribute("stepOneToThreeParameters");
-        if (stepOneToThreeParameters == null) {
+    public String userFormStepOneSearchOrganizations(@AuthenticationPrincipal CurrentUser customUser, StepOneToThreeParameters stepOneToThreeParameters, HttpSession sess, Model model,
+                                                     @RequestParam(defaultValue = "1") int step, Gift gift, @RequestParam(required = false) String date, @RequestParam(required = false) String time) {
+        if (step == 1) {
+            sess.setAttribute("stepOneToThreeParameters", stepOneToThreeParameters);
+            Set<Organization> organizationList = organizationServiceImpl.findAllByNameCityNeedTarget(stepOneToThreeParameters.getOrganizationName(), stepOneToThreeParameters.getCityId(), stepOneToThreeParameters.getNeedIdTab(), stepOneToThreeParameters.getTargetIdTab());
+            if (organizationList.size() < 1) {
+                organizationList = new HashSet<>(organizationRepository.findAll());
+                model.addAttribute("noOrganizationFound", "Niestety żadna organizacja nie spełnia podanych kryteriów. Oto lista wszystkich organizacji: ");
+            }
+            model.addAttribute("organizationList", organizationList);
+            model.addAttribute("bags", stepOneToThreeParameters.getBags());
+            model.addAttribute("gift", new Gift());
+            model.addAttribute("user", customUser.getUser());
+            model.addAttribute("selectedNeedsToGive", organizationNeedRepository.findAllById(Arrays.asList(stepOneToThreeParameters.getNeedIdTab())));
+            if ((boolean)sess.getAttribute("isAdmin")) {
+                model.addAttribute("adminPanel", "<li><a href=\"/admin\">Panel Admina</a></li>");
+            }
+            return "redirect:/user?step=4";
+        } else if (step == 4) {
+            User currentUser = customUser.getUser();
+            gift.setUser(currentUser);
+            if (!date.equalsIgnoreCase("")) {
+                String[] dateInts = date.split("-");
+                int year = Integer.parseInt(dateInts[0]);
+                int month = Integer.parseInt(dateInts[1]);
+                int day = Integer.parseInt(dateInts[2]);
+                gift.setPreferredDateOfCollection(new Date(year - 1900, month - 1, day + 1));
+            }
+            if (!time.equalsIgnoreCase("")) {
+                String[] timeInts = time.split(":");
+                int hh = Integer.parseInt(timeInts[0]);
+                int mm = Integer.parseInt(timeInts[1]);
+                gift.setPreferredTimeOfCollection(new Time(hh + 1, mm, 0)); //why adding or substracting for database proper values?
+            }
+            gift.setBags(((StepOneToThreeParameters) sess.getAttribute("stepOneToThreeParameters")).getBags());
+            giftRepository.save(gift);
+            return "redirect:/user/form/success#Form";
+        } else {
             return "redirect:/user";
         }
-        Set<Organization> organizationList = organizationServiceImpl.findAllByNameCityNeedTarget(stepOneToThreeParameters.getOrganizationName(), stepOneToThreeParameters.getCityId(), stepOneToThreeParameters.getNeedIdTab(), stepOneToThreeParameters.getTargetIdTab());
-        if (organizationList.size() < 1) {
-            organizationList = new HashSet<>(organizationRepository.findAll());
-            model.addAttribute("noOrganizationFound", "Niestety żadna organizacja nie spełnia podanych kryteriów. Oto lista wszystkich organizacji: ");
-        }
-        model.addAttribute("organizationList", organizationList);
-        model.addAttribute("bags", stepOneToThreeParameters.getBags());
-        model.addAttribute("gift", new Gift());
-        model.addAttribute("user", customUser.getUser());
-        model.addAttribute("selectedNeedsToGive", organizationNeedRepository.findAllById(Arrays.asList(stepOneToThreeParameters.getNeedIdTab())));
-        if ((boolean)sess.getAttribute("isAdmin")) {
-            model.addAttribute("adminPanel", "<li><a href=\"/admin\">Panel Admina</a></li>");
-        }
-        return "user/userStep4";
-    }
 
-    @PostMapping("/form/step2")
-    public String userFormSummary(Gift gift, @RequestParam(required = false) String date, @RequestParam(required = false) String time, @AuthenticationPrincipal CurrentUser customUser, HttpSession sess) {
-        User currentUser = customUser.getUser();
-        gift.setUser(currentUser);
-        if (!date.equalsIgnoreCase("")) {
-            String[] dateInts = date.split("-");
-            int year = Integer.parseInt(dateInts[0]);
-            int month = Integer.parseInt(dateInts[1]);
-            int day = Integer.parseInt(dateInts[2]);
-            gift.setPreferredDateOfCollection(new Date(year-1900, month-1,day+1));
-        }
-
-        if (!time.equalsIgnoreCase("")) {
-            String[] timeInts = time.split(":");
-            int hh = Integer.parseInt(timeInts[0]);
-            int mm = Integer.parseInt(timeInts[1]);
-            gift.setPreferredTimeOfCollection(new Time(hh + 1, mm, 0)); //why adding or substracting for database proper values?
-        }
-        gift.setBags(((StepOneToThreeParameters)sess.getAttribute("stepOneToThreeParameters")).getBags());
-
-        giftRepository.save(gift);
-        return "redirect:/user/form/success#Form";
     }
 
     @GetMapping("/form/success")

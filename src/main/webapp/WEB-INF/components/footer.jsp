@@ -13,7 +13,7 @@
             <div class="form-group form-group--50"><input type="email" name="email" placeholder="E-mail" maxlength="31" value="${email}" required/></div>
             <div class="form-group"><textarea name="text" placeholder="Wiadomość" rows="5" maxlength="255" required>${text}</textarea></div>
             <h3 style="color: #b92c28;">${captchaNotChecked}</h3>
-            <div class="g-recaptcha form-group" data-sitekey="6LfTZK4UAAAAAODRi5ewVgSq35VEWyLgjXbfZTo8"></div>
+            <div class="g-recaptcha form-group" data-sitekey="6LeWZa4UAAAAAB6oRn5dNo86whatF2wBqS9nuOmo"></div>
             <br/>
             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
             <button class="btn" type="submit">Wyślij</button>

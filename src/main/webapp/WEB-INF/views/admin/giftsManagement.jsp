@@ -23,7 +23,7 @@
                     <li><a href="<jsp:include page="../../links/hrefUserProfile.jsp"/>">Profil</a></li>
                     <li><a href="<jsp:include page="../../links/hrefUserSettings.jsp"/>">Ustawienia</a></li>
                     <li><a href="<jsp:include page="../../links/hrefUserGifts.jsp"/>">Moje dary</a></li>
-                    <li><a href="<jsp:include page="../../links/hrefUserCollections.jsp"/>">Moje zbiórki</a></li>
+                    ${adminPanel}
                     <li>
                         <form action="/logout" method="post">
                             <input class="btn--small" type="submit" value="Wyloguj">
@@ -35,20 +35,20 @@
         </ul>
 
         <ul>
-            <li><a href="<jsp:include page="../../links/hrefAdmin.jsp"/>" class="btn btn--without-border active">Zarządzanie Administratorami</a></li>
+            <li><a href="<jsp:include page="../../links/hrefAdmin.jsp"/>" class="btn btn--without-border">Zarządzanie Administratorami</a></li>
             <li><a href="<jsp:include page="../../links/hrefAdminUser.jsp"/>" class="btn btn--without-border">Zarządzanie Użytkownikami</a>
             </li>
             <li>
                 <a href="<jsp:include page="../../links/hrefAdminOrganizations.jsp"/>" class="btn btn--without-border">Zarządzanie Instytucjami</a>
             </li>
-            <li><a href="<jsp:include page="../../links/hrefAdminGiftsManagement.jsp"/>" class="btn btn--without-border">Zarządzanie Darami</a></li>
+            <li><a href="<jsp:include page="../../links/hrefAdminGiftsManagement.jsp"/>" class="btn btn--without-border active">Zarządzanie Darami</a></li>
         </ul>
     </nav>
 
     <div class="container">
         <div class="slogan--item" style="width: 100%">
             <h2>
-                Moje zbiórki
+                Zarządzanie Darami
             </h2>
         </div>
         <div class="tab-content">
@@ -56,7 +56,7 @@
 
                 <section class="container">
                     <h3 class="slogan--steps-title">
-                        Lista moich darów
+                        Lista darów
                     </h3>
                     <table class="table">
                         <tr>

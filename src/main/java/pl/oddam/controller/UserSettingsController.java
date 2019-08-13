@@ -12,29 +12,39 @@ import pl.oddam.model.CurrentUser;
 import pl.oddam.model.User;
 import pl.oddam.repository.UserRepository;
 
+import javax.servlet.http.HttpSession;
+
 @Controller
 @RequestMapping("/user/settings")
-public class SettingsController {
+public class UserSettingsController {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
 
-    public SettingsController(UserRepository userRepository, PasswordEncoder passwordEncoder) {
+    public UserSettingsController(UserRepository userRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
     }
 
     @GetMapping("")
-    public String userSettings(@AuthenticationPrincipal CurrentUser customUser, Model model) {
+    public String userSettings(@AuthenticationPrincipal CurrentUser customUser, Model model, HttpSession sess) {
         model.addAttribute("user", customUser.getUser());
+        if ((boolean)sess.getAttribute("isAdmin")) {
+            model.addAttribute("adminPanel", "<li><a href=\"/admin\">Panel Admina</a></li>");
+        }
         return "user/settings";
     }
+
     @GetMapping("/")
     public String userSettingsSlash() {
         return "redirect:/user/settings";
     }
+
     @GetMapping("/edit-personal-data")
-    public String editPersonalData(@AuthenticationPrincipal CurrentUser customUser, Model model) {
+    public String editPersonalData(@AuthenticationPrincipal CurrentUser customUser, Model model, HttpSession sess) {
         model.addAttribute("user", customUser.getUser());
+        if ((boolean)sess.getAttribute("isAdmin")) {
+            model.addAttribute("adminPanel", "<li><a href=\"/admin\">Panel Admina</a></li>");
+        }
         return "user/editPersonalData";
     }
     @PostMapping("/edit-personal-data")
@@ -45,13 +55,16 @@ public class SettingsController {
         return "redirect:/user/profile";
     }
     @GetMapping("/edit-password")
-    public String editPassword(@AuthenticationPrincipal CurrentUser customUser, Model model) {
+    public String editPassword(@AuthenticationPrincipal CurrentUser customUser, Model model, HttpSession sess) {
         model.addAttribute("user", customUser.getUser());
+        if ((boolean)sess.getAttribute("isAdmin")) {
+            model.addAttribute("adminPanel", "<li><a href=\"/admin\">Panel Admina</a></li>");
+        }
         return "user/editPassword";
     }
 
     @PostMapping("/edit-password")
-    public String editPasswordSaveToDb(@AuthenticationPrincipal CurrentUser customUser, @RequestParam String oldPassword, @RequestParam String newPassword, Model model) {
+    public String editPasswordSaveToDb(@AuthenticationPrincipal CurrentUser customUser, @RequestParam String oldPassword, @RequestParam String newPassword, Model model, HttpSession sess) {
         User user = customUser.getUser();
         if (passwordEncoder.matches(oldPassword, user.getPassword())) {
             user.setPassword(passwordEncoder.encode(newPassword));
@@ -59,6 +72,9 @@ public class SettingsController {
             model.addAttribute("success", "Hasło zmienione!");
         }
         model.addAttribute("user", customUser.getUser());
+        if ((boolean)sess.getAttribute("isAdmin")) {
+            model.addAttribute("adminPanel", "<li><a href=\"/admin\">Panel Admina</a></li>");
+        }
         return "user/editPassword";
     }
 }

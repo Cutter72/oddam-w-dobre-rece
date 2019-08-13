@@ -42,6 +42,7 @@ public class AdminOrganizationController {
         model.addAttribute("organizationTypeList", organizationTypeRepository.findAll());
         model.addAttribute("organizationTargetList", organizationTargetRepository.findAll());
         model.addAttribute("cityList", cityRepository.findAll());
+        model.addAttribute("adminPanel", "<li><a href=\"/admin\">Panel Admina</a></li>");
         return "adminOrganization";
     }
 
@@ -55,6 +56,7 @@ public class AdminOrganizationController {
         if (result.hasErrors()) {
             adminOrganization(customUser, model);
             modelMap.put(BindingResult.class.getName() + ".newOrganization", result);
+            model.addAttribute("adminPanel", "<li><a href=\"/admin\">Panel Admina</a></li>");
             return "adminOrganization";
         }
         String existingName = null;
@@ -67,6 +69,7 @@ public class AdminOrganizationController {
             adminOrganization(customUser, model);
             model.addAttribute("newOrganization", organization);
             model.addAttribute("duplicateName", "Nazwa '" + existingName + "' jest już zajęta!");
+            model.addAttribute("adminPanel", "<li><a href=\"/admin\">Panel Admina</a></li>");
             return "adminOrganization";
         }
         return "redirect:/admin/organization#list";
@@ -76,6 +79,7 @@ public class AdminOrganizationController {
     public String adminOrganizationEdit(@AuthenticationPrincipal CurrentUser customUser, Model model, @PathVariable Long id) {
         adminOrganization(customUser, model);
         model.addAttribute("organizationToEdit", organizationRepository.findById(id).get());
+        model.addAttribute("adminPanel", "<li><a href=\"/admin\">Panel Admina</a></li>");
         return "admin/organizationEdit";
     }
 
@@ -84,6 +88,7 @@ public class AdminOrganizationController {
         if (result.hasErrors()) {
             adminOrganization(customUser, model);
             modelMap.put(BindingResult.class.getName() + ".organizationToEdit", result);
+            model.addAttribute("adminPanel", "<li><a href=\"/admin\">Panel Admina</a></li>");
             return "adminOrganization";
         }
         String existingName;
@@ -102,6 +107,7 @@ public class AdminOrganizationController {
             } else {
                 adminOrganizationEdit(customUser, model, id);
                 model.addAttribute("duplicateName", "Nazwa '" + existingName + "' jest już zajęta!");
+                model.addAttribute("adminPanel", "<li><a href=\"/admin\">Panel Admina</a></li>");
                 return "admin/organizationEdit";
             }
         } else {

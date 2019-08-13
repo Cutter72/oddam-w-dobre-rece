@@ -30,6 +30,7 @@ public class AdminGiftsController {
 
     @GetMapping("")
     public String adminGifts(@AuthenticationPrincipal CurrentUser customUser, Model model, @RequestParam(defaultValue = "none") String sortingBy, @RequestParam(defaultValue = "default") String sortingOrder) {
+        model.addAttribute("adminPanel", "<li><a href=\"/admin\">Panel Admina</a></li>");
         return "admin/giftsManagement";
     }
 

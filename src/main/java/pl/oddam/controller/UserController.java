@@ -47,6 +47,9 @@ public class UserController {
         model.addAttribute("organizationNeedList", organizationNeedRepository.findAll());
         model.addAttribute("organizationTargetList", organizationTargetRepository.findAll());
         model.addAttribute("cityList", cityRepository.findAll());
+        if ((boolean)sess.getAttribute("isAdmin")) {
+            model.addAttribute("adminPanel", "<li><a href=\"/admin\">Panel Admina</a></li>");
+        }
         return "user";
     }
 
@@ -72,6 +75,9 @@ public class UserController {
         model.addAttribute("gift", new Gift());
         model.addAttribute("user", customUser.getUser());
         model.addAttribute("selectedNeedsToGive", organizationNeedRepository.findAllById(Arrays.asList(stepOneToThreeParameters.getNeedIdTab())));
+        if ((boolean)sess.getAttribute("isAdmin")) {
+            model.addAttribute("adminPanel", "<li><a href=\"/admin\">Panel Admina</a></li>");
+        }
         return "user/userStep4";
     }
 
@@ -103,6 +109,9 @@ public class UserController {
     public String userFormSuccess(@AuthenticationPrincipal CurrentUser customUser, Model model, HttpSession sess) {
         model.addAttribute("user", customUser.getUser());
         sess.removeAttribute("stepOneToThreeParameters");
+        if ((boolean)sess.getAttribute("isAdmin")) {
+            model.addAttribute("adminPanel", "<li><a href=\"/admin\">Panel Admina</a></li>");
+        }
         return "user/formSuccess";
     }
 
@@ -112,8 +121,11 @@ public class UserController {
     }
 
     @GetMapping("/profile")
-    public String userProfile(@AuthenticationPrincipal CurrentUser customUser, Model model) {
+    public String userProfile(@AuthenticationPrincipal CurrentUser customUser, Model model, HttpSession sess) {
         model.addAttribute("user", customUser.getUser());
+        if ((boolean)sess.getAttribute("isAdmin")) {
+            model.addAttribute("adminPanel", "<li><a href=\"/admin\">Panel Admina</a></li>");
+        }
         return "user/profile";
     }
 

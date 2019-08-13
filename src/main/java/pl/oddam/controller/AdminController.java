@@ -34,6 +34,7 @@ public class AdminController {
     public String admin(@AuthenticationPrincipal CurrentUser customUser, Model model) {
         model.addAttribute("user", customUser.getUser());
         model.addAttribute("newUser", new User());
+        model.addAttribute("adminPanel", "<li><a href=\"/admin\">Panel Admina</a></li>");
         Role userRole = roleRepository.findByName("ROLE_ADMIN");
         model.addAttribute("adminList", userRepository.findAllByRoles(new HashSet<Role>(Arrays.asList(userRole))));
         return "admin";

@@ -14,6 +14,7 @@ import pl.oddam.model.User;
 import pl.oddam.repository.UserRepository;
 import pl.oddam.service.ReCaptchaService;
 
+import javax.servlet.http.HttpSession;
 import javax.transaction.Transactional;
 import java.io.IOException;
 
@@ -36,9 +37,12 @@ public class UserPasswordChangeController {
 
 
     @GetMapping("/change")
-    public String changePasswordForm(@AuthenticationPrincipal CurrentUser customUser, Model model) {
+    public String changePasswordForm(@AuthenticationPrincipal CurrentUser customUser, Model model, HttpSession sess) {
         model.addAttribute("user", customUser.getUser());
         model.addAttribute("reCaptchaKey", domainSettings.getSiteKey());
+        if ((boolean)sess.getAttribute("isAdmin")) {
+            model.addAttribute("adminPanel", "<li><a href=\"/admin\">Panel Admina</a></li>");
+        }
         return "user/changePassword";
     }
 
@@ -58,7 +62,10 @@ public class UserPasswordChangeController {
     }
 
     @PostMapping("/change")
-    public String register(@RequestParam("g-recaptcha-response") String recaptchaResponse, @AuthenticationPrincipal CurrentUser customUser, Model model, @RequestParam String oldPassword, @RequestParam String password1) throws IOException {
+    public String register(@RequestParam("g-recaptcha-response") String recaptchaResponse, @AuthenticationPrincipal CurrentUser customUser, Model model, @RequestParam String oldPassword, @RequestParam String password1, HttpSession sess) throws IOException {
+        if ((boolean)sess.getAttribute("isAdmin")) {
+            model.addAttribute("adminPanel", "<li><a href=\"/admin\">Panel Admina</a></li>");
+        }
         if (reCaptchaService.processResponse(recaptchaResponse)) {
             User user = customUser.getUser();
             if (passwordEncoder.matches(oldPassword, user.getPassword())) {

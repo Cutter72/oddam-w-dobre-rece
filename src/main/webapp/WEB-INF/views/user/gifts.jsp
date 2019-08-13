@@ -67,9 +67,9 @@
                             <th>Organizacja</th>
                             <th>Miasto organizacji</th>
                             <th>Worki</th>
-                            <th>Data utworzenia <a href="/user/gifts?sortingBy=created&sortingOrder=asc" class="btn--small btn--without-border">ASC</a>/<a href="/user/gifts?sortingBy=created&sortingOrder=des" class="btn--small btn--without-border">DES</a></th>
+                            <th>Data utworzenia <a href="/user/gifts?sortBy=created&sortOrder=asc" class="btn--small btn--without-border">ASC</a>/<a href="/user/gifts?sortBy=created&sortOrder=des" class="btn--small btn--without-border">DES</a></th>
                             <th>Preferowana data odebrania</th>
-                            <th>Odebrane? <a href="/user/gifts?sortingBy=dateCollected&sortingOrder=asc" class="btn--small btn--without-border">ASC</a>/<a href="/user/gifts?sortingBy=dateCollected&sortingOrder=des" class="btn--small btn--without-border">DES</a></th>
+                            <th>Odebrane? <a href="/user/gifts?sortBy=dateCollected&sortOrder=asc" class="btn--small btn--without-border">ASC</a>/<a href="/user/gifts?sortBy=dateCollected&sortOrder=des" class="btn--small btn--without-border">DES</a></th>
                             <th>Szczegóły</th>
                         </tr>
                         <c:forEach items="${giftList}" var="gift">
@@ -82,13 +82,13 @@
                                 <td>
                                     <c:choose>
                                         <c:when test="${gift.collected}">
-                                            Tak<img width= "20px" src="https://upload.wikimedia.org/wikipedia/commons/8/80/Symbol_OK.svg"/>
+                                            Tak<img width= "20px" src="https://upload.wikimedia.org/wikipedia/commons/8/80/Symbol_OK.svg"/> ${gift.dateCollected}
                                         </c:when>
                                         <c:otherwise>
                                             <span>Nie ❌️</span>
                                             <span class="makeStatusTrue btn btn--without-border">Ustaw jako odebrane</span>
                                             <div hidden>
-                                                <form method="post">
+                                                <form method="post" action="/user/gifts?destination=user">
                                                     <label>Podaj datę odebrania:</label><input type="date" name="date" class="dateInput" required /><br/>
                                                     <button type="submit" class="btn--small btn--without-border">Ustaw</button>
                                                     <a href="/user/gifts" class="btn--small btn--without-border">Anuluj</a>

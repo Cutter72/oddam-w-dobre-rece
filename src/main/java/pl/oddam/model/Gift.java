@@ -40,4 +40,8 @@ public class Gift {
     public void setUpdatedDate () {
         this.updated = LocalDateTime.now();
     }
+
+    public String getUserEmail () {
+        return this.user.getEmail();
+    }
 }

@@ -46,10 +46,20 @@
     </nav>
 
     <div class="container">
-        <div class="slogan--item" style="width: 100%">
+        <div class="login-page">
             <h2>
                 Zarządzanie Darami
             </h2>
+            <h3 class="slogan--steps-title">
+                Filtruj po adresie e-mail:
+            </h3>
+            <div>
+                <form>
+                    <input required type="text" name="email" placeholder="xyz@domain.com">
+                    <button class="btn btn--small" type="submit">Filtruj</button>
+                    <a href="<jsp:include page="../../links/hrefAdminGiftsManagement.jsp"/>?email=all" class="btn btn--small">Pokaż wszystkie</a>
+                </form>
+            </div>
         </div>
         <div class="tab-content">
             <div class="tab-pane fade in active">
@@ -60,16 +70,18 @@
                     </h3>
                     <table class="table">
                         <tr>
+                            <th>Email użytkownika <a href="/admin/gifts?sortBy=email&sortOrder=asc" class="btn--small btn--without-border">ASC</a>/<a href="/admin/gifts?sortBy=email&sortOrder=des" class="btn--small btn--without-border">DES</a></th>
                             <th>Organizacja</th>
                             <th>Miasto organizacji</th>
                             <th>Worki</th>
-                            <th>Data utworzenia <a href="/user/gifts?sortingBy=created&sortingOrder=asc" class="btn--small btn--without-border">ASC</a>/<a href="/user/gifts?sortingBy=created&sortingOrder=des" class="btn--small btn--without-border">DES</a></th>
+                            <th>Data utworzenia <a href="/admin/gifts?sortBy=created&sortOrder=asc" class="btn--small btn--without-border">ASC</a>/<a href="/admin/gifts?sortBy=created&sortOrder=des" class="btn--small btn--without-border">DES</a></th>
                             <th>Preferowana data odebrania</th>
-                            <th>Odebrane? <a href="/user/gifts?sortingBy=dateCollected&sortingOrder=asc" class="btn--small btn--without-border">ASC</a>/<a href="/user/gifts?sortingBy=dateCollected&sortingOrder=des" class="btn--small btn--without-border">DES</a></th>
+                            <th>Odebrane? <a href="/admin/gifts?sortBy=dateCollected&sortOrder=asc" class="btn--small btn--without-border">ASC</a>/<a href="/admin/gifts?sortBy=dateCollected&sortOrder=des" class="btn--small btn--without-border">DES</a></th>
                             <th>Szczegóły</th>
                         </tr>
                         <c:forEach items="${giftList}" var="gift">
                             <tr>
+                                <td>${gift.user.email}</td>
                                 <td>${gift.organization.name}</td>
                                 <td>${gift.organization.city.name}</td>
                                 <td>${gift.bags}</td>
@@ -84,10 +96,10 @@
                                             <span>Nie ❌️</span>
                                             <span class="makeStatusTrue btn btn--without-border">Ustaw jako odebrane</span>
                                             <div hidden>
-                                            <form method="post">
+                                            <form method="post" action="/user/gifts?destination=admin">
                                                 <label>Podaj datę odebrania:</label><input type="date" name="date" class="dateInput" required /><br/>
                                                 <button type="submit" class="btn--small btn--without-border">Ustaw</button>
-                                                <a href="/user/gifts" class="btn--small btn--without-border">Anuluj</a>
+                                                <a href="/admin/gifts" class="btn--small btn--without-border">Anuluj</a>
                                                 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                                                 <input type="hidden" name="giftId" value="${gift.id}"/>
                                             </form>

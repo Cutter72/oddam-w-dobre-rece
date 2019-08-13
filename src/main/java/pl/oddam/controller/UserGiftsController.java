@@ -24,17 +24,17 @@ public class UserGiftsController {
     }
 
     @GetMapping("")
-    public String userGifts(@AuthenticationPrincipal CurrentUser customUser, Model model, @RequestParam(defaultValue = "none") String sortingBy, @RequestParam(defaultValue = "default") String sortingOrder, HttpSession sess) {
+    public String userGifts(@AuthenticationPrincipal CurrentUser customUser, Model model, @RequestParam(defaultValue = "none") String sortBy, @RequestParam(defaultValue = "default") String sortOrder, HttpSession sess) {
         User user = customUser.getUser();
         model.addAttribute("user", user);
         List<Gift> giftList = giftRepository.findAllByUser(user);
-        if (sortingBy.equals("created") && sortingOrder.equals("asc")) {
+        if (sortBy.equals("created") && sortOrder.equals("asc")) {
             giftList.sort(Comparator.nullsFirst(Comparator.comparing(Gift::getCreated)));
-        } else if (sortingBy.equals("created") && sortingOrder.equals("des")) {
+        } else if (sortBy.equals("created") && sortOrder.equals("des")) {
             giftList.sort(Comparator.nullsFirst(Comparator.comparing(Gift::getCreated)).reversed());
-        } else if (sortingBy.equals("dateCollected") && sortingOrder.equals("asc")) {
+        } else if (sortBy.equals("dateCollected") && sortOrder.equals("asc")) {
             giftList.sort(Comparator.nullsFirst(Comparator.comparing(Gift::getDateCollected, Comparator.nullsFirst(Comparator.naturalOrder()))));
-        } else if (sortingBy.equals("dateCollected") && sortingOrder.equals("des")) {
+        } else if (sortBy.equals("dateCollected") && sortOrder.equals("des")) {
             giftList.sort(Comparator.nullsFirst(Comparator.comparing(Gift::getDateCollected, Comparator.nullsFirst(Comparator.naturalOrder()))).reversed());
         }
         model.addAttribute("giftList", giftList);
@@ -50,7 +50,7 @@ public class UserGiftsController {
     }
 
     @PostMapping("")
-    public String userGiftEdit(@RequestParam Long giftId, @RequestParam String date) {
+    public String userGiftEdit(@RequestParam Long giftId, @RequestParam String date, @RequestParam(defaultValue = "user") String destination) {
         String[] dateStrings = date.split("-");
         int[] dateInts = new int[dateStrings.length];
         for (int i = 0 ; i < dateStrings.length ; i++) {
@@ -60,7 +60,7 @@ public class UserGiftsController {
         gift.setDateCollected(LocalDate.of(dateInts[0], dateInts[1], dateInts[2]).plusDays(1)); //why databse save it one day back?
         gift.setCollected(true);
         giftRepository.save(gift);
-        return "redirect:/user/gifts";
+        return "redirect:/"+destination+"/gifts";
     }
 
 }

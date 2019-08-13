@@ -12,8 +12,9 @@ import pl.oddam.model.Gift;
 import pl.oddam.model.User;
 import pl.oddam.repository.GiftRepository;
 import pl.oddam.repository.RoleRepository;
+import pl.oddam.repository.UserRepository;
 
-import java.time.LocalDate;
+import javax.servlet.http.HttpSession;
 import java.util.Comparator;
 import java.util.List;
 
@@ -21,26 +22,53 @@ import java.util.List;
 @RequestMapping("/admin/gifts")
 public class AdminGiftsController {
     private final GiftRepository giftRepository;
-    private final RoleRepository roleRepository;
+    private final UserRepository userRepository;
 
-    public AdminGiftsController(GiftRepository giftRepository, RoleRepository roleRepository) {
+    public AdminGiftsController(GiftRepository giftRepository, UserRepository userRepository) {
         this.giftRepository = giftRepository;
-        this.roleRepository = roleRepository;
+        this.userRepository = userRepository;
     }
 
     @GetMapping("")
-    public String adminGifts(@AuthenticationPrincipal CurrentUser customUser, Model model, @RequestParam(defaultValue = "none") String sortingBy, @RequestParam(defaultValue = "default") String sortingOrder) {
+    public String adminGifts(@AuthenticationPrincipal CurrentUser customUser, Model model, @RequestParam(defaultValue = "none") String sortBy, @RequestParam(defaultValue = "default") String sortOrder, @RequestParam(required = false) String email, HttpSession sess) {
         model.addAttribute("adminPanel", "<li><a href=\"/admin\">Panel Admina</a></li>");
+        User user = customUser.getUser();
+        model.addAttribute("user", user);
+        List<Gift> giftList;
+        if (email != null) {
+            if (email.equals("all")) {
+                sess.setAttribute("giftsManagementEmail", null);
+                giftList = giftRepository.findAll();
+            } else {
+                sess.setAttribute("giftsManagementEmail", email);
+                giftList = giftRepository.findAllByUser(userRepository.findByEmail(email));
+            }
+        } else {
+            if (sess.getAttribute("giftsManagementEmail") != null) {
+                giftList = giftRepository.findAllByUser(userRepository.findByEmail((String) sess.getAttribute("giftsManagementEmail")));
+            } else {
+                giftList = giftRepository.findAll();
+            }
+        }
+        if (sortBy.equals("created") && sortOrder.equals("asc")) {
+            giftList.sort(Comparator.nullsFirst(Comparator.comparing(Gift::getCreated)));
+        } else if (sortBy.equals("created") && sortOrder.equals("des")) {
+            giftList.sort(Comparator.nullsFirst(Comparator.comparing(Gift::getCreated)).reversed());
+        } else if (sortBy.equals("dateCollected") && sortOrder.equals("asc")) {
+            giftList.sort(Comparator.nullsFirst(Comparator.comparing(Gift::getDateCollected, Comparator.nullsFirst(Comparator.naturalOrder()))));
+        } else if (sortBy.equals("dateCollected") && sortOrder.equals("des")) {
+            giftList.sort(Comparator.nullsFirst(Comparator.comparing(Gift::getDateCollected, Comparator.nullsFirst(Comparator.naturalOrder()))).reversed());
+        } else if (sortBy.equals("email") && sortOrder.equals("asc")) {
+            giftList.sort(Comparator.nullsFirst(Comparator.comparing(Gift::getUserEmail, Comparator.nullsFirst(Comparator.naturalOrder()))));
+        } else if (sortBy.equals("email") && sortOrder.equals("des")) {
+            giftList.sort(Comparator.nullsFirst(Comparator.comparing(Gift::getUserEmail, Comparator.nullsFirst(Comparator.naturalOrder()))).reversed());
+        }
+        model.addAttribute("giftList", giftList);
         return "admin/giftsManagement";
     }
 
     @GetMapping("/")
     public String adminGiftsSlash() {
-        return "redirect:/admin/gifts";
-    }
-
-    @PostMapping("")
-    public String adminGiftEdit(@RequestParam Long giftId, @RequestParam String date) {
         return "redirect:/admin/gifts";
     }
 

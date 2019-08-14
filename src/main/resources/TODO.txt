@@ -1,2 +1,8 @@
-- session.isAdmin = false bug when bypassing /usercheck
+- isLogged logic could be changed to:
+    public class AuthenticationSystem {
+        public static boolean isLogged() {
+            final Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+            return null != authentication && !("anonymousUser").equals(authentication.getName());
+        }
+    }
 

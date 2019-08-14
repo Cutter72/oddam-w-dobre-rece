@@ -1,10 +1,12 @@
 package pl.oddam.controller;
 
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import pl.oddam.model.CurrentUser;
 import pl.oddam.model.DomainSettings;
 import pl.oddam.model.User;
 import pl.oddam.service.*;
@@ -23,17 +25,22 @@ public class RegisterController {
     private final DomainSettings domainSettings;
     private final RegisterService registerService;
     private final TokenService tokenService;
+    private final LoginUserRoleCheckService loginUserRoleCheckService;
 
-    public RegisterController(UserServiceImpl userServiceImpl, ReCaptchaService reCaptchaService, DomainSettings domainSettings, RegisterService registerService, TokenService tokenService) {
+    public RegisterController(UserServiceImpl userServiceImpl, ReCaptchaService reCaptchaService, DomainSettings domainSettings, RegisterService registerService, TokenService tokenService, LoginUserRoleCheckService loginUserRoleCheckService) {
         this.userServiceImpl = userServiceImpl;
         this.reCaptchaService = reCaptchaService;
         this.domainSettings = domainSettings;
         this.registerService = registerService;
         this.tokenService = tokenService;
+        this.loginUserRoleCheckService = loginUserRoleCheckService;
     }
 
     @GetMapping("")
-    public String registerForm(Model model) {
+    public String registerForm(@AuthenticationPrincipal CurrentUser customUser, Model model) {
+        if (loginUserRoleCheckService.isLogged(customUser)) {
+            return "redirect:/home";
+        }
         model.addAttribute("user", new User());
         model.addAttribute("reCaptchaKey", domainSettings.getSiteKey());
         return "register";

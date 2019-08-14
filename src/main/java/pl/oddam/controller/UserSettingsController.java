@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import pl.oddam.model.CurrentUser;
 import pl.oddam.model.User;
 import pl.oddam.repository.UserRepository;
+import pl.oddam.service.LoginUserRoleCheckService;
 
 import javax.servlet.http.HttpSession;
 
@@ -19,18 +20,18 @@ import javax.servlet.http.HttpSession;
 public class UserSettingsController {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
+    private final LoginUserRoleCheckService loginUserRoleCheckService;
 
-    public UserSettingsController(UserRepository userRepository, PasswordEncoder passwordEncoder) {
+    public UserSettingsController(UserRepository userRepository, PasswordEncoder passwordEncoder, LoginUserRoleCheckService loginUserRoleCheckService) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
+        this.loginUserRoleCheckService = loginUserRoleCheckService;
     }
 
     @GetMapping("")
     public String userSettings(@AuthenticationPrincipal CurrentUser customUser, Model model, HttpSession sess) {
         model.addAttribute("user", customUser.getUser());
-        if ((boolean)sess.getAttribute("isAdmin")) {
-            model.addAttribute("adminPanel", "<li><a href=\"/admin\">Panel Admina</a></li>");
-        }
+        model.addAttribute("isAdmin", loginUserRoleCheckService.isAdmin(customUser));
         return "user/settings";
     }
 
@@ -42,9 +43,7 @@ public class UserSettingsController {
     @GetMapping("/edit-personal-data")
     public String editPersonalData(@AuthenticationPrincipal CurrentUser customUser, Model model, HttpSession sess) {
         model.addAttribute("user", customUser.getUser());
-        if ((boolean)sess.getAttribute("isAdmin")) {
-            model.addAttribute("adminPanel", "<li><a href=\"/admin\">Panel Admina</a></li>");
-        }
+        model.addAttribute("isAdmin", loginUserRoleCheckService.isAdmin(customUser));
         return "user/editPersonalData";
     }
     @PostMapping("/edit-personal-data")
@@ -57,9 +56,7 @@ public class UserSettingsController {
     @GetMapping("/edit-password")
     public String editPassword(@AuthenticationPrincipal CurrentUser customUser, Model model, HttpSession sess) {
         model.addAttribute("user", customUser.getUser());
-        if ((boolean)sess.getAttribute("isAdmin")) {
-            model.addAttribute("adminPanel", "<li><a href=\"/admin\">Panel Admina</a></li>");
-        }
+        model.addAttribute("isAdmin", loginUserRoleCheckService.isAdmin(customUser));
         return "user/editPassword";
     }
 
@@ -72,9 +69,7 @@ public class UserSettingsController {
             model.addAttribute("success", "Hasło zmienione!");
         }
         model.addAttribute("user", customUser.getUser());
-        if ((boolean)sess.getAttribute("isAdmin")) {
-            model.addAttribute("adminPanel", "<li><a href=\"/admin\">Panel Admina</a></li>");
-        }
+        model.addAttribute("isAdmin", loginUserRoleCheckService.isAdmin(customUser));
         return "user/editPassword";
     }
 }

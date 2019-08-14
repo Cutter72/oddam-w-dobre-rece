@@ -12,6 +12,7 @@ import pl.oddam.model.CurrentUser;
 import pl.oddam.model.DomainSettings;
 import pl.oddam.model.User;
 import pl.oddam.repository.UserRepository;
+import pl.oddam.service.LoginUserRoleCheckService;
 import pl.oddam.service.ReCaptchaService;
 
 import javax.servlet.http.HttpSession;
@@ -26,12 +27,14 @@ public class UserPasswordChangeController {
     private final ReCaptchaService reCaptchaService;
     private final DomainSettings domainSettings;
     private final BCryptPasswordEncoder passwordEncoder;
+    private final LoginUserRoleCheckService loginUserRoleCheckService;
 
-    public UserPasswordChangeController(UserRepository userRepository, ReCaptchaService reCaptchaService, DomainSettings domainSettings, BCryptPasswordEncoder passwordEncoder) {
+    public UserPasswordChangeController(UserRepository userRepository, ReCaptchaService reCaptchaService, DomainSettings domainSettings, BCryptPasswordEncoder passwordEncoder, LoginUserRoleCheckService loginUserRoleCheckService) {
         this.userRepository = userRepository;
         this.reCaptchaService = reCaptchaService;
         this.domainSettings = domainSettings;
         this.passwordEncoder = passwordEncoder;
+        this.loginUserRoleCheckService = loginUserRoleCheckService;
     }
 
 
@@ -40,9 +43,7 @@ public class UserPasswordChangeController {
     public String changePasswordForm(@AuthenticationPrincipal CurrentUser customUser, Model model, HttpSession sess) {
         model.addAttribute("user", customUser.getUser());
         model.addAttribute("reCaptchaKey", domainSettings.getSiteKey());
-        if ((boolean)sess.getAttribute("isAdmin")) {
-            model.addAttribute("adminPanel", "<li><a href=\"/admin\">Panel Admina</a></li>");
-        }
+        model.addAttribute("isAdmin", loginUserRoleCheckService.isAdmin(customUser));
         return "user/changePassword";
     }
 
@@ -63,9 +64,7 @@ public class UserPasswordChangeController {
 
     @PostMapping("/change")
     public String register(@RequestParam("g-recaptcha-response") String recaptchaResponse, @AuthenticationPrincipal CurrentUser customUser, Model model, @RequestParam String oldPassword, @RequestParam String password1, HttpSession sess) throws IOException {
-        if ((boolean)sess.getAttribute("isAdmin")) {
-            model.addAttribute("adminPanel", "<li><a href=\"/admin\">Panel Admina</a></li>");
-        }
+        model.addAttribute("isAdmin", loginUserRoleCheckService.isAdmin(customUser));
         if (reCaptchaService.processResponse(recaptchaResponse)) {
             User user = customUser.getUser();
             if (passwordEncoder.matches(oldPassword, user.getPassword())) {

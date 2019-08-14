@@ -31,7 +31,6 @@ public class AdminGiftsController {
 
     @GetMapping("")
     public String adminGifts(@AuthenticationPrincipal CurrentUser customUser, Model model, @RequestParam(defaultValue = "none") String sortBy, @RequestParam(defaultValue = "default") String sortOrder, @RequestParam(required = false) String email, HttpSession sess) {
-        model.addAttribute("adminPanel", "<li><a href=\"/admin\">Panel Admina</a></li>");
         User user = customUser.getUser();
         model.addAttribute("user", user);
         List<Gift> giftList;

@@ -24,7 +24,7 @@
                     <li><a href="<jsp:include page="../../links/hrefUserProfile.jsp"/>">Profil</a></li>
                     <li><a href="<jsp:include page="../../links/hrefUserSettings.jsp"/>">Ustawienia</a></li>
                     <li><a href="<jsp:include page="../../links/hrefUserGifts.jsp"/>">Moje dary</a></li>
-                    ${adminPanel}
+                    <li><a href="<jsp:include page="../../links/hrefAdmin.jsp"/>">Panel Admina</a></li>
                     <li>
                         <form action="/logout" method="post">
                             <input class="btn--small" type="submit" value="Wyloguj">

@@ -8,6 +8,7 @@ import pl.oddam.model.CurrentUser;
 import pl.oddam.model.Gift;
 import pl.oddam.model.User;
 import pl.oddam.repository.*;
+import pl.oddam.service.LoginUserRoleCheckService;
 
 import javax.servlet.http.HttpSession;
 import java.time.LocalDate;
@@ -18,9 +19,11 @@ import java.util.List;
 @RequestMapping("/user/gifts")
 public class UserGiftsController {
     private final GiftRepository giftRepository;
+    private final LoginUserRoleCheckService loginUserRoleCheckService;
 
-    public UserGiftsController(GiftRepository giftRepository) {
+    public UserGiftsController(GiftRepository giftRepository, LoginUserRoleCheckService loginUserRoleCheckService) {
         this.giftRepository = giftRepository;
+        this.loginUserRoleCheckService = loginUserRoleCheckService;
     }
 
     @GetMapping("")
@@ -38,9 +41,7 @@ public class UserGiftsController {
             giftList.sort(Comparator.nullsFirst(Comparator.comparing(Gift::getDateCollected, Comparator.nullsFirst(Comparator.naturalOrder()))).reversed());
         }
         model.addAttribute("giftList", giftList);
-        if ((boolean)sess.getAttribute("isAdmin")) {
-            model.addAttribute("adminPanel", "<li><a href=\"/admin\">Panel Admina</a></li>");
-        }
+        model.addAttribute("isAdmin", loginUserRoleCheckService.isAdmin(customUser));
         return "user/gifts";
     }
 

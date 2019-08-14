@@ -1,7 +1,5 @@
 package pl.oddam.controller;
 
-import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,12 +13,10 @@ import pl.oddam.repository.RoleRepository;
 import pl.oddam.repository.UserRepository;
 import pl.oddam.service.UserServiceImpl;
 
-import javax.transaction.Transactional;
 import javax.validation.Valid;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 @Controller
 @RequestMapping("/admin/user")
@@ -45,7 +41,6 @@ public class AdminUserController {
         userList.addAll(userRepository.findAllByRoles(new HashSet<Role>(Arrays.asList(bannedUserRole))));
         userList.sort((User u1, User u2) -> (int)(u1.getId()-u2.getId()));
         model.addAttribute("userList", userList);
-        model.addAttribute("adminPanel", "<li><a href=\"/admin\">Panel Admina</a></li>");
         return "adminUser";
     }
 
@@ -61,7 +56,6 @@ public class AdminUserController {
             adminUser(customUser, model);
             model.addAttribute("newUser", user);
             modelMap.put(BindingResult.class.getName() + ".newUser", result);
-            model.addAttribute("adminPanel", "<li><a href=\"/admin\">Panel Admina</a></li>");
             return "adminUser";
         }
         String existingEmail = null;
@@ -74,7 +68,6 @@ public class AdminUserController {
             adminUser(customUser, model);
             model.addAttribute("newUser", user);
             model.addAttribute("duplicateEmail", "Email " + existingEmail + " jest już zajęty!");
-            model.addAttribute("adminPanel", "<li><a href=\"/admin\">Panel Admina</a></li>");
             return "adminUser";
         }
         return "redirect:/admin/user#list";
@@ -86,7 +79,6 @@ public class AdminUserController {
         model.addAttribute("userToEdit", userRepository.findById(id).get());
         Role userRole = roleRepository.findByName("ROLE_USER");
         model.addAttribute("userList", userRepository.findAllByRoles(new HashSet<Role>(Arrays.asList(userRole))));
-        model.addAttribute("adminPanel", "<li><a href=\"/admin\">Panel Admina</a></li>");
         return "admin/userEdit";
     }
 
@@ -100,7 +92,6 @@ public class AdminUserController {
         if (result.hasErrors()) {
             adminUserEdit(customUser, model, id);
             modelMap.put(BindingResult.class.getName() + ".userToEdit", result);
-            model.addAttribute("adminPanel", "<li><a href=\"/admin\">Panel Admina</a></li>");
             return "admin/userEdit";
         }
         String existingEmail;
@@ -119,7 +110,6 @@ public class AdminUserController {
             } else {
                 adminUserEdit(customUser, model, id);
                 model.addAttribute("duplicateEmail", "Email " + existingEmail + " jest już zajęty!");
-                model.addAttribute("adminPanel", "<li><a href=\"/admin\">Panel Admina</a></li>");
                 return "admin/userEdit";
             }
         } else {

@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import pl.oddam.model.*;
 import pl.oddam.model.dto.StepOneToThreeParameters;
 import pl.oddam.repository.*;
+import pl.oddam.service.LoginUserRoleCheckService;
 import pl.oddam.service.OrganizationServiceImpl;
 
 import javax.servlet.http.HttpSession;
@@ -25,14 +26,16 @@ public class UserController {
     private final OrganizationRepository organizationRepository;
     private final CityRepository cityRepository;
     private final GiftRepository giftRepository;
+    private final LoginUserRoleCheckService loginUserRoleCheckService;
 
-    public UserController(OrganizationNeedRepository organizationNeedRepository, OrganizationTargetRepository organizationTargetRepository, OrganizationServiceImpl organizationServiceImpl, OrganizationRepository organizationRepository, CityRepository cityRepository, GiftRepository giftRepository) {
+    public UserController(OrganizationNeedRepository organizationNeedRepository, OrganizationTargetRepository organizationTargetRepository, OrganizationServiceImpl organizationServiceImpl, OrganizationRepository organizationRepository, CityRepository cityRepository, GiftRepository giftRepository, LoginUserRoleCheckService loginUserRoleCheckService) {
         this.organizationNeedRepository = organizationNeedRepository;
         this.organizationTargetRepository = organizationTargetRepository;
         this.organizationServiceImpl = organizationServiceImpl;
         this.organizationRepository = organizationRepository;
         this.cityRepository = cityRepository;
         this.giftRepository = giftRepository;
+        this.loginUserRoleCheckService = loginUserRoleCheckService;
     }
 
     @GetMapping("")
@@ -47,9 +50,7 @@ public class UserController {
             model.addAttribute("organizationNeedList", organizationNeedRepository.findAll());
             model.addAttribute("organizationTargetList", organizationTargetRepository.findAll());
             model.addAttribute("cityList", cityRepository.findAll());
-            if ((boolean) sess.getAttribute("isAdmin")) {
-                model.addAttribute("adminPanel", "<li><a href=\"/admin\">Panel Admina</a></li>");
-            }
+            model.addAttribute("isAdmin", loginUserRoleCheckService.isAdmin(customUser));
             return "user";
         } else if (step == 4 && sess.getAttribute("stepOneToThreeParameters") != null) {
             StepOneToThreeParameters stepOneToThreeParameters = (StepOneToThreeParameters) sess.getAttribute("stepOneToThreeParameters");
@@ -63,9 +64,7 @@ public class UserController {
             model.addAttribute("gift", new Gift());
             model.addAttribute("user", customUser.getUser());
             model.addAttribute("selectedNeedsToGive", organizationNeedRepository.findAllById(Arrays.asList(stepOneToThreeParameters.getNeedIdTab())));
-            if ((boolean) sess.getAttribute("isAdmin")) {
-                model.addAttribute("adminPanel", "<li><a href=\"/admin\">Panel Admina</a></li>");
-            }
+            model.addAttribute("isAdmin", loginUserRoleCheckService.isAdmin(customUser));
             return "user/userStep4";
         } else {
             return "redirect:/user";
@@ -87,9 +86,7 @@ public class UserController {
             model.addAttribute("gift", new Gift());
             model.addAttribute("user", customUser.getUser());
             model.addAttribute("selectedNeedsToGive", organizationNeedRepository.findAllById(Arrays.asList(stepOneToThreeParameters.getNeedIdTab())));
-            if ((boolean)sess.getAttribute("isAdmin")) {
-                model.addAttribute("adminPanel", "<li><a href=\"/admin\">Panel Admina</a></li>");
-            }
+            model.addAttribute("isAdmin", loginUserRoleCheckService.isAdmin(customUser));
             return "redirect:/user?step=4";
         } else if (step == 4) {
             User currentUser = customUser.getUser();
@@ -120,9 +117,7 @@ public class UserController {
     public String userFormSuccess(@AuthenticationPrincipal CurrentUser customUser, Model model, HttpSession sess) {
         model.addAttribute("user", customUser.getUser());
         sess.removeAttribute("stepOneToThreeParameters");
-        if ((boolean)sess.getAttribute("isAdmin")) {
-            model.addAttribute("adminPanel", "<li><a href=\"/admin\">Panel Admina</a></li>");
-        }
+        model.addAttribute("isAdmin", loginUserRoleCheckService.isAdmin(customUser));
         return "user/formSuccess";
     }
 
@@ -134,9 +129,7 @@ public class UserController {
     @GetMapping("/profile")
     public String userProfile(@AuthenticationPrincipal CurrentUser customUser, Model model, HttpSession sess) {
         model.addAttribute("user", customUser.getUser());
-        if ((boolean)sess.getAttribute("isAdmin")) {
-            model.addAttribute("adminPanel", "<li><a href=\"/admin\">Panel Admina</a></li>");
-        }
+        model.addAttribute("isAdmin", loginUserRoleCheckService.isAdmin(customUser));
         return "user/profile";
     }
 

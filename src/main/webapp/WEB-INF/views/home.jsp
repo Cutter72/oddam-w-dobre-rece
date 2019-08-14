@@ -14,11 +14,34 @@
 <body>
 <header class="header--main-page">
     <nav class="container container--70">
-        <ul class="nav--actions">
-            <li><a href="<jsp:include page="../links/hrefLogin.jsp"/>" class="btn btn--small btn--without-border">Zaloguj</a></li>
-            <li><a href="<jsp:include page="../links/hrefRegister.jsp"/>" class="btn btn--small btn--highlighted">Załóż konto</a></li>
-            <li><a href="<jsp:include page="../links/hrefUserCheck.jsp"/>" class="btn btn--small btn--without-border">Moje konto</a></li>
-        </ul>
+        <c:choose>
+            <c:when test="${isLogged}">
+                <ul class="nav--actions">
+                    <li class="logged-user">
+                        Witaj ${user.firstName}
+                        <ul class="dropdown">
+                            <li><a href="<jsp:include page="../links/hrefUserProfile.jsp"/>">Profil</a></li>
+                            <li><a href="<jsp:include page="../links/hrefUserSettings.jsp"/>">Ustawienia</a></li>
+                            <li><a href="<jsp:include page="../links/hrefUserGifts.jsp"/>">Moje dary</a></li>
+                            <c:if test="${isAdmin}"><li><a href="<jsp:include page="../links/hrefAdmin.jsp"/>">Panel Admina</a></li></c:if>
+                            <li>
+                                <form action="/logout" method="post">
+                                    <input class="btn--small" type="submit" value="Wyloguj">
+                                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                                </form>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </c:when>
+            <c:otherwise>
+                <ul class="nav--actions">
+                    <li><a href="<jsp:include page="../links/hrefLogin.jsp"/>" class="btn btn--small btn--without-border">Zaloguj</a></li>
+                    <li><a href="<jsp:include page="../links/hrefRegister.jsp"/>" class="btn btn--small btn--highlighted">Załóż konto</a></li>
+                    <li><a href="<jsp:include page="../links/hrefUserCheck.jsp"/>" class="btn btn--small btn--without-border">Moje konto</a></li>
+                </ul>
+            </c:otherwise>
+        </c:choose>
 
         <ul>
             <li><a href="/" class="btn btn--without-border active">Start</a></li>

@@ -39,7 +39,7 @@ public class RegisterController {
     @GetMapping("")
     public String registerForm(@AuthenticationPrincipal CurrentUser customUser, Model model) {
         if (loginUserRoleCheckService.isLogged(customUser)) {
-            return "redirect:/home";
+            return "redirect:/";
         }
         model.addAttribute("user", new User());
         model.addAttribute("reCaptchaKey", domainSettings.getSiteKey());

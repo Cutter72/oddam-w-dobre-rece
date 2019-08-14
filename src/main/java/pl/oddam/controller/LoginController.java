@@ -22,7 +22,7 @@ public class LoginController {
     @GetMapping("")
     public String login(@AuthenticationPrincipal CurrentUser customUser) {
         if (loginUserRoleCheckService.isLogged(customUser)) {
-            return "redirect:/home";
+            return "redirect:/";
         }
         return "login";
     }

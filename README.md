@@ -9,6 +9,7 @@ everyone can give away unnecessary things to trusted institutions.
 * Spring Form
 * Spring Security
 * Hibernate
+* JavaScript
 * Google reCaptcha v2
 
 Online adress*: <br>

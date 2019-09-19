@@ -10,6 +10,7 @@ everyone can give away unnecessary things to trusted institutions.
 * Spring Security
 * Hibernate
 * JavaScript
+* Maven
 * Google reCaptcha v2
 
 Online adress*: <br>

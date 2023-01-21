@@ -12,7 +12,3 @@ everyone can give away unnecessary things to trusted institutions.
 * JavaScript
 * Maven
 * Google reCaptcha v2
-
-Online adress*: <br>
-https://hidden-reef-52319.herokuapp.com/ <br>
-*Please be patient, server usually sleeps, so sometimes is needed to wait a few seconds (max 60s) to load the page.
